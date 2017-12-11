@@ -18,6 +18,8 @@ public class DemoPlayer : MonoBehaviour {
     public float groundDistance;
     public bool enableDoubleJump;
     public bool inDoubleJump;
+    public float fallMultiplier;
+    public float lowJumpMultiplier;
 
     private Rigidbody2D rb;
     private Animator anim;
@@ -33,9 +35,12 @@ public class DemoPlayer : MonoBehaviour {
 
 
         moveSpeed = 3.0f;
-        jumpSpeed = 6.5f;
+        jumpSpeed = 10f;
         forward = true;
         groundDistance = 0.2f;
+
+        fallMultiplier = 1.5f;
+        lowJumpMultiplier = 2f;
 
         enableDoubleJump = true;
 	}
@@ -61,7 +66,13 @@ public class DemoPlayer : MonoBehaviour {
                     return;
                 }
             }
-            rb.velocity = new Vector2(rb.velocity.x, jumpSpeed);
+            rb.velocity = new Vector2(rb.velocity.x, jumpSpeed * Vector2.up.y);
+        }
+        if (rb.velocity.y < 0) {
+            rb.velocity += Vector2.up * Physics2D.gravity.y * (fallMultiplier - 1) * Time.deltaTime;
+        }
+        else if (rb.velocity.y > 0 && !Input.GetButton("Jump")) {
+            rb.velocity += Vector2.up * Physics2D.gravity.y * (lowJumpMultiplier - 1) * Time.deltaTime;
         }
     }
 
@@ -105,7 +116,6 @@ public class DemoPlayer : MonoBehaviour {
     private void CheckPosition()
     {
         if (transform.position.y < -10.0f) {
-            Debug.Log("[DemoPlayer] CheckPosition. transform.position.y = " + transform.position.y);
             Respawn();
         }
     }
