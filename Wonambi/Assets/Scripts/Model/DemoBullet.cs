@@ -13,7 +13,7 @@ public class DemoBullet : MonoBehaviour {
         if(transform.parent.localScale.x < 0.0f) {
             speed = -speed;
         }
-        transform.position = transform.parent.GetComponent<DemoPlayer>().firePos.transform.position;
+        transform.position = transform.parent.GetComponent<PlayerController>().GetMuzzlePos();
         transform.SetParent(null);
         rb2d = GetComponent<Rigidbody2D>();
         StartCoroutine(Die());
