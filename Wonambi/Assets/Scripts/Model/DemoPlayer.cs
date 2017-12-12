@@ -25,6 +25,11 @@ public class DemoPlayer : MonoBehaviour {
     private Animator anim;
 
     public GameObject checkPoint;
+
+    public float timer;
+    public GameObject bullet;
+    public GameObject firePos;
+
 	// Use this for initialization
 	void Start () {
         checkPoint = GameObject.Find("CheckPoint");
@@ -53,6 +58,7 @@ public class DemoPlayer : MonoBehaviour {
 
         SyncAnimator();
         CheckPosition();
+        Fire();
 	}
 
     private void Movement()
@@ -123,5 +129,14 @@ public class DemoPlayer : MonoBehaviour {
     {
         rb.velocity = Vector2.zero;
         transform.position = checkPoint.transform.position;
+    }
+
+    private void Fire()
+    {
+        timer -= Time.deltaTime;
+        if(Input.GetKey(KeyCode.J) && timer <= 0f) {
+            Instantiate(bullet, transform).SetActive(true);
+            timer = 0.5f;
+        }
     }
 }

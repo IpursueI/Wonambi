@@ -29,7 +29,6 @@ public class CameralController : MonoBehaviour {
 		else {
             moveVert = 0;
 		}
-
         transform.position = new Vector3(player.transform.position.x * moveHoriz, player.transform.position.y * moveVert, transform.position.z);
 	}
 }
