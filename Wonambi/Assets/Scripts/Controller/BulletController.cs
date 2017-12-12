@@ -2,15 +2,54 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+[RequireComponent(typeof(Rigidbody2D))]
+[RequireComponent(typeof(BoxCollider2D))]
 public class BulletController : MonoBehaviour {
+    public float speed;
+    public float duration;
+    private Vector3 spawnPos;
+    private Rigidbody2D rb2d;
+    private GameObject owner;
 
-	// Use this for initialization
-	void Start () {
-		
+    private void Awake()
+    {
+        rb2d = GetComponent<Rigidbody2D>();
+    }
+    // Use this for initialization
+    void Start () 
+    {
+        StartCoroutine(Die());
 	}
 	
 	// Update is called once per frame
-	void Update () {
-		
+	void Update () 
+    {
+        rb2d.velocity = new Vector2(speed, 0f);
 	}
+
+    public void Init(float _speed, float _duration, Vector3 _spawnPos)
+    {
+        speed = _speed;
+        duration = _duration;
+
+        if (transform.parent.localScale.x < 0.0f) {
+            speed = -speed;
+        }
+        transform.position = _spawnPos;
+        owner = transform.parent.gameObject;
+        transform.SetParent(null);
+    }
+
+    IEnumerator Die() 
+    {
+        yield return new WaitForSeconds(duration);
+        Destroy(gameObject);
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.tag != "Player") {
+            Destroy(gameObject);
+        }
+    }
 }

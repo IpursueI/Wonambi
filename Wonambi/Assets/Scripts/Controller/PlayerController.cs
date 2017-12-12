@@ -133,7 +133,10 @@ public class PlayerController : MonoBehaviour {
     {
         cooldown -= Time.deltaTime;
         if (Input.GetKey(KeyCode.J) && cooldown <= 0f) {
-            Instantiate(bullet, transform).SetActive(true);
+            GameObject curBullet = Instantiate(bullet, transform) as GameObject;
+            BulletController bulletCtrl = curBullet.GetComponent<BulletController>();
+            bulletCtrl.Init(DefineNumber.BulletSpeed, DefineNumber.BulletDuration, GetMuzzlePos());
+            curBullet.SetActive(true);
             cooldown = 0.5f;
         }
     }
