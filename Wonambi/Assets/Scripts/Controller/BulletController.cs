@@ -48,8 +48,17 @@ public class BulletController : MonoBehaviour {
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.tag != "Player") {
-            Destroy(gameObject);
+        if(gameObject.tag == "PlayerBullet"){
+            if(collision.gameObject.tag == "MonsterBullet" || collision.gameObject.tag == "Player") {
+                return;
+            }
+        } else if(gameObject.tag == "MonsterBullet"){
+            if (collision.gameObject.tag == "Monster") return;
+            if (collision.gameObject.tag == "Player") {
+                var playerModel = collision.gameObject.GetComponent<PlayerModel>();
+                if (playerModel.UnAttackAble()) return;
+            }
         }
+        Destroy(gameObject);
     }
 }

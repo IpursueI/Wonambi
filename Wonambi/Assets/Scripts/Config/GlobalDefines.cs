@@ -14,8 +14,11 @@ namespace GlobalDefines
         public static readonly float DefaultJumpSpeed = 10.0f;
         public static readonly float FallFactor = 1.0f;
         public static readonly float LowJumpFactor = 1.0f;
-        public static readonly float BulletSpeed = 5.0f;
-        public static readonly float BulletDuration = 5.0f;
+        public static readonly float BulletSpeed = 10.0f;
+        public static readonly float BulletDuration = 2.0f;
+        public static readonly float DieDuration = 0.8f;
+        public static readonly float InvincibleDuration = 1.0f;
+        public static readonly float HitBlinkDuration = 0.1f;
     }
 
     public class PrefsKey
