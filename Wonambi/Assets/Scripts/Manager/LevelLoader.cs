@@ -59,10 +59,11 @@ public class LevelLoader : MonoBehaviour
             if (ctp.color.Equals(c)) {
                 string prefabName = ctp.name;
                 if (prefabName == "Tile") {
-                    top = y >= height || IsColorNotTile(pixels[((y + 1) * width) + x]);
-                    bottom = y <= 0 || IsColorNotTile(pixels[((y - 1) * width) + x]);
-                    left = x <= 0 || IsColorNotTile(pixels[(y * width) + x - 1]);
-                    right = x >= width || IsColorNotTile(pixels[(y * width) + x + 1]);
+                    //Debug.Log("[LevelLoader] SpawnTileAt y = " + y + ", width = " + width);
+                    top = y >= height-1 || IsColorNotTile(pixels[((y + 1) * width) + x]);
+                    bottom = y <= 1 || IsColorNotTile(pixels[((y - 1) * width) + x]);
+                    left = x <= 1 || IsColorNotTile(pixels[(y * width) + x - 1]);
+                    right = x >= width-1 || IsColorNotTile(pixels[(y * width) + x + 1]);
 
                     if (top && bottom && left && right) {
                         prefabName += "Block";
@@ -112,10 +113,15 @@ public class LevelLoader : MonoBehaviour
                     else if (!top && !bottom && !left && !right) {
                         return;
                     }
+                    Debug.Log("[LevelLoader] SpawnTileAt prefabName = " + prefabName + ", x = " + x + ", y = " + y);
+                    GameObject go = Instantiate(BundleMgr.Instance.GetTile(prefabName), new Vector3(x, y, 0), Quaternion.identity);
+                    go.transform.SetParent(null);
+                    return;
+                } else {
+                    GameObject go = Instantiate(BundleMgr.Instance.GetObject(prefabName), new Vector3(x, y, 0), Quaternion.identity);
+                    go.transform.SetParent(transform);
+                    return;
                 }
-                GameObject go = Instantiate(BundleMgr.Instance.GetTile(prefabName), new Vector3(x, y, 0), Quaternion.identity);
-                go.transform.SetParent(transform);
-                return;
             }
         }
         Debug.LogError("[LevelLoader] SpawnTileAt : no color to prefab found for: " + c.ToString() + ", " + x + ", " + y);

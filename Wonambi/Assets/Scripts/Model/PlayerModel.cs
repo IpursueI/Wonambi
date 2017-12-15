@@ -10,15 +10,12 @@ public class PlayerModel : MonoBehaviour {
     public int hp;
     public ParticleSystem particleOne;
     public ParticleSystem particleZero;
-    private PlayerController controller;
     private SpriteRenderer spriteRenderer;
-    private Animator anim;
     private HitReaction hitReact;
     private bool isDead;
     private bool isInvincible;
 	// Use this for initialization
 	void Start () {
-        anim = GetComponent<Animator>();
         spriteRenderer = GetComponent<SpriteRenderer>();
         hitReact = GetComponent<HitReaction>();
         isDead = false;

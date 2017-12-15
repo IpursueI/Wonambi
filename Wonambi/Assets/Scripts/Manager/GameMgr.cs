@@ -9,7 +9,7 @@ public class GameMgr : MonoBehaviour {
 	void Start () {
         BundleMgr.Instance.LoadBundles();
         levelLoader = GameObject.Find("Level").GetComponent<LevelLoader>();
-        levelLoader.LoadLevel("level1");
+        levelLoader.LoadLevel("levelMap1");
 	}
 	
 	// Update is called once per frame

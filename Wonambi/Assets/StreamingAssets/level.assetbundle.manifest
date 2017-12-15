@@ -1,9 +1,9 @@
 ManifestFileVersion: 0
-CRC: 432329326
+CRC: 1570331098
 Hashes:
   AssetFileHash:
     serializedVersion: 2
-    Hash: e2a8316e04ea63c79909db1c319bd41e
+    Hash: b67a06eb51f878b3044850a624497c10
   TypeTreeHash:
     serializedVersion: 2
     Hash: 21f0dc8ebad690f009368069428e0a1a
@@ -14,5 +14,5 @@ ClassTypes:
 - Class: 213
   Script: {instanceID: 0}
 Assets:
-- Assets/Sprites/Map/level1.png
+- Assets/Sprites/Map/LevelMap1.png
 Dependencies: []
