@@ -5,6 +5,9 @@ namespace GlobalDefines
 	public class FilePath
 	{
 		public static readonly string MonsterData = "Config/MonsterData";
+        public static readonly string TileBundlePath = "/tiles.assetbundle";
+        public static readonly string ObjectBundlePath = "/objects.assetbundle";
+        public static readonly string LevelBundlePath = "/level.assetbundle";
 	}
 
     public class DefineNumber
