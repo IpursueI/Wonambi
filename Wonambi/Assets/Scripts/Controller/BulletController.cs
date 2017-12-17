@@ -24,14 +24,13 @@ public class BulletController : MonoBehaviour {
 	// Update is called once per frame
 	void Update () 
     {
-        rb2d.velocity = new Vector2(speed, 0f);
+        rb2d.velocity = new Vector2(speed, 0);
 	}
 
     public void Init(float _speed, float _duration, Vector3 _spawnPos)
     {
         speed = _speed;
         duration = _duration;
-
         if (transform.parent.localScale.x < 0.0f) {
             speed = -speed;
         }
@@ -49,7 +48,7 @@ public class BulletController : MonoBehaviour {
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if(gameObject.tag == "PlayerBullet"){
-            if(collision.gameObject.tag == "MonsterBullet" || collision.gameObject.tag == "Player") {
+            if(collision.gameObject.tag == "MonsterBullet" || collision.gameObject.tag == "Player" || collision.gameObject.tag == "TurnPoint") {
                 return;
             }
         } else if(gameObject.tag == "MonsterBullet"){
@@ -60,5 +59,6 @@ public class BulletController : MonoBehaviour {
             }
         }
         Destroy(gameObject);
+       
     }
 }

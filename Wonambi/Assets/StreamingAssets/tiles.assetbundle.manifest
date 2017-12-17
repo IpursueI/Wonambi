@@ -1,12 +1,12 @@
 ManifestFileVersion: 0
-CRC: 435615088
+CRC: 3251527522
 Hashes:
   AssetFileHash:
     serializedVersion: 2
-    Hash: 8f3788b7614804889160f76e89d89da0
+    Hash: 15ea2a622132132f7cb29b96546dcc67
   TypeTreeHash:
     serializedVersion: 2
-    Hash: 97461d62c6cecc9b1cd38e12b420af39
+    Hash: 9e6545ccb3b168a1f8a5fa86ef1f9cb9
 HashAppended: 0
 ClassTypes:
 - Class: 1
@@ -19,7 +19,17 @@ ClassTypes:
   Script: {instanceID: 0}
 - Class: 48
   Script: {instanceID: 0}
+- Class: 50
+  Script: {instanceID: 0}
 - Class: 61
+  Script: {instanceID: 0}
+- Class: 62
+  Script: {instanceID: 0}
+- Class: 114
+  Script: {fileID: 11500000, guid: 8fb575032fddb45f8bb89aa56a2c5a61, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: 38b0eef2bf2f14ccaaa838cd667a8886, type: 3}
+- Class: 115
   Script: {instanceID: 0}
 - Class: 212
   Script: {instanceID: 0}
@@ -27,6 +37,7 @@ ClassTypes:
   Script: {instanceID: 0}
 Assets:
 - Assets/Prefabs/Tiles/TilePillarT.prefab
+- Assets/Prefabs/Tiles/MovingPlatform.prefab
 - Assets/Prefabs/Tiles/TilePlatformR.prefab
 - Assets/Prefabs/Tiles/TileGroundB.prefab
 - Assets/Prefabs/Tiles/TileGroundLB.prefab
@@ -41,4 +52,5 @@ Assets:
 - Assets/Prefabs/Tiles/TileGroundR.prefab
 - Assets/Prefabs/Tiles/TileBlock.prefab
 - Assets/Prefabs/Tiles/TileGroundRT.prefab
+- Assets/Prefabs/Tiles/TurnPoint.prefab
 Dependencies: []

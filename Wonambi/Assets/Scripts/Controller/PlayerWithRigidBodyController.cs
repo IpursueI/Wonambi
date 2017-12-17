@@ -57,7 +57,7 @@ public class PlayerWithRigidBodyController : MonoBehaviour {
         rightGrounded = false;
         muzzle = transform.Find("Muzzle").gameObject;
         anim = GetComponent<Animator>();
-        cooldown = 0.3f;
+        cooldown = DefineNumber.FireCooldown;
     }
 
     public void Save()
@@ -136,7 +136,7 @@ public class PlayerWithRigidBodyController : MonoBehaviour {
             BulletController bulletCtrl = curBullet.GetComponent<BulletController>();
             bulletCtrl.Init(DefineNumber.BulletSpeed, DefineNumber.BulletDuration, GetMuzzlePos());
             curBullet.SetActive(true);
-            cooldown = 0.5f;
+            cooldown = DefineNumber.FireCooldown;
         }
     }
 

@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using GlobalDefines;
 
 [System.Serializable]
 public class ColorToPrefab {
@@ -12,6 +13,8 @@ public class LevelLoader : MonoBehaviour
     private Texture2D currentLevelMap;
 
     public ColorToPrefab[] colorToPrefab;
+
+    public Vector2 startPoint;
 
     private void Start()
     {
@@ -47,6 +50,15 @@ public class LevelLoader : MonoBehaviour
         return true;
     }
 
+    private bool IsDirectionTile(Color32 c) {
+        foreach(var ctp in colorToPrefab) {
+            if(ctp.name == "Direction" && ctp.color.Equals(c)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
     public void SpawnTileAt(Color32[] pixels, int x, int y, int width, int height) 
     {
         Color32 c = pixels[(y * width) + x];
@@ -61,8 +73,8 @@ public class LevelLoader : MonoBehaviour
                 if (prefabName == "Tile") {
                     //Debug.Log("[LevelLoader] SpawnTileAt y = " + y + ", width = " + width);
                     top = y >= height-1 || IsColorNotTile(pixels[((y + 1) * width) + x]);
-                    bottom = y <= 1 || IsColorNotTile(pixels[((y - 1) * width) + x]);
-                    left = x <= 1 || IsColorNotTile(pixels[(y * width) + x - 1]);
+                    bottom = y <= 0 || IsColorNotTile(pixels[((y - 1) * width) + x]);
+                    left = x <= 0 || IsColorNotTile(pixels[(y * width) + x - 1]);
                     right = x >= width-1 || IsColorNotTile(pixels[(y * width) + x + 1]);
 
                     if (top && bottom && left && right) {
@@ -113,11 +125,113 @@ public class LevelLoader : MonoBehaviour
                     else if (!top && !bottom && !left && !right) {
                         return;
                     }
-                    Debug.Log("[LevelLoader] SpawnTileAt prefabName = " + prefabName + ", x = " + x + ", y = " + y);
                     GameObject go = Instantiate(BundleMgr.Instance.GetTile(prefabName), new Vector3(x, y, 0), Quaternion.identity);
-                    go.transform.SetParent(null);
+                    go.transform.SetParent(transform);
                     return;
-                } else {
+                }
+                else if(prefabName == "PlayerSpawnPoint") {
+                    startPoint = new Vector2(x, y);
+                    return;
+                }
+                else if(prefabName == "Escalator") {
+                    // 加一个中继点
+                    GameObject tGo = Instantiate(BundleMgr.Instance.GetTile("TurnPoint"), new Vector3(x, y, 0), Quaternion.identity);
+                    tGo.transform.SetParent(transform);
+
+
+                    // 根据周围地块来分析方向
+                    top = y < height - 1 && IsDirectionTile(pixels[((y + 1) * width) + x]);
+                    bottom = y > 0 && IsDirectionTile(pixels[((y - 1) * width) + x]);
+                    left = x > 0 && IsDirectionTile(pixels[(y * width) + x - 1]);
+                    right = x < width - 1 && IsDirectionTile(pixels[(y * width) + x + 1]);
+                    TurnPointController tpCtrl = tGo.GetComponent<TurnPointController>();
+                    if (top) {
+                        if (tpCtrl.direction1 == MoveDirection.None) {
+                            tpCtrl.direction1 = MoveDirection.Up;
+                        }
+                        else if (tpCtrl.direction2 == MoveDirection.None) {
+                            tpCtrl.direction2 = MoveDirection.Up;
+                        }
+                    }
+                    if (bottom) {
+                        if (tpCtrl.direction1 == MoveDirection.None) {
+                            tpCtrl.direction1 = MoveDirection.Down;
+                        }
+                        else if (tpCtrl.direction2 == MoveDirection.None) {
+                            tpCtrl.direction2 = MoveDirection.Down;
+                        }
+                    }
+                    if (left) {
+                        if (tpCtrl.direction1 == MoveDirection.None) {
+                            tpCtrl.direction1 = MoveDirection.Left;
+                        }
+                        else if (tpCtrl.direction2 == MoveDirection.None) {
+                            tpCtrl.direction2 = MoveDirection.Left;
+                        }
+                    }
+                    if (right) {
+                        if (tpCtrl.direction1 == MoveDirection.None) {
+                            tpCtrl.direction1 = MoveDirection.Right;
+                        }
+                        else if (tpCtrl.direction2 == MoveDirection.None) {
+                            tpCtrl.direction2 = MoveDirection.Right;
+                        }
+                    }
+                    // 加一个电梯
+                    GameObject eGo = Instantiate(BundleMgr.Instance.GetTile("MovingPlatform"), new Vector3(x, y, 0), Quaternion.identity);
+                    eGo.transform.SetParent(transform);
+                    eGo.GetComponent<MovingPlatformController>().auto = true;
+                    return;
+                }
+                else if(prefabName == "TurnPoint") {
+                    // 加一个中继点
+                    GameObject tGo = Instantiate(BundleMgr.Instance.GetTile("TurnPoint"), new Vector3(x, y, 0), Quaternion.identity);
+                    tGo.transform.SetParent(transform);
+
+                    // 根据周围地块来分析方向
+                    top = IsDirectionTile(pixels[((y + 1) * width) + x]);
+                    bottom = IsDirectionTile(pixels[((y - 1) * width) + x]);
+                    left = IsDirectionTile(pixels[(y * width) + x - 1]);
+                    right = IsDirectionTile(pixels[(y * width) + x + 1]);
+                    TurnPointController tpCtrl = tGo.GetComponent<TurnPointController>();
+                    if (top) {
+                        if (tpCtrl.direction1 == MoveDirection.None) {
+                            tpCtrl.direction1 = MoveDirection.Up;
+                        }
+                        else if (tpCtrl.direction2 == MoveDirection.None) {
+                            tpCtrl.direction2 = MoveDirection.Up;
+                        }
+                    }
+                    if (bottom) {
+                        if (tpCtrl.direction1 == MoveDirection.None) {
+                            tpCtrl.direction1 = MoveDirection.Down;
+                        }
+                        else if (tpCtrl.direction2 == MoveDirection.None) {
+                            tpCtrl.direction2 = MoveDirection.Down;
+                        }
+                    }
+                    if (left) {
+                        if (tpCtrl.direction1 == MoveDirection.None) {
+                            tpCtrl.direction1 = MoveDirection.Left;
+                        }
+                        else if (tpCtrl.direction2 == MoveDirection.None) {
+                            tpCtrl.direction2 = MoveDirection.Left;
+                        }
+                    }
+                    if (right) {
+                        if (tpCtrl.direction1 == MoveDirection.None) {
+                            tpCtrl.direction1 = MoveDirection.Right;
+                        }
+                        else if (tpCtrl.direction2 == MoveDirection.None) {
+                            tpCtrl.direction2 = MoveDirection.Right;
+                        }
+                    }
+                    return;
+                }
+                else if(prefabName == "Direction") {
+                    return;
+                }
+                else {
                     GameObject go = Instantiate(BundleMgr.Instance.GetObject(prefabName), new Vector3(x, y, 0), Quaternion.identity);
                     go.transform.SetParent(transform);
                     return;
@@ -126,11 +240,11 @@ public class LevelLoader : MonoBehaviour
         }
         Debug.LogError("[LevelLoader] SpawnTileAt : no color to prefab found for: " + c.ToString() + ", " + x + ", " + y);
     }
+
     public void LoadLevel(string levelName)
     {
         Clear();
         currentLevelMap = BundleMgr.Instance.GetLevelMap(levelName);
-
         Color32[] allPixels = currentLevelMap.GetPixels32();
         int width = currentLevelMap.width;
         int height = currentLevelMap.height;

@@ -17,11 +17,13 @@ namespace GlobalDefines
         public static readonly float DefaultJumpSpeed = 10.0f;
         public static readonly float FallFactor = 1.0f;
         public static readonly float LowJumpFactor = 1.0f;
-        public static readonly float BulletSpeed = 8.0f;
+        public static readonly float BulletSpeed = 10.0f;
         public static readonly float BulletDuration = 1.0f;
+        public static readonly float FireCooldown = 0.3f;
         public static readonly float DieDuration = 0.8f;
         public static readonly float InvincibleDuration = 1.0f;
-        public static readonly float HitBlinkDuration = 0.1f;
+        public static readonly float HitBlinkDuration = 0.05f;
+        public static readonly float CloseTurnDistance = 0.1f;
     }
 
     public class PrefsKey
@@ -30,5 +32,14 @@ namespace GlobalDefines
         public static readonly string PlayerMoveSpeed = "PlayerMoveSpeed";
         public static readonly string PlayerJumpSpeed = "PlayerJumpSpeed";
         public static readonly string PlayerEnableDoubleJump = "PlayerEnableDoubleJump";
+    }
+
+    public enum MoveDirection 
+    {
+        None = 0,
+        Up = 1,
+        Down = 2,
+        Left = 3,
+        Right = 4
     }
 }

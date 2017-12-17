@@ -17,6 +17,7 @@ public class CameraController : MonoBehaviour {
 	// Update is called once per frame
 	void Update () 
     {
+        if (player == null) return;
         if(player.transform.position.x > 0) {
             moveHoriz = 1;
         }else {
@@ -31,4 +32,9 @@ public class CameraController : MonoBehaviour {
 		}
         transform.position = new Vector3(player.transform.position.x * moveHoriz, player.transform.position.y * moveVert, transform.position.z);
 	}
+
+    public void SetPlayer(GameObject p)
+    {
+        player = p;
+    }
 }
