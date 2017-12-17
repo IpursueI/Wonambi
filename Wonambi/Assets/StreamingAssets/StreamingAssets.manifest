@@ -1,13 +1,13 @@
 ManifestFileVersion: 0
-CRC: 112044199
+CRC: 742289005
 AssetBundleManifest:
   AssetBundleInfos:
     Info_0:
-      Name: object.assetbundle
+      Name: level.assetbundle
       Dependencies: {}
     Info_1:
       Name: tiles.assetbundle
       Dependencies: {}
     Info_2:
-      Name: level.assetbundle
+      Name: object.assetbundle
       Dependencies: {}
