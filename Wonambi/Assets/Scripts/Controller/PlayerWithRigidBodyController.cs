@@ -96,15 +96,15 @@ public class PlayerWithRigidBodyController : MonoBehaviour {
     private void Rotate()
     {
         if (rb2d.velocity.x < 0.0f && forward) {
-            transform.localScale = new Vector3(-0.5f, 0.5f, 1f);
+            transform.localScale = new Vector3(-1f, 1f, 1f);
             forward = false;
-            leftCheck.transform.localPosition = new Vector3(-0.5f, -0.5f, 0.0f);
-            rightCheck.transform.localPosition = new Vector3(0.1f, -0.5f, 0.0f);
+            leftCheck.transform.localPosition = new Vector3(0.053f, -0.384f, 0.0f);
+            rightCheck.transform.localPosition = new Vector3(-0.286f, -0.387f, 0.0f);
         } else if (rb2d.velocity.x > 0.0f && !forward){
-            transform.localScale = new Vector3(0.5f, 0.5f, 1f);
+            transform.localScale = new Vector3(1f, 1f, 1f);
             forward = true;
-            leftCheck.transform.localPosition = new Vector3(0.1f, -0.5f, 0.0f);
-            rightCheck.transform.localPosition = new Vector3(-0.5f, -0.5f, 0.0f);
+            leftCheck.transform.localPosition = new Vector3(-0.286f, -0.387f, 0.0f);
+            rightCheck.transform.localPosition = new Vector3(0.053f, -0.384f, 0.0f);
         }    
     }
 
