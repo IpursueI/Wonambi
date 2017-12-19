@@ -12,20 +12,34 @@ public class PlayerModel : MonoBehaviour {
     public ParticleSystem particleZero;
     private SpriteRenderer spriteRenderer;
     private HitReaction hitReact;
-    private bool isDead;
+    public bool isDead;
     private bool isInvincible;
-	// Use this for initialization
-	void Start () {
+    private PlayerWithRigidBodyController controller;
+    private GameMgr gameMgr;
+
+    private void Awake()
+    {
         spriteRenderer = GetComponent<SpriteRenderer>();
         hitReact = GetComponent<HitReaction>();
-        isDead = false;
-        isInvincible = false;
+        controller = GetComponent<PlayerWithRigidBodyController>();
+        gameMgr = GameObject.Find("GameDirector").GetComponent<GameMgr>();
+    }
+    // Use this for initialization
+    void Start () 
+    {
+
 	}
 	
 	// Update is called once per frame
 	void Update () {
 		
 	}
+
+    public void Init() {
+        isDead = false;
+        isInvincible = false;
+        hp = PlayerPrefs.GetInt(PrefsKey.PlayerMaxHP, 3);
+    }
 
     private void OnTriggerStay2D(Collider2D collision)
     {
@@ -65,7 +79,7 @@ public class PlayerModel : MonoBehaviour {
     }
 
 
-    private void Die()
+    public void Die()
     {
         spriteRenderer.enabled = false;
         particleZero.Play();
@@ -77,12 +91,16 @@ public class PlayerModel : MonoBehaviour {
     public IEnumerator DieCoroutine()
     {
         yield return new WaitForSeconds(DefineNumber.DieDuration);
-
+        Reborn();
     }
 
     private void Reborn()
     {
-        Debug.Log("[PlayerModel] Reborn.");
+        Init();
+        controller.Init();
+        spriteRenderer.enabled = true;
+        transform.position = gameMgr.GetPlayerSpawnPos();
+        transform.SetParent(null);
     }
 
     public bool UnAttackAble()

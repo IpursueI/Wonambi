@@ -1,12 +1,12 @@
 ManifestFileVersion: 0
-CRC: 2652338941
+CRC: 716482194
 Hashes:
   AssetFileHash:
     serializedVersion: 2
-    Hash: 72997672f1846d6e3cceaf6b5c1a92bd
+    Hash: 3a69360418baf7ffee91f231db589dae
   TypeTreeHash:
     serializedVersion: 2
-    Hash: 6bb32ecc4de84035d2ee82a88deca593
+    Hash: af2b7e5471c176c998ede41171b011cf
 HashAppended: 0
 ClassTypes:
 - Class: 1
@@ -34,17 +34,19 @@ ClassTypes:
 - Class: 95
   Script: {instanceID: 0}
 - Class: 114
-  Script: {fileID: 11500000, guid: 51cc0eaad05094811a3d2097c383366e, type: 3}
+  Script: {fileID: 11500000, guid: 707365103c072497b87c7d1281c56ccd, type: 3}
 - Class: 114
-  Script: {fileID: 11500000, guid: 91e9b41e78c184d71996cff0b36ae6f1, type: 3}
+  Script: {fileID: 11500000, guid: 7ae0ee22d80bd41b787e197b3b3c636c, type: 3}
 - Class: 114
   Script: {fileID: 11500000, guid: 67656ac6c7144456589d54389122adab, type: 3}
 - Class: 114
-  Script: {fileID: 11500000, guid: 707365103c072497b87c7d1281c56ccd, type: 3}
+  Script: {fileID: 11500000, guid: 51cc0eaad05094811a3d2097c383366e, type: 3}
 - Class: 114
   Script: {fileID: 11500000, guid: 70ac7bed032794b6ab006ffc255b28cd, type: 3}
 - Class: 114
-  Script: {fileID: 11500000, guid: 7ae0ee22d80bd41b787e197b3b3c636c, type: 3}
+  Script: {fileID: 11500000, guid: 91e9b41e78c184d71996cff0b36ae6f1, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: dd0d206f3e1144cf1975b5ed3fe70149, type: 3}
 - Class: 115
   Script: {instanceID: 0}
 - Class: 198
@@ -56,6 +58,7 @@ ClassTypes:
 - Class: 213
   Script: {instanceID: 0}
 Assets:
+- Assets/Prefabs/Objects/SavePoint.prefab
 - Assets/Prefabs/Monsters/MonsterBullet.prefab
 - Assets/Prefabs/Player/Player.prefab
 - Assets/Prefabs/Player/Bullet.prefab

@@ -27,7 +27,7 @@ public class BulletController : MonoBehaviour {
         rb2d.velocity = new Vector2(speed, 0);
 	}
 
-    public void Init(float _speed, float _duration, Vector3 _spawnPos)
+    public void Init(float _speed, float _duration, Vector3 _spawnPos, GameObject _owner)
     {
         speed = _speed;
         duration = _duration;
@@ -35,7 +35,7 @@ public class BulletController : MonoBehaviour {
             speed = -speed;
         }
         transform.position = _spawnPos;
-        owner = transform.parent.gameObject;
+        owner = _owner;
         transform.SetParent(null);
     }
 

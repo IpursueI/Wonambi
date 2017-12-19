@@ -18,16 +18,25 @@ public class SentryController : MonoBehaviour {
     private GameObject rightCheck;
     private bool leftGrounded;
     private bool rightGrounded;
+    private GameMgr gameMgr;
 
 	// Use this for initialization
 	void Start () {
         rb2d = GetComponent<Rigidbody2D>();
         leftCheck = transform.Find("LeftCheck").gameObject;
         rightCheck = transform.Find("RightCheck").gameObject;
+        gameMgr = GameObject.Find("GameDirector").GetComponent<GameMgr>();
 	}
 	
 	// Update is called once per frame
-	void Update () {
+	void Update () 
+    {
+        /*
+        if(!gameMgr.IsPlayerClose(transform.position)) {
+            rb2d.velocity = new Vector2(0, 0);
+            return;
+        }
+        */
         Move();
         CheckGround();
 	}

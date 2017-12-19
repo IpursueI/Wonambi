@@ -6,15 +6,21 @@ using GlobalDefines;
 public class MovingPlatformController : MonoBehaviour {
 
     public bool auto;
+    public bool isEnd;
+    public bool isRun;
     public float speed;
     public bool willTurn = false;
     public Vector3 turnPosition;
     public MoveDirection turnDirection;
     public MoveDirection direction = MoveDirection.None;
-    public bool isEnd;
+    private GameMgr gameMgr;
 
-	// Use this for initialization
-	void Start () 
+    private void Awake()
+    {
+        gameMgr = GameObject.Find("GameDirector").GetComponent<GameMgr>();
+    }
+    // Use this for initialization
+    void Start () 
     {
         speed = 2.0f;
 	}
@@ -22,7 +28,12 @@ public class MovingPlatformController : MonoBehaviour {
 	// Update is called once per frame
 	void Update () 
     {
-        if (!auto) return;
+        if(auto && gameMgr.IsPlayerClose(transform.position)) {
+            isRun = true;
+        }
+        if (!isRun) {
+            return;
+        }
         Move();
         Turn();
 	}
@@ -49,12 +60,19 @@ public class MovingPlatformController : MonoBehaviour {
 
     private void Turn()
     {
-        if (isEnd && !auto) return;
         if (!willTurn) return;
         if((turnPosition - transform.localPosition).sqrMagnitude <= DefineNumber.CloseTurnDistance * DefineNumber.CloseTurnDistance) {
             direction = turnDirection;
             willTurn = false;
-            isEnd = false;
+            if(isEnd) {
+                if(!auto) {
+                    isRun = false;
+                } else {
+                    if(!gameMgr.IsPlayerClose(transform.position)) {
+                        isRun = false;
+                    }
+                }
+            }
         }
     }
 
@@ -73,26 +91,13 @@ public class MovingPlatformController : MonoBehaviour {
                     isEnd = true;
                 } else {
                     turnDirection = PickOneDirection(tpCtrl.direction1, tpCtrl.direction2, direction);
+                    isEnd = false;
                 }
             }
         }
     }
 
-    private void OnCollisionEnter2D(Collision2D collision)
-    {
-        if(collision.gameObject.tag == "Player") {
-            collision.gameObject.transform.SetParent(transform);
-        }
-    }
-
-    private void OnCollisionExit2D(Collision2D collision)
-    {
-        if(collision.gameObject.tag == "Player") {
-            collision.gameObject.transform.SetParent(null);
-        }        
-    }
-
-    private MoveDirection PickOneDirection(MoveDirection direction1, MoveDirection direction2, MoveDirection curDirection) 
+    private MoveDirection PickOneDirection(MoveDirection direction1, MoveDirection direction2, MoveDirection curDirection)     
     {
         if(curDirection == MoveDirection.None) {
             return direction1;
@@ -104,7 +109,7 @@ public class MovingPlatformController : MonoBehaviour {
                 return direction1;
             }
         }
-        if (curDirection == MoveDirection.Down) {
+        else if (curDirection == MoveDirection.Down) {
             if (direction1 == MoveDirection.Up) {
                 return direction2;
             }
@@ -112,22 +117,25 @@ public class MovingPlatformController : MonoBehaviour {
                 return direction1;
             }
         }
-        if (curDirection == MoveDirection.Left) {
+        else if (curDirection == MoveDirection.Left) {
             if (direction1 == MoveDirection.Right) {
                 return direction2;
-            }
-            else {
+            } else {
                 return direction1;
             }
         }
-        if (curDirection == MoveDirection.Right) {
+        else if (curDirection == MoveDirection.Right) {
             if (direction1 == MoveDirection.Left) {
                 return direction2;
-            }
-            else {
+            } else {
                 return direction1;
             }
         }
         return curDirection;
+    }
+
+    public void OnTrigger()
+    {
+        if (isEnd) isRun = true;
     }
 }

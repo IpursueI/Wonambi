@@ -180,7 +180,7 @@ public class LevelLoader : MonoBehaviour
                     // 加一个电梯
                     GameObject eGo = Instantiate(BundleMgr.Instance.GetTile("MovingPlatform"), new Vector3(x, y, 0), Quaternion.identity);
                     eGo.transform.SetParent(transform);
-                    eGo.GetComponent<MovingPlatformController>().auto = true;
+                    eGo.GetComponent<MovingPlatformController>().auto = false;
                     return;
                 }
                 else if(prefabName == "TurnPoint") {

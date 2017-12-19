@@ -112,6 +112,48 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!1001 &302196505
+Prefab:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 4362740235010034, guid: 553442f95c3fd4ee49f37d2f4b0097fa, type: 2}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4362740235010034, guid: 553442f95c3fd4ee49f37d2f4b0097fa, type: 2}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4362740235010034, guid: 553442f95c3fd4ee49f37d2f4b0097fa, type: 2}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4362740235010034, guid: 553442f95c3fd4ee49f37d2f4b0097fa, type: 2}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4362740235010034, guid: 553442f95c3fd4ee49f37d2f4b0097fa, type: 2}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4362740235010034, guid: 553442f95c3fd4ee49f37d2f4b0097fa, type: 2}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4362740235010034, guid: 553442f95c3fd4ee49f37d2f4b0097fa, type: 2}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4362740235010034, guid: 553442f95c3fd4ee49f37d2f4b0097fa, type: 2}
+      propertyPath: m_RootOrder
+      value: 3
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_ParentPrefab: {fileID: 100100000, guid: 553442f95c3fd4ee49f37d2f4b0097fa, type: 2}
+  m_IsPrefabParent: 0
 --- !u!1 &357259229
 GameObject:
   m_ObjectHideFlags: 0
@@ -303,6 +345,10 @@ MonoBehaviour:
       serializedVersion: 2
       rgba: 4294967040
     name: Direction
+  - color:
+      serializedVersion: 2
+      rgba: 4278255360
+    name: SavePoint
   startPoint: {x: 0, y: 0}
 --- !u!4 &778623558
 Transform:
@@ -311,7 +357,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 778623556}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 2.0160353, y: -0.7652236, z: -0.06644538}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}

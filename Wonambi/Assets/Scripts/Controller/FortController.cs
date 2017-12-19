@@ -29,7 +29,7 @@ public class FortController : MonoBehaviour {
         if (timer <= 0f) {
             GameObject curBullet = Instantiate(bullet, transform) as GameObject;
             BulletController bulletCtrl = curBullet.GetComponent<BulletController>();
-            bulletCtrl.Init(DefineNumber.BulletSpeed, DefineNumber.BulletDuration, muzzle.transform.position);
+            bulletCtrl.Init(DefineNumber.BulletSpeed, DefineNumber.BulletDuration, muzzle.transform.position, gameObject);
             curBullet.transform.localScale = new Vector3(1f, 1f, 1f);
             curBullet.SetActive(true);
             timer = cooldown;

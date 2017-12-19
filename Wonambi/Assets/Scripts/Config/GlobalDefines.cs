@@ -2,7 +2,7 @@
 
 namespace GlobalDefines
 {
-	public class FilePath
+	public static class FilePath
 	{
 		public static readonly string MonsterData = "Config/MonsterData";
         public static readonly string TileBundlePath = "/tiles.assetbundle";
@@ -10,7 +10,7 @@ namespace GlobalDefines
         public static readonly string LevelBundlePath = "/level.assetbundle";
 	}
 
-    public class DefineNumber
+    public static class DefineNumber
     {
         public static readonly int DefaultHP = 3;
         public static readonly float DefaultMoveSpeed = 3.0f;
@@ -24,14 +24,19 @@ namespace GlobalDefines
         public static readonly float InvincibleDuration = 1.0f;
         public static readonly float HitBlinkDuration = 0.05f;
         public static readonly float CloseTurnDistance = 0.1f;
+        public static readonly float MonsterTriggerDistance = 20.0f;
+        public static readonly float MaxFallSpeed = -20.0f;
+        public static readonly float PlayerMinY = -10.0f;
     }
 
-    public class PrefsKey
+    public static class PrefsKey
     {
         public static readonly string PlayerMaxHP = "PlayerMaxHP";
         public static readonly string PlayerMoveSpeed = "PlayerMoveSpeed";
         public static readonly string PlayerJumpSpeed = "PlayerJumpSpeed";
         public static readonly string PlayerEnableDoubleJump = "PlayerEnableDoubleJump";
+        public static readonly string PlayerSavePoint = "PlayerSavePoint";
+        public static readonly string PlayerLevelMap = "PlayerLevelMap";
     }
 
     public enum MoveDirection 
@@ -41,5 +46,23 @@ namespace GlobalDefines
         Down = 2,
         Left = 3,
         Right = 4
+    }
+
+    public static class GlobalFunc
+    {
+        public static Vector3 StringToVector3(string s)
+        {
+            if(s.StartsWith("(") && s.EndsWith(")")) {
+                s = s.Substring(1, s.Length - 2);
+            }
+            string[] sArray = s.Split(',');
+
+            Vector3 result = new Vector3(
+                float.Parse(sArray[0]),
+                float.Parse(sArray[1]),
+                float.Parse(sArray[2]));
+
+            return result;
+        }
     }
 }

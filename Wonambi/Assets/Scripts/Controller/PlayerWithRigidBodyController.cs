@@ -26,22 +26,39 @@ public class PlayerWithRigidBodyController : MonoBehaviour {
     private float cooldown;
     public GameObject bullet;
     private GameObject muzzle;
+    // model
+    private PlayerModel model;
 
-	// Use this for initialization
-	void Start () 
+    private void Awake()
     {
-        Init();
+        muzzle = transform.Find("Muzzle").gameObject;
+        leftCheck = transform.Find("LeftCheck").gameObject;
+        rightCheck = transform.Find("RightCheck").gameObject;
+        rb2d = GetComponent<Rigidbody2D>();
+        model = GetComponent<PlayerModel>();
+        anim = GetComponent<Animator>();
+    }
+
+    // Use this for initialization
+    void Start () 
+    {
+
 	}
-	
-	// Update is called once per frame
-	void Update () 
+
+    private void Update()
     {
+        if (model.isDead) 
+        {
+            rb2d.velocity = Vector2.zero;
+            return;
+        }
         Move();
         Rotate();
         CheckGround();
         Fire();
         SyncAnimator();
-	}
+        CheckDie();
+    }
 
     public void Init()
     {
@@ -49,14 +66,9 @@ public class PlayerWithRigidBodyController : MonoBehaviour {
         enableDoubleJump = PlayerPrefs.GetInt(PrefsKey.PlayerEnableDoubleJump, 0) > 0;
         moveSpeed = PlayerPrefs.GetFloat(PrefsKey.PlayerMoveSpeed, DefineNumber.DefaultMoveSpeed);
         jumpSpeed = PlayerPrefs.GetFloat(PrefsKey.PlayerJumpSpeed, DefineNumber.DefaultJumpSpeed);
-        leftCheck = transform.Find("LeftCheck").gameObject;
-        rightCheck = transform.Find("RightCheck").gameObject;
-        rb2d = GetComponent<Rigidbody2D>();
-        inDoubleJump = false;
+        inDoubleJump = true;
         leftGrounded = false;
         rightGrounded = false;
-        muzzle = transform.Find("Muzzle").gameObject;
-        anim = GetComponent<Animator>();
         cooldown = DefineNumber.FireCooldown;
     }
 
@@ -91,6 +103,9 @@ public class PlayerWithRigidBodyController : MonoBehaviour {
         else if (rb2d.velocity.y > 0 && !Input.GetButton("Jump")) {
             rb2d.velocity += Vector2.up * Physics2D.gravity.y * DefineNumber.LowJumpFactor * Time.deltaTime;
         }
+        if(rb2d.velocity.y < DefineNumber.MaxFallSpeed) {
+            rb2d.velocity = new Vector2(rb2d.velocity.x, DefineNumber.MaxFallSpeed);
+        }
     }
 
     private void Rotate()
@@ -98,13 +113,13 @@ public class PlayerWithRigidBodyController : MonoBehaviour {
         if (rb2d.velocity.x < 0.0f && forward) {
             transform.localScale = new Vector3(-1f, 1f, 1f);
             forward = false;
-            leftCheck.transform.localPosition = new Vector3(0.053f, -0.384f, 0.0f);
-            rightCheck.transform.localPosition = new Vector3(-0.286f, -0.387f, 0.0f);
+            leftCheck.transform.localPosition = new Vector3(-0.45f, -0.6f, 0.0f);
+            rightCheck.transform.localPosition = new Vector3(0.05f, -0.6f, 0.0f);
         } else if (rb2d.velocity.x > 0.0f && !forward){
             transform.localScale = new Vector3(1f, 1f, 1f);
             forward = true;
-            leftCheck.transform.localPosition = new Vector3(-0.286f, -0.387f, 0.0f);
-            rightCheck.transform.localPosition = new Vector3(0.053f, -0.384f, 0.0f);
+            leftCheck.transform.localPosition = new Vector3(0.05f, -0.6f, 0.0f);
+            rightCheck.transform.localPosition = new Vector3(-0.45f, -0.6f, 0.0f);
         }    
     }
 
@@ -134,7 +149,7 @@ public class PlayerWithRigidBodyController : MonoBehaviour {
         if (Input.GetKey(KeyCode.J) && cooldown <= 0f) {
             GameObject curBullet = Instantiate(bullet, transform) as GameObject;
             BulletController bulletCtrl = curBullet.GetComponent<BulletController>();
-            bulletCtrl.Init(DefineNumber.BulletSpeed, DefineNumber.BulletDuration, GetMuzzlePos());
+            bulletCtrl.Init(DefineNumber.BulletSpeed, DefineNumber.BulletDuration, GetMuzzlePos(), gameObject);
             curBullet.SetActive(true);
             cooldown = DefineNumber.FireCooldown;
         }
@@ -150,5 +165,12 @@ public class PlayerWithRigidBodyController : MonoBehaviour {
     public Vector3 GetMuzzlePos()
     {
         return muzzle.transform.position;
+    }
+
+    private void CheckDie()
+    {
+        if(transform.position.y < DefineNumber.PlayerMinY) {
+            model.Die();
+        }
     }
 }
