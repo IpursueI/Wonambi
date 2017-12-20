@@ -45,14 +45,8 @@ public class SentryController : MonoBehaviour {
     {
         if (forward) {
             rb2d.velocity = new Vector2(speed, rb2d.velocity.y);
-            transform.localScale = new Vector3(1, 1, 1);
-            leftCheck.transform.localPosition = new Vector3(-0.3f, -0.4f, 0f);
-            rightCheck.transform.localPosition = new Vector3(0.3f, -0.4f, 0f);
         } else {
             rb2d.velocity = new Vector2(-speed, rb2d.velocity.y);
-            transform.localScale = new Vector3(-1, 1, 1);
-            leftCheck.transform.localPosition = new Vector3(0.3f, -0.4f, 0f);
-            rightCheck.transform.localPosition = new Vector3(-0.3f, -0.4f, 0f);
         }
     }
 
