@@ -23,8 +23,8 @@ public class MonsterModel : MonoBehaviour {
         bc2d = GetComponent<BoxCollider2D>();
         anim = GetComponent<Animator>();
         hitReact = GetComponent<HitReaction>();
-        isDead = false;
         controller = GetComponent<MonsterController>();
+        isDead = false;
 	}
 	
 	// Update is called once per frame

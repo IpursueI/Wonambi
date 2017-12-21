@@ -2,31 +2,49 @@
 using System.Collections.Generic;
 using UnityEngine;
 using DG.Tweening;
+using UnityEngine.UI;
 
 public class SavePointController : MonoBehaviour {
 
     public GameMgr gameMgr;
     private bool isTrigger = false;
-	// Use this for initialization
-	void Start () 
+    private Text text;
+    private Animator anim;
+    // Use this for initialization
+    private void Awake()
     {
         gameMgr = GameObject.Find("GameDirector").GetComponent<GameMgr>();
+        text = transform.Find("Canvas/Text").gameObject.GetComponent<Text>();
+        text.gameObject.SetActive(false);
+        anim = GetComponent<Animator>();
+    }
+
+    void Start () 
+    {
+
 	}
 	
 	// Update is called once per frame
 	void Update () 
     {
-        // TODO 
-        if(isTrigger && Input.GetKey(KeyCode.K)) {
+        if(isTrigger && Input.GetKey(KeyCode.L)) {
             gameMgr.SetSavePoint(transform.position);
+            text.text = "Game saved.";
         }
-
-        // TODO Show something
 	}
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        Debug.Log("[SavePointController] OnTriggerEnter2D.");
         isTrigger = true;
+        text.text = "It is an old school floppy.\nPress L to save game.";
+        text.gameObject.SetActive(true);
+        anim.SetBool("isTrigger", isTrigger);
+    }
+
+    private void OnTriggerExit2D(Collider2D collision)
+    {
+        isTrigger = false;
+        text.gameObject.SetActive(false);
+        anim.SetBool("isTrigger", isTrigger);
     }
 }

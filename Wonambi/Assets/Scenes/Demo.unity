@@ -194,7 +194,7 @@ Camera:
   m_Enabled: 1
   serializedVersion: 2
   m_ClearFlags: 1
-  m_BackGroundColor: {r: 0.19215687, g: 0.3019608, b: 0.4745098, a: 0}
+  m_BackGroundColor: {r: 0.25490198, g: 0.27058825, b: 0.30588236, a: 0}
   m_NormalizedViewPortRect:
     serializedVersion: 2
     x: 0
@@ -315,6 +315,10 @@ MonoBehaviour:
       serializedVersion: 2
       rgba: 4278386943
     name: Fort
+  - color:
+      serializedVersion: 2
+      rgba: 4278452479
+    name: Lurker
   startPoint: {x: 0, y: 0}
 --- !u!4 &778623558
 Transform:
@@ -329,45 +333,3 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1001 &1653149307
-Prefab:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    m_TransformParent: {fileID: 0}
-    m_Modifications:
-    - target: {fileID: 4750522037889588, guid: f2044142ca6294a6b92a55578e78810e, type: 2}
-      propertyPath: m_LocalPosition.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4750522037889588, guid: f2044142ca6294a6b92a55578e78810e, type: 2}
-      propertyPath: m_LocalPosition.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4750522037889588, guid: f2044142ca6294a6b92a55578e78810e, type: 2}
-      propertyPath: m_LocalPosition.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4750522037889588, guid: f2044142ca6294a6b92a55578e78810e, type: 2}
-      propertyPath: m_LocalRotation.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4750522037889588, guid: f2044142ca6294a6b92a55578e78810e, type: 2}
-      propertyPath: m_LocalRotation.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4750522037889588, guid: f2044142ca6294a6b92a55578e78810e, type: 2}
-      propertyPath: m_LocalRotation.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4750522037889588, guid: f2044142ca6294a6b92a55578e78810e, type: 2}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4750522037889588, guid: f2044142ca6294a6b92a55578e78810e, type: 2}
-      propertyPath: m_RootOrder
-      value: 3
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-  m_ParentPrefab: {fileID: 100100000, guid: f2044142ca6294a6b92a55578e78810e, type: 2}
-  m_IsPrefabParent: 0

@@ -12,6 +12,7 @@ public class GameMgr : MonoBehaviour {
 	// Use this for initialization
 	void Start () 
     {
+        PlayerPrefs.DeleteAll();
         BundleMgr.Instance.LoadBundles();
         levelLoader = GameObject.Find("LevelContainer").GetComponent<LevelLoader>();
 
@@ -27,6 +28,7 @@ public class GameMgr : MonoBehaviour {
     void StartLevel(string levelName) 
     {
         levelLoader.LoadLevel("levelMap1");
+        LoadPlayPref();
         SpawnPlayer();
 
     }
@@ -44,9 +46,9 @@ public class GameMgr : MonoBehaviour {
     void SpawnPlayer() 
     {
         if(player == null) {
-            // TODO 以后需要根据存盘来决定位置
+            Debug.Log("[GameMgr] SpawnPlayer: playerSavePoint = " + playerSavePoint.ToString());
             player = Instantiate(BundleMgr.Instance.GetObject("Player"), 
-                                 new Vector3(levelLoader.startPoint.x, levelLoader.startPoint.y, -10), 
+                                 playerSavePoint,
                                  Quaternion.identity);
             player.GetComponent<PlayerWithRigidBodyController>().Init();
             player.GetComponent<PlayerModel>().Init();
@@ -96,7 +98,7 @@ public class GameMgr : MonoBehaviour {
 
     public void SetSavePoint(Vector3 savePos) 
     {
-        Vector3 tmp = new Vector3(savePos.x, savePos.y, -10);
-        PlayerPrefs.SetString(PrefsKey.PlayerSavePoint, tmp.ToString());
+        playerSavePoint = new Vector3(savePos.x, savePos.y, -10);
+        PlayerPrefs.SetString(PrefsKey.PlayerSavePoint, playerSavePoint.ToString());
     }
 }

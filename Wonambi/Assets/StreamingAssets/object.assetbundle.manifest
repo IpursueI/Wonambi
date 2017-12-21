@@ -1,12 +1,12 @@
 ManifestFileVersion: 0
-CRC: 1257562381
+CRC: 463230757
 Hashes:
   AssetFileHash:
     serializedVersion: 2
-    Hash: 886ab302029fc4af1b5ae2ebbe3e8ed7
+    Hash: 64fa4030eaf77a2aa4ac15688b30a32e
   TypeTreeHash:
     serializedVersion: 2
-    Hash: 3ac98d50f331857699d8e35de8efaaff
+    Hash: ec9e1ed5f4ac1716c510763c4425771b
 HashAppended: 0
 ClassTypes:
 - Class: 1
@@ -38,6 +38,12 @@ ClassTypes:
 - Class: 114
   Script: {fileID: 11500000, guid: 707365103c072497b87c7d1281c56ccd, type: 3}
 - Class: 114
+  Script: {fileID: 1980459831, guid: f70555f144d8491a825f0804e09c671c, type: 3}
+- Class: 114
+  Script: {fileID: 1301386320, guid: f70555f144d8491a825f0804e09c671c, type: 3}
+- Class: 114
+  Script: {fileID: 708705254, guid: f70555f144d8491a825f0804e09c671c, type: 3}
+- Class: 114
   Script: {fileID: 11500000, guid: 7ae0ee22d80bd41b787e197b3b3c636c, type: 3}
 - Class: 114
   Script: {fileID: 11500000, guid: 67656ac6c7144456589d54389122adab, type: 3}
@@ -53,6 +59,8 @@ ClassTypes:
   Script: {fileID: 11500000, guid: dd0d206f3e1144cf1975b5ed3fe70149, type: 3}
 - Class: 115
   Script: {instanceID: 0}
+- Class: 128
+  Script: {instanceID: 0}
 - Class: 198
   Script: {instanceID: 0}
 - Class: 199
@@ -61,7 +69,14 @@ ClassTypes:
   Script: {instanceID: 0}
 - Class: 213
   Script: {instanceID: 0}
+- Class: 222
+  Script: {instanceID: 0}
+- Class: 223
+  Script: {instanceID: 0}
+- Class: 224
+  Script: {instanceID: 0}
 Assets:
+- Assets/Prefabs/Monsters/Lurker.prefab
 - Assets/Prefabs/Objects/SavePoint.prefab
 - Assets/Prefabs/Monsters/MonsterBullet.prefab
 - Assets/Prefabs/Player/Player.prefab
