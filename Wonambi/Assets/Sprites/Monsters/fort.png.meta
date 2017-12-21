@@ -1,13 +1,11 @@
 fileFormatVersion: 2
-guid: 96e2e128535b447f5867fa1cbd1ec276
-timeCreated: 1513840569
+guid: ed3239efaaa3140d6a7f113c5c4dc1ed
+timeCreated: 1513845472
 licenseType: Free
 TextureImporter:
   fileIDToRecycleName:
-    21300000: patrol_0
-    21300002: patrol_1
-    21300004: patrol_2
-    21300006: patrol_3
+    21300000: fort_0
+    21300002: fort_1
   externalObjects: {}
   serializedVersion: 4
   mipmaps:
@@ -91,57 +89,29 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: patrol_0
+      name: fort_0
       rect:
         serializedVersion: 2
         x: 0
-        y: 128
-        width: 64
-        height: 128
+        y: 64
+        width: 80
+        height: 64
       alignment: 9
-      pivot: {x: 0.5, y: 0.25}
+      pivot: {x: 0.4, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: patrol_1
-      rect:
-        serializedVersion: 2
-        x: 64
-        y: 128
-        width: 64
-        height: 128
-      alignment: 9
-      pivot: {x: 0.5, y: 0.25}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-    - serializedVersion: 2
-      name: patrol_2
+      name: fort_1
       rect:
         serializedVersion: 2
         x: 0
         y: 0
-        width: 64
-        height: 128
+        width: 80
+        height: 64
       alignment: 9
-      pivot: {x: 0.5, y: 0.25}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-    - serializedVersion: 2
-      name: patrol_3
-      rect:
-        serializedVersion: 2
-        x: 64
-        y: 0
-        width: 64
-        height: 128
-      alignment: 9
-      pivot: {x: 0.5, y: 0.25}
+      pivot: {x: 0.4, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []

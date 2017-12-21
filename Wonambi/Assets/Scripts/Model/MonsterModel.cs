@@ -15,7 +15,8 @@ public class MonsterModel : MonoBehaviour {
     private BoxCollider2D bc2d;
     private Animator anim;
     private HitReaction hitReact;
-    private bool isDead;
+    private bool isDead = false;
+    private MonsterController controller;
 	// Use this for initialization
 	void Start () {
         spriteRenderer = GetComponent<SpriteRenderer>();
@@ -23,6 +24,7 @@ public class MonsterModel : MonoBehaviour {
         anim = GetComponent<Animator>();
         hitReact = GetComponent<HitReaction>();
         isDead = false;
+        controller = GetComponent<MonsterController>();
 	}
 	
 	// Update is called once per frame
@@ -65,6 +67,9 @@ public class MonsterModel : MonoBehaviour {
         particleZero.Play();
         particleOne.Play();
         isDead = true;
+        if(controller != null) {
+            controller.OnDie();
+        }
         StartCoroutine(DieCoroutine());
     }
 
@@ -72,5 +77,10 @@ public class MonsterModel : MonoBehaviour {
     {
         yield return new WaitForSeconds(DefineNumber.DieDuration);
         Destroy(gameObject);
+    }
+
+    public bool IsDead()
+    {
+        return isDead;
     }
 }

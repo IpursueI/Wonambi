@@ -4,7 +4,7 @@ using UnityEngine;
 
 [RequireComponent(typeof(Rigidbody2D))]
 [RequireComponent(typeof(BoxCollider2D))]
-public class SentryController : MonoBehaviour {
+public class SentryController : MonsterController {
 
     // Movement
     public float speed;
@@ -20,23 +20,27 @@ public class SentryController : MonoBehaviour {
     private bool rightGrounded;
     private GameMgr gameMgr;
 
+    private MonsterModel model;
 	// Use this for initialization
 	void Start () {
         rb2d = GetComponent<Rigidbody2D>();
         leftCheck = transform.Find("LeftCheck").gameObject;
         rightCheck = transform.Find("RightCheck").gameObject;
         gameMgr = GameObject.Find("GameDirector").GetComponent<GameMgr>();
+        model = GetComponent<MonsterModel>();
 	}
 	
 	// Update is called once per frame
 	void Update () 
     {
-        /*
-        if(!gameMgr.IsPlayerClose(transform.position)) {
-            rb2d.velocity = new Vector2(0, 0);
+        if(model.IsDead()) {
             return;
         }
-        */
+        if(!gameMgr.IsPlayerClose(transform.position)) {
+            rb2d.velocity = Vector2.zero;
+            return;
+        }
+
         Move();
         CheckGround();
 	}
@@ -63,5 +67,10 @@ public class SentryController : MonoBehaviour {
         if ((!forward && wallLeft.transform != null) || hitLeft.transform == null) {
             forward = true;
         }
+    }
+
+    public override void OnDie()
+    {
+        rb2d.velocity = Vector2.zero;
     }
 }

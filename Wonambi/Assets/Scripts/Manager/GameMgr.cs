@@ -59,10 +59,33 @@ public class GameMgr : MonoBehaviour {
         Vector3 pPos = player.transform.position;
         float distancePow = Mathf.Pow(monsterPos.x - pPos.x, 2) + Mathf.Pow(monsterPos.y - pPos.y, 2);
        // Debug.Log("[IsPlayerClose] pPos = " + pPos.ToString() + ", mPos = " + monsterPos.ToString() + ", distance = " + distancePow.ToString());
-        if(distancePow < DefineNumber.MonsterTriggerDistance * DefineNumber.MonsterTriggerDistance) {
+        if(distancePow < DefineNumber.MonsterMoveTriggerDistance * DefineNumber.MonsterMoveTriggerDistance) {
             return true;
         }
         return false;
+    }
+
+    public bool IsPlayerTrigger(Vector3 monsterPos) {
+        if (player == null) return false;
+        Vector3 pPos = player.transform.position;
+        float distancePow = Mathf.Pow(monsterPos.x - pPos.x, 2) + Mathf.Pow(monsterPos.y - pPos.y, 2);
+        if(distancePow < DefineNumber.MonsterFireTriggerDistance * DefineNumber.MonsterFireTriggerDistance) {
+            return true;
+        }
+        return false;
+    }
+
+    public bool IsPlayerRight(Vector3 monsterPos) {
+        if (player == null) return false;
+        Vector3 pPos = player.transform.position;
+        if (pPos.x < monsterPos.x) return false;
+        return true;
+    }
+
+    public float DistanceToPlayer(Vector3 monsterPos) {
+        if (player == null) return -1.0f;
+        Vector3 pPos = player.transform.position;
+        return Mathf.Pow(monsterPos.x - pPos.x, 2) + Mathf.Pow(monsterPos.y - pPos.y, 2);
     }
 
     public Vector3 GetPlayerSpawnPos()

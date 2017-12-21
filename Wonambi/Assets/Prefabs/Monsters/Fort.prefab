@@ -24,6 +24,7 @@ GameObject:
   - component: {fileID: 61283302753470952}
   - component: {fileID: 114267842713671472}
   - component: {fileID: 114571052200005002}
+  - component: {fileID: 114946105766422342}
   m_Layer: 0
   m_Name: Fort
   m_TagString: Monster
@@ -42,7 +43,7 @@ GameObject:
   m_Layer: 0
   m_Name: Muzzle
   m_TagString: Untagged
-  m_Icon: {fileID: 0}
+  m_Icon: {fileID: 571167235653111936, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
@@ -100,7 +101,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1214114120447602}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0.834, y: -0.023, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 4504552467652450}
@@ -112,16 +113,16 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1032812890604224}
-  m_LocalRotation: {x: 0, y: 1, z: 0, w: 0}
-  m_LocalPosition: {x: 4.7, y: -1.01, z: 0}
-  m_LocalScale: {x: 2, y: 2, z: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4181382696629600}
   - {fileID: 4637996518890398}
   - {fileID: 4161325573516732}
   m_Father: {fileID: 0}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 180, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &4637996518890398
 Transform:
   m_ObjectHideFlags: 1
@@ -147,18 +148,18 @@ BoxCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.22498971, y: 0}
+  m_Offset: {x: 0.1265943, y: 0}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 1.45, y: 0.86}
-    newSize: {x: 1.45, y: 0.86}
+    pivot: {x: 0.4, y: 0.5}
+    oldSize: {x: 1.25, y: 1}
+    newSize: {x: 1.25, y: 1}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 1.0000206, y: 0.86}
+  m_Size: {x: 1.2531886, y: 1}
   m_EdgeRadius: 0
 --- !u!95 &95268975073350140
 Animator:
@@ -202,6 +203,19 @@ MonoBehaviour:
   hp: 5
   particleOne: {fileID: 198095405319241242}
   particleZero: {fileID: 198444015550579554}
+--- !u!114 &114946105766422342
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1032812890604224}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b6358000af560493a8ead14c9bb06b7c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  cooldown: 1
+  bullet: {fileID: 1956704864712264, guid: e9d27bb2fab7841f2b89bfb73af94f7c, type: 2}
 --- !u!198 &198095405319241242
 ParticleSystem:
   m_ObjectHideFlags: 1
@@ -262,7 +276,7 @@ ParticleSystem:
   moveWithTransform: 0
   moveWithCustomTransform: {fileID: 0}
   scalingMode: 1
-  randomSeed: 1984320509
+  randomSeed: -1229685540
   InitialModule:
     serializedVersion: 3
     enabled: 1
@@ -7020,12 +7034,12 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 0a7747b17d9f14bcb8841b3740362eb4, type: 3}
+  m_Sprite: {fileID: 21300000, guid: ed3239efaaa3140d6a7f113c5c4dc1ed, type: 3}
   m_Color: {r: 1, g: 1, b: 0, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 1.45, y: 0.86}
+  m_Size: {x: 1.25, y: 1}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
