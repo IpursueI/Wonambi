@@ -8,6 +8,8 @@ TagManager:
   - Monster
   - MonsterBullet
   - TurnPoint
+  - Heart
+  - SavePoint
   layers:
   - Default
   - TransparentFX

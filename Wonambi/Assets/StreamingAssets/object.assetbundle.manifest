@@ -1,12 +1,12 @@
 ManifestFileVersion: 0
-CRC: 784095220
+CRC: 2306935912
 Hashes:
   AssetFileHash:
     serializedVersion: 2
-    Hash: 9f703e94c3d6844a6f16fa678ddd376b
+    Hash: 60f26bd0a05f2f47d936c04c3d15bcbb
   TypeTreeHash:
     serializedVersion: 2
-    Hash: ec9e1ed5f4ac1716c510763c4425771b
+    Hash: e7b37fab21ed90f601e0b8bb091d9f0d
 HashAppended: 0
 ClassTypes:
 - Class: 1
@@ -76,14 +76,14 @@ ClassTypes:
 - Class: 224
   Script: {instanceID: 0}
 Assets:
-- Assets/Prefabs/Monsters/Lurker.prefab
-- Assets/Prefabs/Objects/SavePoint.prefab
-- Assets/Prefabs/Monsters/MonsterBullet.prefab
-- Assets/Prefabs/Player/Player.prefab
-- Assets/Prefabs/Player/Bullet.prefab
-- Assets/Prefabs/Monsters/Patrol.prefab
-- Assets/Prefabs/Levels/Level1.prefab
-- Assets/Prefabs/Monsters/Pile.prefab
-- Assets/Prefabs/Monsters/Sentry.prefab
-- Assets/Prefabs/Monsters/Fort.prefab
+- Assets/Bundles/Prefabs/Monsters/Lurker.prefab
+- Assets/Bundles/Prefabs/Objects/SavePoint.prefab
+- Assets/Bundles/Prefabs/Monsters/MonsterBullet.prefab
+- Assets/Bundles/Prefabs/Player/Player.prefab
+- Assets/Bundles/Prefabs/Player/Bullet.prefab
+- Assets/Bundles/Prefabs/Monsters/Patrol.prefab
+- Assets/Bundles/Prefabs/Monsters/Pile.prefab
+- Assets/Bundles/Prefabs/Monsters/Sentry.prefab
+- Assets/Bundles/Prefabs/Monsters/Fort.prefab
+- Assets/Bundles/Prefabs/Objects/Heart.prefab
 Dependencies: []

@@ -8,6 +8,7 @@ using GlobalDefines;
 public class PlayerModel : MonoBehaviour {
     
     public int hp;
+    public int maxHp;
     public ParticleSystem particleOne;
     public ParticleSystem particleZero;
     private SpriteRenderer spriteRenderer;
@@ -38,14 +39,17 @@ public class PlayerModel : MonoBehaviour {
     public void Init() {
         isDead = false;
         isInvincible = false;
-        hp = PlayerPrefs.GetInt(PrefsKey.PlayerMaxHP, 3);
+        maxHp = PlayerPrefs.GetInt(PrefsKey.PlayerMaxHP, 3);
+        hp = maxHp;
+        spriteRenderer.enabled = true;
+        controller.Init();
     }
 
     private void OnTriggerStay2D(Collider2D collision)
     {
         if (isDead) return;
         if (isInvincible) return;
-        if(collision.gameObject.tag == "Monster") {
+        if(collision.tag == "Monster") {
             OnHit();
         }
     }
@@ -53,14 +57,19 @@ public class PlayerModel : MonoBehaviour {
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (isDead) return;
-        if (isInvincible) return;
-        if (collision.gameObject.tag == "MonsterBullet") {
+        if(collision.tag == "Heart") {
+            AddHP(1);
+            Destroy(collision.gameObject); 
+
+        }
+        if (collision.tag == "MonsterBullet" && !isInvincible) {
             OnHit();
         }
     }
     private void OnHit()
     {
         --hp;
+        gameMgr.RefreshHP();
         if(hp <= 0) {
             Die();
             return;
@@ -85,26 +94,33 @@ public class PlayerModel : MonoBehaviour {
         particleZero.Play();
         particleOne.Play();
         isDead = true;
+        transform.SetParent(null);
         StartCoroutine(DieCoroutine());
     }
 
     public IEnumerator DieCoroutine()
     {
         yield return new WaitForSeconds(DefineNumber.DieDuration);
-        Reborn();
-    }
-
-    private void Reborn()
-    {
-        Init();
-        controller.Init();
-        spriteRenderer.enabled = true;
-        transform.position = gameMgr.GetPlayerSpawnPos();
-        transform.SetParent(null);
+        gameMgr.StartLevel();
     }
 
     public bool UnAttackAble()
     {
         return isInvincible || isDead;
     }
+
+    private void AddHP(int v)
+    {
+        hp += v;
+        gameMgr.RefreshHP();
+        if(hp > maxHp) {
+            hp = maxHp;
+        }
+    }
+
+    public void FullHP()
+    {
+        AddHP(maxHp);
+    }
+
 }

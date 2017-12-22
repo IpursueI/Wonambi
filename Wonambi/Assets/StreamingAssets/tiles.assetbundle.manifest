@@ -1,9 +1,9 @@
 ManifestFileVersion: 0
-CRC: 1887203092
+CRC: 4272657512
 Hashes:
   AssetFileHash:
     serializedVersion: 2
-    Hash: 3cf593347b6280189ad513192d2fe391
+    Hash: f2cb825486dcc6be0d1713e6a61054b2
   TypeTreeHash:
     serializedVersion: 2
     Hash: 6342b51ffdea446539accd3b6370086d
@@ -38,21 +38,21 @@ ClassTypes:
 - Class: 213
   Script: {instanceID: 0}
 Assets:
-- Assets/Prefabs/Tiles/TilePillarT.prefab
-- Assets/Prefabs/Tiles/MovingPlatform.prefab
-- Assets/Prefabs/Tiles/TilePlatformR.prefab
-- Assets/Prefabs/Tiles/TileGroundB.prefab
-- Assets/Prefabs/Tiles/TileGroundLB.prefab
-- Assets/Prefabs/Tiles/TilePillarM.prefab
-- Assets/Prefabs/Tiles/TilePlatformL.prefab
-- Assets/Prefabs/Tiles/TilePillarB.prefab
-- Assets/Prefabs/Tiles/TileGroundT.prefab
-- Assets/Prefabs/Tiles/TileGroundLT.prefab
-- Assets/Prefabs/Tiles/TileGroundL.prefab
-- Assets/Prefabs/Tiles/TileGroundRB.prefab
-- Assets/Prefabs/Tiles/TilePlatformM.prefab
-- Assets/Prefabs/Tiles/TileGroundR.prefab
-- Assets/Prefabs/Tiles/TileBlock.prefab
-- Assets/Prefabs/Tiles/TileGroundRT.prefab
-- Assets/Prefabs/Tiles/TurnPoint.prefab
+- Assets/Bundles/Prefabs/Tiles/TilePillarT.prefab
+- Assets/Bundles/Prefabs/Tiles/MovingPlatform.prefab
+- Assets/Bundles/Prefabs/Tiles/TilePlatformR.prefab
+- Assets/Bundles/Prefabs/Tiles/TileGroundB.prefab
+- Assets/Bundles/Prefabs/Tiles/TileGroundLB.prefab
+- Assets/Bundles/Prefabs/Tiles/TilePillarM.prefab
+- Assets/Bundles/Prefabs/Tiles/TilePlatformL.prefab
+- Assets/Bundles/Prefabs/Tiles/TilePillarB.prefab
+- Assets/Bundles/Prefabs/Tiles/TileGroundT.prefab
+- Assets/Bundles/Prefabs/Tiles/TileGroundLT.prefab
+- Assets/Bundles/Prefabs/Tiles/TileGroundL.prefab
+- Assets/Bundles/Prefabs/Tiles/TileGroundRB.prefab
+- Assets/Bundles/Prefabs/Tiles/TilePlatformM.prefab
+- Assets/Bundles/Prefabs/Tiles/TileGroundR.prefab
+- Assets/Bundles/Prefabs/Tiles/TileBlock.prefab
+- Assets/Bundles/Prefabs/Tiles/TileGroundRT.prefab
+- Assets/Bundles/Prefabs/Tiles/TurnPoint.prefab
 Dependencies: []

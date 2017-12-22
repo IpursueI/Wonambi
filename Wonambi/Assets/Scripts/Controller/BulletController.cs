@@ -48,7 +48,8 @@ public class BulletController : MonoBehaviour {
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if(gameObject.tag == "PlayerBullet"){
-            if(collision.tag == "MonsterBullet" || collision.tag == "Player" || collision.tag == "TurnPoint") {
+            if(collision.tag == "MonsterBullet" || collision.tag == "Player" || collision.tag == "TurnPoint"
+               || collision.tag == "Heart" || collision.tag == "SavePoint") {
                 return;
             }
         } else if(gameObject.tag == "MonsterBullet"){

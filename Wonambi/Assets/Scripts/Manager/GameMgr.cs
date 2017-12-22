@@ -9,15 +9,22 @@ public class GameMgr : MonoBehaviour {
     private GameObject player;
 
     private Vector3 playerSavePoint;
+    private UIController uiCtrl;
+    private string curLevel;
 	// Use this for initialization
 	void Start () 
     {
         PlayerPrefs.DeleteAll();
-        BundleMgr.Instance.LoadBundles();
-        levelLoader = GameObject.Find("LevelContainer").GetComponent<LevelLoader>();
+        BundleMgr.Instance.Init();
+        LevelMgr.Instance.Init();
 
+        levelLoader = GameObject.Find("LevelContainer").GetComponent<LevelLoader>();
+        uiCtrl = GameObject.Find("UICanvas").GetComponent<UIController>();
+        uiCtrl.gameObject.SetActive(false);
+
+        curLevel = "levelMap1";
         // TODO test
-        StartLevel("levelMap1");
+        StartLevel();
 	}
 	
 	// Update is called once per frame
@@ -25,12 +32,12 @@ public class GameMgr : MonoBehaviour {
 		
 	}
 
-    void StartLevel(string levelName) 
+    public void StartLevel() 
     {
-        levelLoader.LoadLevel("levelMap1");
+        levelLoader.LoadLevel(curLevel);
         LoadPlayPref();
         SpawnPlayer();
-
+        uiCtrl.gameObject.SetActive(true);
     }
 
     void LoadPlayPref()
@@ -51,6 +58,12 @@ public class GameMgr : MonoBehaviour {
                                  Quaternion.identity);
             player.GetComponent<PlayerWithRigidBodyController>().Init();
             player.GetComponent<PlayerModel>().Init();
+            uiCtrl.ShowHp(player.GetComponent<PlayerModel>().hp);
+        } else {
+            player.transform.position = playerSavePoint;
+            player.GetComponent<PlayerModel>().Init();
+            player.GetComponent<PlayerWithRigidBodyController>().Init();
+            uiCtrl.ShowHp(player.GetComponent<PlayerModel>().hp);
         }
     }
 
@@ -93,10 +106,19 @@ public class GameMgr : MonoBehaviour {
     {
         playerSavePoint = new Vector3(savePos.x, savePos.y, -10);
         PlayerPrefs.SetString(PrefsKey.PlayerSavePoint, playerSavePoint.ToString());
+        if(player != null) {
+            player.GetComponent<PlayerModel>().FullHP();
+        }
     }
 
     public Vector3 GetPlayerSpawnPos()
     {
         return playerSavePoint;
+    }
+
+    public void RefreshHP()
+    {
+        if (player == null) return;
+        uiCtrl.ShowHp(player.GetComponent<PlayerModel>().hp);
     }
 }

@@ -43,7 +43,7 @@ GameObject:
   - component: {fileID: 95237075062533984}
   m_Layer: 0
   m_Name: SavePoint
-  m_TagString: Untagged
+  m_TagString: SavePoint
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
