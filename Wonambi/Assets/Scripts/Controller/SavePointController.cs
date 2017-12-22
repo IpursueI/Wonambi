@@ -35,14 +35,16 @@ public class SavePointController : MonoBehaviour {
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
+        if (collision.tag != "Player") return;
         isTrigger = true;
-        text.text = "It is an old school floppy.\nPress L to save game.";
+        text.text = "It is an old school floppy disk.\nPress L to save game.";
         text.gameObject.SetActive(true);
         anim.SetBool("isTrigger", isTrigger);
     }
 
     private void OnTriggerExit2D(Collider2D collision)
     {
+        if (collision.tag != "Player") return;
         isTrigger = false;
         text.gameObject.SetActive(false);
         anim.SetBool("isTrigger", isTrigger);

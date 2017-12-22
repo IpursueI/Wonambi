@@ -48,12 +48,12 @@ public class BulletController : MonoBehaviour {
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if(gameObject.tag == "PlayerBullet"){
-            if(collision.gameObject.tag == "MonsterBullet" || collision.gameObject.tag == "Player" || collision.gameObject.tag == "TurnPoint") {
+            if(collision.tag == "MonsterBullet" || collision.tag == "Player" || collision.tag == "TurnPoint") {
                 return;
             }
         } else if(gameObject.tag == "MonsterBullet"){
-            if (collision.gameObject.tag == "Monster") return;
-            if (collision.gameObject.tag == "Player") {
+            if (collision.tag == "Monster" || collision.tag == "PlayerBullet") return;
+            if (collision.tag == "Player") {
                 var playerModel = collision.gameObject.GetComponent<PlayerModel>();
                 if (playerModel.UnAttackAble()) return;
             }

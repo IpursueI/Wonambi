@@ -71,7 +71,6 @@ public class LevelLoader : MonoBehaviour
             if (ctp.color.Equals(c)) {
                 string prefabName = ctp.name;
                 if (prefabName == "Tile") {
-                    //Debug.Log("[LevelLoader] SpawnTileAt y = " + y + ", width = " + width);
                     top = y >= height-1 || IsColorNotTile(pixels[((y + 1) * width) + x]);
                     bottom = y <= 0 || IsColorNotTile(pixels[((y - 1) * width) + x]);
                     left = x <= 0 || IsColorNotTile(pixels[(y * width) + x - 1]);

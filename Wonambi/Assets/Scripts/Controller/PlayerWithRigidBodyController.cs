@@ -63,7 +63,8 @@ public class PlayerWithRigidBodyController : MonoBehaviour {
     public void Init()
     {
         groundDistance = 0.5f;
-        enableDoubleJump = PlayerPrefs.GetInt(PrefsKey.PlayerEnableDoubleJump, 0) > 0;
+        //enableDoubleJump = PlayerPrefs.GetInt(PrefsKey.PlayerEnableDoubleJump, 0) > 0;
+        enableDoubleJump = true;
         moveSpeed = PlayerPrefs.GetFloat(PrefsKey.PlayerMoveSpeed, DefineNumber.DefaultMoveSpeed);
         jumpSpeed = PlayerPrefs.GetFloat(PrefsKey.PlayerJumpSpeed, DefineNumber.DefaultJumpSpeed);
         inDoubleJump = true;

@@ -46,7 +46,6 @@ public class GameMgr : MonoBehaviour {
     void SpawnPlayer() 
     {
         if(player == null) {
-            Debug.Log("[GameMgr] SpawnPlayer: playerSavePoint = " + playerSavePoint.ToString());
             player = Instantiate(BundleMgr.Instance.GetObject("Player"), 
                                  playerSavePoint,
                                  Quaternion.identity);
@@ -90,15 +89,14 @@ public class GameMgr : MonoBehaviour {
         return Mathf.Pow(monsterPos.x - pPos.x, 2) + Mathf.Pow(monsterPos.y - pPos.y, 2);
     }
 
-    public Vector3 GetPlayerSpawnPos()
-    {
-        // TODO 以后需要根据存盘来决定位置
-        return new Vector3(levelLoader.startPoint.x, levelLoader.startPoint.y, -10);
-    }
-
     public void SetSavePoint(Vector3 savePos) 
     {
         playerSavePoint = new Vector3(savePos.x, savePos.y, -10);
         PlayerPrefs.SetString(PrefsKey.PlayerSavePoint, playerSavePoint.ToString());
+    }
+
+    public Vector3 GetPlayerSpawnPos()
+    {
+        return playerSavePoint;
     }
 }
