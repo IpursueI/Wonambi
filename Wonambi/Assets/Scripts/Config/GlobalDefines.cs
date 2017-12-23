@@ -4,13 +4,15 @@ namespace GlobalDefines
 {
 	public static class FilePath
 	{
-        public static readonly string TileBundlePath = "/tiles.assetbundle";
         public static readonly string ObjectBundlePath = "/object.assetbundle";
         public static readonly string LevelBundlePath = "/level.assetbundle";
         public static readonly string ConfigBundlePath = "/config.assetbundle";
-
-        public static readonly string ColorToPrefabFile = "ColorToPrefab";
 	}
+
+    public static class DefineString
+    {
+        public static readonly string FirstLevel = "LevelMap1";
+    }
 
     public static class DefineNumber
     {

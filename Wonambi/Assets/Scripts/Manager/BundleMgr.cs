@@ -9,35 +9,24 @@ public class BundleMgr : Singleton<BundleMgr>
     protected BundleMgr() { }
     public string identify = "BundleMgr";
 
-    private AssetBundle tileBundle;
     private AssetBundle levelBundle;
     private AssetBundle objectBundle;
     private AssetBundle configBundle;
 
     public void Init()
     {
-        tileBundle = AssetBundle.LoadFromFile(Application.streamingAssetsPath + FilePath.TileBundlePath);
         levelBundle = AssetBundle.LoadFromFile(Application.streamingAssetsPath + FilePath.LevelBundlePath);
         objectBundle = AssetBundle.LoadFromFile(Application.streamingAssetsPath + FilePath.ObjectBundlePath);
         configBundle = AssetBundle.LoadFromFile(Application.streamingAssetsPath + FilePath.ConfigBundlePath);
     }
 
-    public GameObject GetTile(string name)
-    {
-        try {
-            return tileBundle.LoadAsset<GameObject>(name);
-        } catch (NullReferenceException e) {
-            Debug.LogError("[BundleMgr] GetTile : " + e.ToString());
-            return null;
-        }
-    }
 
-    public Texture2D GetLevelMap(string name)
+    public GameObject GetLevel(string name)
     {
         try {
-            return levelBundle.LoadAsset<Texture2D>(name);
+            return levelBundle.LoadAsset<GameObject>(name);
         } catch (NullReferenceException e) {
-            Debug.LogError("[BundleMgr] GetLevelMap : " + e.ToString());
+            Debug.LogError("[BundleMgr] GetLevel : " + e.ToString() + ", name = " + name);
             return null;
         }
     }
@@ -47,7 +36,7 @@ public class BundleMgr : Singleton<BundleMgr>
         try {
             return objectBundle.LoadAsset<GameObject>(name);
         } catch (NullReferenceException e) {
-            Debug.LogError("[BundleMgr] GetObject : " + e.ToString());
+            Debug.LogError("[BundleMgr] GetObject : " + e.ToString() + ", name = " + name);
             return null;
         }
     }
@@ -58,7 +47,7 @@ public class BundleMgr : Singleton<BundleMgr>
             return configBundle.LoadAsset<TextAsset>(name);
         }
         catch (NullReferenceException e) {
-            Debug.LogError("[BundleMgr] GetJson : " + e.ToString());
+            Debug.LogError("[BundleMgr] GetJson : " + e.ToString() + ", name = " + name);
             return null;
         }
     }

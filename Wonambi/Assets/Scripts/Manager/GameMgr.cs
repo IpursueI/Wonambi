@@ -16,8 +16,6 @@ public class GameMgr : MonoBehaviour {
     {
         PlayerPrefs.DeleteAll();
         BundleMgr.Instance.Init();
-        LevelMgr.Instance.Init();
-
         levelLoader = GameObject.Find("LevelContainer").GetComponent<LevelLoader>();
         uiCtrl = GameObject.Find("UICanvas").GetComponent<UIController>();
         uiCtrl.gameObject.SetActive(false);
