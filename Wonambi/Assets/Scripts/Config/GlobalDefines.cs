@@ -40,8 +40,9 @@ namespace GlobalDefines
         public static readonly string PlayerMoveSpeed = "PlayerMoveSpeed";
         public static readonly string PlayerJumpSpeed = "PlayerJumpSpeed";
         public static readonly string PlayerEnableDoubleJump = "PlayerEnableDoubleJump";
-        public static readonly string PlayerSavePoint = "PlayerSavePoint";
-        public static readonly string PlayerLevelMap = "PlayerLevelMap";
+
+        public static readonly string SavePoint = "SavePoint";
+        public static readonly string LevelMap = "LevelMap";
     }
 
     public enum MoveDirection 
