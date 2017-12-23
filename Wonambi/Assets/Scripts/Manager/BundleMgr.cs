@@ -17,7 +17,7 @@ public class BundleMgr : Singleton<BundleMgr>
     {
         levelBundle = AssetBundle.LoadFromFile(Application.streamingAssetsPath + FilePath.LevelBundlePath);
         objectBundle = AssetBundle.LoadFromFile(Application.streamingAssetsPath + FilePath.ObjectBundlePath);
-        configBundle = AssetBundle.LoadFromFile(Application.streamingAssetsPath + FilePath.ConfigBundlePath);
+       // configBundle = AssetBundle.LoadFromFile(Application.streamingAssetsPath + FilePath.ConfigBundlePath);
     }
 
 

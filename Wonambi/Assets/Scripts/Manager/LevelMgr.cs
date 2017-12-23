@@ -8,81 +8,133 @@ public class LevelMgr : Singleton<LevelMgr>
     protected LevelMgr() { }
     public string identify = "LevelMgr";
 
-    private string curLevel;
-    private string savePoint;
-
     private GameObject levelContainer;
+    private GameObject levelObj;
+    private GameObject player;
 
-    public void Init()
+    private string curLevel;
+    private GameDirector gameDirector;
+
+    private UIController uiController;
+
+    public void Init(GameDirector director)
     {
-       levelController = GameObject.Find("LevelContainer");
-        savePoint = PlayerPrefs.GetString(PrefsKey.SavePoint, "");
-        curLevel = PlayerPrefs.GetString(PrefsKey.LevelMap, "");
+        levelContainer = GameObject.Find("LevelContainer");
+        uiController = GameObject.Find("UICanvas").GetComponent<UIController>();
+        gameDirector = director;
     }
 
     public void ClearLevel()
     {
-        while(levelController.transform.childCount > 0) {
-            Transform c = levelController.transform.GetChild(0);
-            c.SetParent(null);
-            Destroy(c.gameObject);
+        if(levelObj != null) {
+            if(player != null) player.transform.SetParent(null);
+            Destroy(levelObj);
+            levelObj = null;
         }
     }
 
     public void StartNewLevel()
     {
         LoadLevel(DefineString.FirstLevel);
+        curLevel = DefineString.FirstLevel;
+        SpawnPlayer();
+
     }
 
     public void StartLevel(string levelName)
     {
         LoadLevel(levelName);
+        curLevel = levelName;
+        TeleportPlayer();
     }
 
     public void RestartLevel()
     {
-        ReLoadLevel();
+        LoadLevel(curLevel);
+        LoadPlayer();
     }
 
-    public void LoadLevel(string levelName)
+    public void RebornPlayer(Vector3 savePos)
     {
-        ClearLevel();
-        GameObject levelGo = Instantiate(BundleMgr.Instance.GetLevel(levelName), Vector3.zero, Quaternion.identify);
-        levelGo.transform.SetParent(levelContainer.transform);
-
-        Vector2 savePointVec2 = levelGo.GetComponent<LevelController>().SavePoint;
-        Vector3 savePointVec3 = new Vector3(savePointVec2.x, savePointVec2.y, -10.0f);
-
-        savePoint = savePointVec3.ToString();
-        curLevel = levelName;
-
-        PlayerPrefs.SetString(PrefsKey.SavePoint, savePoint);
+        Vector3 savePointVec3 = new Vector3(savePos.x, savePos.y, -10.0f);
         PlayerPrefs.SetString(PrefsKey.LevelMap, curLevel);
+        PlayerPrefs.SetString(PrefsKey.SavePoint, savePointVec3.ToString());
+        RestartLevel();
     }
 
-    public void ReLoadLevel()
+    private void SpawnPlayer()
     {
-        if(savePoint == "" || curLevel == "") {
-            Debug.Log("[LevelMgr] RestartLevel savePoint or levelName not found.");
+        if(player == null) {
+            player = Instantiate(BundleMgr.Instance.GetObject("Player"), Vector3.zero, Quaternion.identity);
+        }
+
+        player.GetComponent<PlayerController>().Init(false);
+        player.GetComponent<PlayerModel>().Init(DefineNumber.DefaultHP);
+        player.transform.position = levelObj.GetComponent<LevelController>().startPoint;
+        player.transform.SetParent(null);
+
+        // Save
+        PlayerPrefs.SetInt(PrefsKey.PlayerMaxHP, player.GetComponent<PlayerModel>().GetMaxHP());
+        PlayerPrefs.SetInt(PrefsKey.PlayerMaxHP, player.GetComponent<PlayerController>().GetDoubleJump() ? 1 : 0);
+        PlayerPrefs.SetString(PrefsKey.LevelMap, curLevel);
+        PlayerPrefs.SetString(PrefsKey.SavePoint, levelObj.GetComponent<LevelController>().startPoint.ToString());
+    }
+
+    private void TeleportPlayer()
+    {
+        if (player == null) {
+            Debug.LogError("[LevelMgr] TeleportPlayer failed. player is null.");
             return;
         }
 
-        GameObject levelGo = Instantiate(BundleMgr.Instance.GetLevel(curLevel), Vector3.zero, Quaternion.identify);
-        levelGo.transform.SetParent(levelContainer.transform);
+        player.transform.position = levelObj.GetComponent<LevelController>().startPoint;
     }
 
-    public void SetSavePoint(Vector3 savePos)
+    private void LoadPlayer()
     {
-        Vector3 savePointVec3 = new Vector3(savePos.x, savePos.y, -10.0f);
-        savePoint = savePointVec3.ToString();
+        if(player == null) {
+            player = Instantiate(BundleMgr.Instance.GetObject("Player"), Vector3.zero, Quaternion.identity);
+        }
 
-        PlayerPrefs.SetString(PrefsKey.SavePoint, savePoint);
-        PlayerPrefs.SetString(PrefsKey.LevelMap, curLevel);
+        player.GetComponent<PlayerController>().Init(false);
+        player.GetComponent<PlayerModel>().Init(DefineNumber.DefaultHP);
+        string posStr = PlayerPrefs.GetString(PrefsKey.SavePoint, "");
+        if(posStr == "") {
+            Debug.Log("[LevelMgr] LoadPlayer savepoint not found.");
+            return;
+        }
+        player.transform.position = GlobalFunc.StringToVector3(posStr);
+        player.transform.SetParent(null);
     }
 
-    public string GetSavePoint()
+    private void LoadLevel(string levelName)
     {
-        return savePoint;
+        ClearLevel();
+        levelObj = Instantiate(BundleMgr.Instance.GetLevel(levelName), Vector3.zero, Quaternion.identity);
+        levelObj.transform.SetParent(levelContainer.transform);
+    }
+
+    public bool IsPlayerRight(Vector3 monsterPos)
+    {
+        if (player == null) return false;
+        Vector3 pPos = player.transform.position;
+        if (pPos.x < monsterPos.x) return false;
+        return true;
+    }
+
+    public float DistanceToPlayer(Vector3 monsterPos)
+    {
+        if (player == null) return -1.0f;
+        Vector3 pPos = player.transform.position;
+        return Mathf.Pow(monsterPos.x - pPos.x, 2) + Mathf.Pow(monsterPos.y - pPos.y, 2);
+    }
+
+    public bool IsPlayerClose(Vector3 monsterPos)
+    {
+        if (player == null) return false;
+        Vector3 pPos = player.transform.position;
+        float distancePow = Mathf.Pow(monsterPos.x - pPos.x, 2) + Mathf.Pow(monsterPos.y - pPos.y, 2);
+        return distancePow < DefineNumber.MonsterMoveTriggerDistance * DefineNumber.MonsterMoveTriggerDistance;
     }
 
 }

@@ -11,7 +11,6 @@ public class FortController : MonsterController {
     private GameObject muzzle;
     private MonsterModel model;
     private float fireTriggerDistance;
-    private GameMgr gameMgr;
     private bool forward;
 
 	// Use this for initialization
@@ -20,7 +19,6 @@ public class FortController : MonsterController {
         muzzle = transform.Find("Muzzle").gameObject;
         timer = cooldown;
         model = GetComponent<MonsterModel>();
-        gameMgr = GameObject.Find("GameDirector").GetComponent<GameMgr>();
         fireTriggerDistance = DefineNumber.MonsterMoveTriggerDistance * DefineNumber.MonsterMoveTriggerDistance;
         forward = true;
 	}
@@ -29,7 +27,7 @@ public class FortController : MonsterController {
 	void Update () 
     {
         if (model.IsDead()) return;
-        float distance = gameMgr.DistanceToPlayer(transform.position);
+        float distance = LevelMgr.Instance.DistanceToPlayer(transform.position);
         if (distance < 0.0f) return;
         if (distance < fireTriggerDistance) {
             ForwardToPlayer();
@@ -52,7 +50,7 @@ public class FortController : MonsterController {
 
     private void ForwardToPlayer()
     {
-        bool isRight = gameMgr.IsPlayerRight(transform.position);
+        bool isRight = LevelMgr.Instance.IsPlayerRight(transform.position);
         if (isRight && !forward) {
             transform.localScale = new Vector3(1f, 1f, 1f);
             forward = true;

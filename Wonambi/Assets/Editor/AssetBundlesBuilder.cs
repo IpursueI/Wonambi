@@ -58,7 +58,7 @@ public class AssetBundlesBuilder
         Dictionary<string, string> colorToPrefab = new Dictionary<string, string>();
 
         colorToPrefab["000000FF"] = "Tile";
-        colorToPrefab["89C997FF"] = "Tile";
+        colorToPrefab["89C997FF"] = "PlayerSpawnPoint";
         colorToPrefab["FF0000FF"] = "Pile";
         colorToPrefab["FF0001FF"] = "Sentry";
         colorToPrefab["FF0002FF"] = "Patrol";
@@ -204,7 +204,8 @@ public class AssetBundlesBuilder
                 go.transform.SetParent(level.transform);
             }
             else if (prefab == "PlayerSpawnPoint") {
-                level.GetComponent<LevelController>().startPoint = new Vector2(x, y);
+                Debug.Log("[PlayerSpawnPoint]");
+                level.GetComponent<LevelController>().startPoint = new Vector3(x, y, -10);
             }
             else if (prefab == "Escalator") {
                 // 加一个中继点

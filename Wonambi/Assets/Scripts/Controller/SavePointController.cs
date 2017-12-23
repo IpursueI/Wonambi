@@ -6,14 +6,12 @@ using UnityEngine.UI;
 
 public class SavePointController : MonoBehaviour {
 
-    public GameMgr gameMgr;
     private bool isTrigger = false;
     private Text text;
     private Animator anim;
     // Use this for initialization
     private void Awake()
     {
-        gameMgr = GameObject.Find("GameDirector").GetComponent<GameMgr>();
         text = transform.Find("Canvas/Text").gameObject.GetComponent<Text>();
         text.gameObject.SetActive(false);
         anim = GetComponent<Animator>();
@@ -28,7 +26,7 @@ public class SavePointController : MonoBehaviour {
 	void Update () 
     {
         if(isTrigger && Input.GetKey(KeyCode.L)) {
-            gameMgr.SetSavePoint(transform.position);
+            LevelMgr.Instance.RebornPlayer(transform.position);
             text.text = "Game saved.";
         }
 	}

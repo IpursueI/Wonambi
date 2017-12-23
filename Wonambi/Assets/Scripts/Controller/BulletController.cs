@@ -9,7 +9,6 @@ public class BulletController : MonoBehaviour {
     public float duration;
     private Vector3 spawnPos;
     private Rigidbody2D rb2d;
-    private GameObject owner;
 
     private void Awake()
     {
@@ -35,7 +34,6 @@ public class BulletController : MonoBehaviour {
             speed = -speed;
         }
         transform.position = _spawnPos;
-        owner = _owner;
         transform.SetParent(null);
     }
 

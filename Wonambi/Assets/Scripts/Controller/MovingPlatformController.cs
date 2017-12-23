@@ -3,7 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using GlobalDefines;
 
-public class MovingPlatformController : MonoBehaviour {
+public class MovingPlatformController : MonoBehaviour
+{
 
     public bool auto;
     public bool isEnd;
@@ -13,22 +14,17 @@ public class MovingPlatformController : MonoBehaviour {
     public Vector3 turnPosition;
     public MoveDirection turnDirection;
     public MoveDirection direction = MoveDirection.None;
-    private GameMgr gameMgr;
 
-    private void Awake()
-    {
-        gameMgr = GameObject.Find("GameDirector").GetComponent<GameMgr>();
-    }
     // Use this for initialization
-    void Start () 
+    void Start()
     {
         speed = 2.0f;
-	}
-	
-	// Update is called once per frame
-	void Update () 
+    }
+
+    // Update is called once per frame
+    void Update()
     {
-        if(auto && gameMgr.IsPlayerClose(transform.position)) {
+        if (auto && LevelMgr.Instance.IsPlayerClose(transform.position)) {
             isRun = true;
         }
         if (!isRun) {
@@ -36,9 +32,9 @@ public class MovingPlatformController : MonoBehaviour {
         }
         Move();
         Turn();
-	}
-         
-    private void Move() 
+    }
+
+    private void Move()
     {
         switch (direction) {
         case MoveDirection.Up:
@@ -61,14 +57,15 @@ public class MovingPlatformController : MonoBehaviour {
     private void Turn()
     {
         if (!willTurn) return;
-        if((turnPosition - transform.localPosition).sqrMagnitude <= DefineNumber.CloseTurnDistance * DefineNumber.CloseTurnDistance) {
+        if ((turnPosition - transform.localPosition).sqrMagnitude <= DefineNumber.CloseTurnDistance * DefineNumber.CloseTurnDistance) {
             direction = turnDirection;
             willTurn = false;
-            if(isEnd) {
-                if(!auto) {
+            if (isEnd) {
+                if (!auto) {
                     isRun = false;
-                } else {
-                    if(!gameMgr.IsPlayerClose(transform.position)) {
+                }
+                else {
+                    if (!LevelMgr.Instance.IsPlayerClose(transform.position)) {
                         isRun = false;
                     }
                 }
@@ -78,18 +75,20 @@ public class MovingPlatformController : MonoBehaviour {
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.tag == "TurnPoint"){
+        if (collision.tag == "TurnPoint") {
             willTurn = true;
             turnPosition = collision.transform.localPosition;
             TurnPointController tpCtrl = collision.GetComponent<TurnPointController>();
-            if(tpCtrl.direction1 == MoveDirection.None) {
+            if (tpCtrl.direction1 == MoveDirection.None) {
                 turnDirection = tpCtrl.direction2;
                 isEnd = true;
-            } else {
-                if(tpCtrl.direction2 == MoveDirection.None) {
+            }
+            else {
+                if (tpCtrl.direction2 == MoveDirection.None) {
                     turnDirection = tpCtrl.direction1;
                     isEnd = true;
-                } else {
+                }
+                else {
                     turnDirection = PickOneDirection(tpCtrl.direction1, tpCtrl.direction2, direction);
                     isEnd = false;
                 }
@@ -97,15 +96,16 @@ public class MovingPlatformController : MonoBehaviour {
         }
     }
 
-    private MoveDirection PickOneDirection(MoveDirection direction1, MoveDirection direction2, MoveDirection curDirection)     
+    private MoveDirection PickOneDirection(MoveDirection direction1, MoveDirection direction2, MoveDirection curDirection)
     {
-        if(curDirection == MoveDirection.None) {
+        if (curDirection == MoveDirection.None) {
             return direction1;
         }
-        if(curDirection == MoveDirection.Up) {
-            if(direction1 == MoveDirection.Down) {
+        if (curDirection == MoveDirection.Up) {
+            if (direction1 == MoveDirection.Down) {
                 return direction2;
-            } else {
+            }
+            else {
                 return direction1;
             }
         }
@@ -120,14 +120,16 @@ public class MovingPlatformController : MonoBehaviour {
         else if (curDirection == MoveDirection.Left) {
             if (direction1 == MoveDirection.Right) {
                 return direction2;
-            } else {
+            }
+            else {
                 return direction1;
             }
         }
         else if (curDirection == MoveDirection.Right) {
             if (direction1 == MoveDirection.Left) {
                 return direction2;
-            } else {
+            }
+            else {
                 return direction1;
             }
         }

@@ -10,13 +10,16 @@ public class GameDirector : MonoBehaviour {
     private UIController uiController;
     void Awake()
     {
-        bundleMgr.Instance.Init();
-        levelMgr.Instance.Init();
+        bundleMgr = BundleMgr.Instance;
+        bundleMgr.Init();
+        levelMgr = LevelMgr.Instance;
+        levelMgr.Init(this);
         uiController = GameObject.Find("UICanvas").GetComponent<UIController>();
     }
+
 	// Use this for initialization
 	void Start () {
-		
+        LevelMgr.Instance.StartNewLevel();
 	}
 	
 	// Update is called once per frame
@@ -26,16 +29,16 @@ public class GameDirector : MonoBehaviour {
 
     public void NewGame()
     {
-        levelMgr.Instance.StartNewLevel();
+        levelMgr.StartNewLevel();
     }
 
     public void ContinueGame() 
     {
-        levelMgr.Instance.RestartLevel();
+        levelMgr.RestartLevel();
     }
 
     public void NextLevel(string levelName)
     {
-        levelMgr.Instance.StartLevel(levelName);
+        levelMgr.StartLevel(levelName);
     }
 }

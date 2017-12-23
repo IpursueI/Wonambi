@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class LevelController : MonoBehaviour {
 
-    public Vector2 startPoint;
+    public Vector3 startPoint;
 	// Use this for initialization
 	void Start () {
 		

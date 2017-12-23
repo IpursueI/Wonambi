@@ -19,7 +19,6 @@ public class PatrolController : MonsterController {
     private GameObject rightCheck;
     private bool leftGrounded;
     private bool rightGrounded;
-    private GameMgr gameMgr;
     private Animator anim;
 
     // Bullet
@@ -42,7 +41,6 @@ public class PatrolController : MonsterController {
         rb2d = GetComponent<Rigidbody2D>();
         leftCheck = transform.Find("LeftCheck").gameObject;
         rightCheck = transform.Find("RightCheck").gameObject;
-        gameMgr = GameObject.Find("GameDirector").GetComponent<GameMgr>();
         anim = GetComponent<Animator>();
         muzzle = transform.Find("Muzzle").gameObject;
         timer = cooldown;
@@ -57,7 +55,7 @@ public class PatrolController : MonsterController {
         if(model.IsDead()) {
             return;
         }
-        float distance = gameMgr.DistanceToPlayer(transform.position);
+        float distance = LevelMgr.Instance.DistanceToPlayer(transform.position);
         if (distance < 0.0f) return;
         if (distance < fireTriggerDistance) {
             if(!isFire) {
@@ -117,7 +115,7 @@ public class PatrolController : MonsterController {
 
     private void ForwardToPlayer()
     {
-        bool isRight = gameMgr.IsPlayerRight(transform.position);
+        bool isRight = LevelMgr.Instance.IsPlayerRight(transform.position);
         if(isRight && !forward) {
             transform.localScale = new Vector3(1f, 1f, 1f);
             forward = true;

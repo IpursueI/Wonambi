@@ -18,7 +18,6 @@ public class SentryController : MonsterController {
     private GameObject rightCheck;
     private bool leftGrounded;
     private bool rightGrounded;
-    private GameMgr gameMgr;
 
     private MonsterModel model;
 	// Use this for initialization
@@ -26,7 +25,6 @@ public class SentryController : MonsterController {
         rb2d = GetComponent<Rigidbody2D>();
         leftCheck = transform.Find("LeftCheck").gameObject;
         rightCheck = transform.Find("RightCheck").gameObject;
-        gameMgr = GameObject.Find("GameDirector").GetComponent<GameMgr>();
         model = GetComponent<MonsterModel>();
 	}
 	
@@ -36,7 +34,7 @@ public class SentryController : MonsterController {
         if(model.IsDead()) {
             return;
         }
-        if(!gameMgr.IsPlayerClose(transform.position)) {
+        if(!LevelMgr.Instance.IsPlayerClose(transform.position)) {
             rb2d.velocity = Vector2.zero;
             return;
         }

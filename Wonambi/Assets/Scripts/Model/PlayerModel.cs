@@ -15,15 +15,13 @@ public class PlayerModel : MonoBehaviour {
     private HitReaction hitReact;
     public bool isDead;
     private bool isInvincible;
-    private PlayerWithRigidBodyController controller;
-    private GameMgr gameMgr;
+    private GameDirector gameDirector;
 
     private void Awake()
     {
         spriteRenderer = GetComponent<SpriteRenderer>();
         hitReact = GetComponent<HitReaction>();
-        controller = GetComponent<PlayerWithRigidBodyController>();
-        gameMgr = GameObject.Find("GameDirector").GetComponent<GameMgr>();
+        gameDirector = GameObject.Find("GameDirector").GetComponent<GameDirector>();
     }
     // Use this for initialization
     void Start () 
@@ -36,13 +34,12 @@ public class PlayerModel : MonoBehaviour {
 		
 	}
 
-    public void Init() {
+    public void Init(int _maxHp) {
         isDead = false;
         isInvincible = false;
-        maxHp = PlayerPrefs.GetInt(PrefsKey.PlayerMaxHP, 3);
+        maxHp = _maxHp;
         hp = maxHp;
         spriteRenderer.enabled = true;
-        controller.Init();
     }
 
     private void OnTriggerStay2D(Collider2D collision)
@@ -69,7 +66,7 @@ public class PlayerModel : MonoBehaviour {
     private void OnHit()
     {
         --hp;
-        gameMgr.RefreshHP();
+       // gameMgr.RefreshHP();
         if(hp <= 0) {
             Die();
             return;
@@ -101,7 +98,7 @@ public class PlayerModel : MonoBehaviour {
     public IEnumerator DieCoroutine()
     {
         yield return new WaitForSeconds(DefineNumber.DieDuration);
-        gameMgr.StartLevel();
+        LevelMgr.Instance.RestartLevel();
     }
 
     public bool UnAttackAble()
@@ -112,7 +109,7 @@ public class PlayerModel : MonoBehaviour {
     private void AddHP(int v)
     {
         hp += v;
-        gameMgr.RefreshHP();
+        //gameMgr.RefreshHP();
         if(hp > maxHp) {
             hp = maxHp;
         }
@@ -123,4 +120,8 @@ public class PlayerModel : MonoBehaviour {
         AddHP(maxHp);
     }
 
+    public int GetMaxHP()
+    {
+        return maxHp;
+    }
 }

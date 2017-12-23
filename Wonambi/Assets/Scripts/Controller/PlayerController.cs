@@ -5,7 +5,7 @@ using GlobalDefines;
 
 [RequireComponent(typeof(Rigidbody2D))]
 [RequireComponent(typeof(Animator))]
-public class PlayerWithRigidBodyController : MonoBehaviour {
+public class PlayerController : MonoBehaviour {
 
     // Movement
     public bool forward;
@@ -60,14 +60,14 @@ public class PlayerWithRigidBodyController : MonoBehaviour {
         CheckDie();
     }
 
-    public void Init()
+    public void Init(bool _isDoubleJump)
     {
         groundDistance = 0.5f;
         //enableDoubleJump = PlayerPrefs.GetInt(PrefsKey.PlayerEnableDoubleJump, 0) > 0;
         enableDoubleJump = true;
-        moveSpeed = PlayerPrefs.GetFloat(PrefsKey.PlayerMoveSpeed, DefineNumber.DefaultMoveSpeed);
-        jumpSpeed = PlayerPrefs.GetFloat(PrefsKey.PlayerJumpSpeed, DefineNumber.DefaultJumpSpeed);
-        inDoubleJump = true;
+        moveSpeed = DefineNumber.DefaultMoveSpeed;
+        jumpSpeed = DefineNumber.DefaultJumpSpeed;
+        inDoubleJump = _isDoubleJump;
         leftGrounded = false;
         rightGrounded = false;
         cooldown = DefineNumber.FireCooldown;
@@ -173,5 +173,10 @@ public class PlayerWithRigidBodyController : MonoBehaviour {
         if(transform.position.y < DefineNumber.PlayerMinY) {
             model.Die();
         }
+    }
+
+    public bool GetDoubleJump()
+    {
+        return inDoubleJump;
     }
 }
