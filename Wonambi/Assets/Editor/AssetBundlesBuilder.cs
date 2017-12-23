@@ -1,11 +1,8 @@
 ﻿using UnityEditor;
 using UnityEngine;
 using System.IO;
-using System;
-using System.Collections;
 using System.Collections.Generic;
 using GlobalDefines;
-using SimpleJSON;
 
 public class AssetBundlesBuilder
 {
@@ -28,8 +25,6 @@ public class AssetBundlesBuilder
         BuildPipeline.BuildAssetBundles(assetBundleDirectoryPath, BuildAssetBundleOptions.ForceRebuildAssetBundle, BuildTarget.StandaloneWindows64);
 #endif
         Debug.Log("[AssetBundlesBuilder] BuildAllAssetBundles Done.");
-
-       
     }
 
     [MenuItem("Assets/Build AssetBundles")]
@@ -44,67 +39,87 @@ public class AssetBundlesBuilder
         string levelDirectoryPath = "Assets/Bundles/Prefabs/Levels";
         string pngDirectoryPath = "Assets/Bundles/Sprites/Maps";
 
-        // TODO 读取文件获取color和prefab名称的对应
+        DirectoryInfo levelDirectory = new DirectoryInfo(levelDirectoryPath);
+        if (!levelDirectory.Exists) {
+            levelDirectory.Create();
+        }
+        foreach (string d in Directory.GetFileSystemEntries(levelDirectoryPath)) {
+            if (File.Exists(d)) {
+                File.Delete(d);
+            }
+        }
         DirectoryInfo pngDirectory = new DirectoryInfo(pngDirectoryPath);
         if (!pngDirectory.Exists) {
             Debug.Log("[AssetBundlesBuilder] No PNG File Found! Path = " + pngDirectoryPath);
             return;
         }
 
-        DirectoryInfo levelDirectory = new DirectoryInfo(levelDirectoryPath);
-        if (!levelDirectory.Exists) {
-            levelDirectory.Create();
-        }
-
-        // TODO 初始化hash表
-        FileInfo[] levelFiles = levelDirectory.GetFiles();
-        foreach (var item in levelFiles) {
-            item.Delete();
-        }
-        var configBundle = AssetBundle.LoadFromFile(Application.streamingAssetsPath + FilePath.ConfigBundlePath);
+        // 初始化hash表
         Dictionary<string, string> colorToPrefab = new Dictionary<string, string>();
 
-        TextAsset ctpFile = configBundle.LoadAsset<TextAsset>(FilePath.ColorToPrefabFile);
-        if (ctpFile == null) {
-            Debug.LogError("[AssetBundlesBuilder] ctpFile not found! Path = " + FilePath.ColorToPrefabFile);
-            return;
-        }
-        colorToPrefab.Clear();
-        JSONClass ctpJson = JSON.Parse(ctpFile.text) as JSONClass;
-        JSONArray ctpArray = ctpJson["ColorToPrefab"].AsArray;
-        for (int i = 0; i < ctpArray.Count; ++i) {
-            JSONClass ctpData = ctpArray[i] as JSONClass;
-            colorToPrefab[ctpData["color"]] = ctpData["prefab"];
-        }
-        Debug.Log("[AssetBundlesBuilder] json loaded. count = " + colorToPrefab.Count.ToString());
+        colorToPrefab["000000FF"] = "Tile";
+        colorToPrefab["89C997FF"] = "Tile";
+        colorToPrefab["FF0000FF"] = "Pile";
+        colorToPrefab["FF0001FF"] = "Sentry";
+        colorToPrefab["FF0002FF"] = "Patrol";
+        colorToPrefab["FF0003FF"] = "Fort";
+        colorToPrefab["FF0004FF"] = "Lurker";
+        colorToPrefab["0000FFFF"] = "Escalator";
+        colorToPrefab["00A0E9FF"] = "TurnPoint";
+        colorToPrefab["00FFFFFF"] = "Direction";
+        colorToPrefab["00FF00FF"] = "SavePoint";
+        colorToPrefab["FFFF00FF"] = "Heart";
 
-        foreach (var png in pngDirectory.GetFiles()) {
-            GameObject level = new GameObject(Path.GetFileNameWithoutExtension(png.Name));
-            BuildMapPrefab(level, png, colorToPrefab);
-            Debug.Log("[AssetBundlesBuilder] CreatePrefab name = " + levelDirectoryPath + "/" + level.name + ".prefab");
-            PrefabUtility.CreatePrefab(levelDirectoryPath + "/" + level.name + ".prefab", level);
-        }
+        foreach (string d in Directory.GetFileSystemEntries(pngDirectoryPath, "*.png")) {
+            if (File.Exists(d)) {
+                GameObject level = new GameObject();
+                level.AddComponent<LevelController>();
+                Texture2D png = (Texture2D)AssetDatabase.LoadAssetAtPath(d, typeof(Texture2D));
+                BuildMapPrefab(level, png, colorToPrefab);
+                string levelPath = levelDirectoryPath + "/" + Path.GetFileNameWithoutExtension(d) + ".prefab";
+                PrefabUtility.CreatePrefab(levelPath, level);
+                GameObject.DestroyImmediate(level);
 
-    }
-
-    private static void BuildMapPrefab(GameObject level, FileInfo png, Dictionary<string, string> colorToPrefab)
-    {
-        /*
-        byte[] fileData = File.ReadAllBytes(png.FullName);
-        Texture2D pngMap = new Texture2D(2, 2);
-        pngMap.LoadImage(fileData);
-        Color32[] allPixels = pngMap.GetPixels32();
-        int width = pngMap.width;
-        int height = pngMap.height;
-        Debug.Log("[BuildAllAssetBundles] pngMap w = " + width.ToString() + ", h = " + height.ToString() + ", name = " + png.Name);
-        for (int x = 0; x < width; ++x) {
-            for (int y = 0; y < height; ++y) {
-                SpawnObjectAt(allPixels, x, y, width, height, colorToPrefab);
+                AssetDatabase.ImportAsset(levelPath);
+                AssetImporter importer = AssetImporter.GetAtPath(levelPath);
+                importer.assetBundleName = "level.assetbundle";
+                importer.SaveAndReimport();
             }
         }
-        */
+        AssetDatabase.SaveAssets();
+
+        // Build Bundles
+        string assetBundleDirectoryPath = Application.streamingAssetsPath;
+        DirectoryInfo assetBundleDirectory = new DirectoryInfo(assetBundleDirectoryPath);
+        if (!assetBundleDirectory.Exists) {
+            assetBundleDirectory.Create();
+        }
+        FileInfo[] files = assetBundleDirectory.GetFiles();
+        foreach (var item in files) {
+            item.Delete();
+        }
+        #if UNITY_STANDALONE_OSX
+        BuildPipeline.BuildAssetBundles(assetBundleDirectoryPath, BuildAssetBundleOptions.ForceRebuildAssetBundle, BuildTarget.StandaloneOSXIntel);
+        #elif UNITY_STANDALONE_WIN
+        BuildPipeline.BuildAssetBundles(assetBundleDirectoryPath, BuildAssetBundleOptions.ForceRebuildAssetBundle, BuildTarget.StandaloneWindows64);
+        #endif
+        Debug.Log("[AssetBundlesBuilder] BuildAssetBundles Done.");
     }
-    /*
+
+    private static void BuildMapPrefab(GameObject level, Texture2D png, Dictionary<string, string> colorToPrefab)
+    {
+        Color32[] allPixels = png.GetPixels32();
+        int width = png.width;
+        int height = png.height;
+        for (int x = 0; x < width; ++x) {
+            for (int y = 0; y < height; ++y) {
+                SpawnObjectAt(allPixels, x, y, width, height, colorToPrefab, level);
+            }
+        }
+
+    }
+
+
     private static bool IsColorNotTile(Color32 c, Dictionary<string, string> colorToPrefab)
     {
         string colorKey = ColorUtility.ToHtmlStringRGBA(c);
@@ -123,13 +138,13 @@ public class AssetBundlesBuilder
         return false;
     }
 
-    private static void SpawnObjectAt(Color32[] pixels, int x, int y, int width, int height, Dictionary<string, string> colorToPrefab)
+    private static void SpawnObjectAt(Color32[] pixels, int x, int y, int width, int height, Dictionary<string, string> colorToPrefab, GameObject level)
     {
         Color32 c = pixels[(y * width) + x];
         if (c.a <= 0) return;
         string colorKey = ColorUtility.ToHtmlStringRGBA(c);
-        if (LevelMgr.Instance.IsColorToPrefabKeyExists(colorKey)) {
-            string prefab = LevelMgr.Instance.PrefabOfColor(colorKey);
+        if (colorToPrefab.ContainsKey(colorKey)) {
+            string prefab = colorToPrefab[colorKey];
             if (prefab == "Tile") {
                 bool top = y >= height - 1 || IsColorNotTile(pixels[((y + 1) * width) + x], colorToPrefab);
                 bool bottom = y <= 0 || IsColorNotTile(pixels[((y - 1) * width) + x],colorToPrefab);
@@ -184,23 +199,24 @@ public class AssetBundlesBuilder
                 else if (!top && !bottom && !left && !right) {
                     return;
                 }
-                GameObject go = GameObject.Instantiate(BundleMgr.Instance.GetTile(prefab), new Vector3(x, y, 0), Quaternion.identity);
-                go.transform.SetParent(transform);
+                Object obj = AssetDatabase.LoadAssetAtPath("Assets/Bundles/Prefabs/Tiles/" + prefab + ".prefab", typeof(GameObject));
+                GameObject go = GameObject.Instantiate(obj, new Vector3(x, y, 0), Quaternion.identity) as GameObject;
+                go.transform.SetParent(level.transform);
             }
             else if (prefab == "PlayerSpawnPoint") {
-                startPoint = new Vector2(x, y);
-                return;
+                level.GetComponent<LevelController>().startPoint = new Vector2(x, y);
             }
             else if (prefab == "Escalator") {
                 // 加一个中继点
-                GameObject turnPoint = Instantiate(BundleMgr.Instance.GetTile("TurnPoint"), new Vector3(x, y, 0), Quaternion.identity);
-                turnPoint.transform.SetParent(transform);
+                Object tpObj = AssetDatabase.LoadAssetAtPath("Assets/Bundles/Prefabs/Tiles/TurnPoint.prefab", typeof(GameObject));
+                GameObject turnPoint = GameObject.Instantiate(tpObj, new Vector3(x, y, 0), Quaternion.identity) as GameObject;
+                turnPoint.transform.SetParent(level.transform);
 
                 // 根据周围地块来分析方向
-                bool top = y < height - 1 && IsDirectionTile(pixels[((y + 1) * width) + x]);
-                bool bottom = y > 0 && IsDirectionTile(pixels[((y - 1) * width) + x]);
-                bool left = x > 0 && IsDirectionTile(pixels[(y * width) + x - 1]);
-                bool right = x < width - 1 && IsDirectionTile(pixels[(y * width) + x + 1]);
+                bool top = y < height - 1 && IsDirectionTile(pixels[((y + 1) * width) + x], colorToPrefab);
+                bool bottom = y > 0 && IsDirectionTile(pixels[((y - 1) * width) + x], colorToPrefab);
+                bool left = x > 0 && IsDirectionTile(pixels[(y * width) + x - 1], colorToPrefab);
+                bool right = x < width - 1 && IsDirectionTile(pixels[(y * width) + x + 1], colorToPrefab);
                 TurnPointController tpCtrl = turnPoint.GetComponent<TurnPointController>();
                 if (top) {
                     if (tpCtrl.direction1 == MoveDirection.None) {
@@ -235,21 +251,24 @@ public class AssetBundlesBuilder
                     }
                 }
                 // 加一个电梯
-                GameObject eGo = Instantiate(BundleMgr.Instance.GetTile("MovingPlatform"), new Vector3(x, y, 0), Quaternion.identity);
-                eGo.transform.SetParent(transform);
-                eGo.GetComponent<MovingPlatformController>().auto = false;
+                Object eObj = AssetDatabase.LoadAssetAtPath("Assets/Bundles/Prefabs/Tiles/MovingPlatform.prefab", typeof(GameObject));
+                GameObject eGo = GameObject.Instantiate(eObj, new Vector3(x, y, 0), Quaternion.identity) as GameObject;
+                eGo.transform.SetParent(level.transform);
+                eGo.GetComponent<MovingPlatformController>().auto = true;
             }
             else if (prefab == "TurnPoint") {
                 // 加一个中继点
-                GameObject tGo = Instantiate(BundleMgr.Instance.GetTile("TurnPoint"), new Vector3(x, y, 0), Quaternion.identity);
-                tGo.transform.SetParent(transform);
+                Object tpObj = AssetDatabase.LoadAssetAtPath("Assets/Bundles/Prefabs/Tiles/TurnPoint.prefab", typeof(GameObject));
+                GameObject turnPoint = GameObject.Instantiate(tpObj, new Vector3(x, y, 0), Quaternion.identity) as GameObject;
+                turnPoint.transform.SetParent(level.transform);
 
                 // 根据周围地块来分析方向
-                bool top = IsDirectionTile(pixels[((y + 1) * width) + x]);
-                bool bottom = IsDirectionTile(pixels[((y - 1) * width) + x]);
-                bool left = IsDirectionTile(pixels[(y * width) + x - 1]);
-                bool right = IsDirectionTile(pixels[(y * width) + x + 1]);
-                TurnPointController tpCtrl = tGo.GetComponent<TurnPointController>();
+                bool top = IsDirectionTile(pixels[((y + 1) * width) + x], colorToPrefab);
+                bool bottom = IsDirectionTile(pixels[((y - 1) * width) + x], colorToPrefab);
+                bool left = IsDirectionTile(pixels[(y * width) + x - 1], colorToPrefab);
+                bool right = IsDirectionTile(pixels[(y * width) + x + 1], colorToPrefab);
+
+                TurnPointController tpCtrl = turnPoint.GetComponent<TurnPointController>();
                 if (top) {
                     if (tpCtrl.direction1 == MoveDirection.None) {
                         tpCtrl.direction1 = MoveDirection.Up;
@@ -287,13 +306,13 @@ public class AssetBundlesBuilder
                 return;
             }
             else {
-                GameObject go = Instantiate(BundleMgr.Instance.GetObject(prefab), new Vector3(x, y, 0), Quaternion.identity);
-                go.transform.SetParent(transform);
+                Object obj = AssetDatabase.LoadAssetAtPath("Assets/Bundles/Prefabs/Objects/" + prefab + ".prefab", typeof(GameObject));
+                GameObject go = GameObject.Instantiate(obj, new Vector3(x, y, 0), Quaternion.identity) as GameObject;
+                go.transform.SetParent(level.transform);
             }
         }
         else {
             Debug.LogError("[LevelLoader] SpawnTileAt : no color to prefab found for: " + colorKey + ", " + c.ToString() + ", " + x + ", " + y);
         }
     }
-    */
 }

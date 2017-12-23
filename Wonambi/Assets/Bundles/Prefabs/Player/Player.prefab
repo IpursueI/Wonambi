@@ -296,6 +296,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   hp: 5
+  maxHp: 0
   particleOne: {fileID: 198968511525194124}
   particleZero: {fileID: 198477683368943428}
   isDead: 0

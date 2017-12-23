@@ -55,7 +55,7 @@ public class BundleMgr : Singleton<BundleMgr>
     public TextAsset GetJson(string name)
     {
         try {
-            return  
+            return configBundle.LoadAsset<TextAsset>(name);
         }
         catch (NullReferenceException e) {
             Debug.LogError("[BundleMgr] GetJson : " + e.ToString());
