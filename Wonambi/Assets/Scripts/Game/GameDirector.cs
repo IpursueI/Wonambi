@@ -19,7 +19,7 @@ public class GameDirector : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-        LevelMgr.Instance.StartNewLevel();
+        //LevelMgr.Instance.StartNewLevel();
 	}
 	
 	// Update is called once per frame
