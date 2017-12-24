@@ -14,13 +14,14 @@ public class LevelMgr : Singleton<LevelMgr>
 
     private string curLevel;
     private GameDirector gameDirector;
-
+    private CameraController cameraController;
     private UIController uiController;
 
     public void Init(GameDirector director)
     {
         levelContainer = GameObject.Find("LevelContainer");
         uiController = GameObject.Find("UICanvas").GetComponent<UIController>();
+        cameraController = GameObject.Find("MainCamera").GetComponent<CameraController>();
         gameDirector = director;
     }
 
@@ -65,6 +66,7 @@ public class LevelMgr : Singleton<LevelMgr>
     {
         if(player == null) {
             player = Instantiate(BundleMgr.Instance.GetObject("Player"), Vector3.zero, Quaternion.identity);
+            cameraController.SetPlayer(player);
         }
 
         player.GetComponent<PlayerController>().Init(false);
@@ -93,6 +95,7 @@ public class LevelMgr : Singleton<LevelMgr>
     {
         if(player == null) {
             player = Instantiate(BundleMgr.Instance.GetObject("Player"), Vector3.zero, Quaternion.identity);
+            cameraController.SetPlayer(player);
         }
 
         player.GetComponent<PlayerController>().Init(false);

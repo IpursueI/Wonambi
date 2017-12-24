@@ -8,6 +8,7 @@ public class GameDirector : MonoBehaviour {
     private BundleMgr bundleMgr;
     private LevelMgr levelMgr;
     private UIController uiController;
+    private bool inGame;
     void Awake()
     {
         bundleMgr = BundleMgr.Instance;
@@ -20,12 +21,23 @@ public class GameDirector : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
         //LevelMgr.Instance.StartNewLevel();
+        inGame = false;
+        uiController.ShowMenuPanel();
+        uiController.HideGamePanel();
+        uiController.gameObject.SetActive(true);
 	}
-	
+
 	// Update is called once per frame
 	void Update () {
 		
 	}
+
+    public void StartGame()
+    {
+        uiController.StartGame();
+        inGame = true;
+        NewGame();
+    }
 
     public void NewGame()
     {
@@ -40,5 +52,10 @@ public class GameDirector : MonoBehaviour {
     public void NextLevel(string levelName)
     {
         levelMgr.StartLevel(levelName);
+    }
+
+    public bool IsInGame()
+    {
+        return inGame;
     }
 }

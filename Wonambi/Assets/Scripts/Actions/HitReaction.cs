@@ -42,11 +42,15 @@ public class HitReaction : MonoBehaviour {
 
     public void Begin(Color clr) 
     {
-        fromColor = spriteRenderer.color;
-        toColor = clr;
-        timer = DefineNumber.HitBlinkDuration;
-        forward = true;
-        isAct = true;
+        if(isAct) {
+            timer = DefineNumber.HitBlinkDuration;
+        } else {
+            fromColor = spriteRenderer.color;
+            toColor = clr;
+            timer = DefineNumber.HitBlinkDuration;
+            forward = true;
+            isAct = true;
+        }
     }
 
     public void End()

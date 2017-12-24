@@ -72,7 +72,7 @@ public class PlayerModel : MonoBehaviour {
             Die();
             return;
         }
-
+        spriteRenderer.color = Color.grey;
         hitReact.Begin(Color.white);
         isInvincible = true;
         StartCoroutine(HitCoroutine());
@@ -83,6 +83,7 @@ public class PlayerModel : MonoBehaviour {
         yield return new WaitForSeconds(DefineNumber.InvincibleDuration);
         isInvincible = false;
         hitReact.End();
+        spriteRenderer.color = Color.green;
     }
 
 

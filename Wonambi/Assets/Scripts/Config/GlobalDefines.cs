@@ -26,7 +26,7 @@ namespace GlobalDefines
         public static readonly float FireCooldown = 0.3f;
         public static readonly float DieDuration = 0.8f;
         public static readonly float InvincibleDuration = 1.0f;
-        public static readonly float HitBlinkDuration = 0.05f;
+        public static readonly float HitBlinkDuration = 0.1f;
         public static readonly float CloseTurnDistance = 0.1f;
         public static readonly float MonsterMoveTriggerDistance = 20.0f;
         public static readonly float MonsterFireTriggerDistance = 8.0f;

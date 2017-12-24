@@ -46,4 +46,10 @@ public class UIController : MonoBehaviour {
     {
         menuPanel.SetActive(false);
     }
+
+    public void StartGame()
+    {
+        gamePanel.SetActive(true);
+        menuPanel.SetActive(false);
+    }
 }

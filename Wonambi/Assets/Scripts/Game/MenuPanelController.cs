@@ -16,5 +16,9 @@ public class MenuPanelController : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
+        if(!gameDirector.IsInGame() && Input.GetKeyDown(KeyCode.Space)) {
+            Debug.Log("[MenuPanelController] GetKey Space.");
+            gameDirector.StartGame();
+        }
 	}
 }

@@ -300,7 +300,7 @@ MonoBehaviour:
   groundLayer:
     serializedVersion: 2
     m_Bits: 256
-  cooldown: 1
+  cooldown: 10
   bullet: {fileID: 1956704864712264, guid: e9d27bb2fab7841f2b89bfb73af94f7c, type: 2}
 --- !u!198 &198569336548946208
 ParticleSystem:

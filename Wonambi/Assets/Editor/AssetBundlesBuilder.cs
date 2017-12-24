@@ -6,27 +6,6 @@ using GlobalDefines;
 
 public class AssetBundlesBuilder
 {
-    [MenuItem("Assets/Build AssetBundles And Generate Levels")]
-    static void OldBuildAllAssetBundles()
-    {
-        string assetBundleDirectoryPath = Application.streamingAssetsPath;
-        DirectoryInfo assetBundleDirectory = new DirectoryInfo(assetBundleDirectoryPath);
-        if(!assetBundleDirectory.Exists) {
-            assetBundleDirectory.Create();
-        }
-        FileInfo[] files = assetBundleDirectory.GetFiles();
-        foreach(var item in files) {
-            item.Delete();
-        }
-        Debug.Log("[AssetBundlesBuilder] BuildAllAssetBundles path = " + assetBundleDirectoryPath);
-#if UNITY_STANDALONE_OSX
-        BuildPipeline.BuildAssetBundles(assetBundleDirectoryPath, BuildAssetBundleOptions.ForceRebuildAssetBundle, BuildTarget.StandaloneOSXIntel);
-#elif UNITY_STANDALONE_WIN
-        BuildPipeline.BuildAssetBundles(assetBundleDirectoryPath, BuildAssetBundleOptions.ForceRebuildAssetBundle, BuildTarget.StandaloneWindows64);
-#endif
-        Debug.Log("[AssetBundlesBuilder] BuildAllAssetBundles Done.");
-    }
-
     [MenuItem("Assets/Build AssetBundles")]
     static void BuildAssetBundles()
     {
@@ -204,7 +183,6 @@ public class AssetBundlesBuilder
                 go.transform.SetParent(level.transform);
             }
             else if (prefab == "PlayerSpawnPoint") {
-                Debug.Log("[PlayerSpawnPoint]");
                 level.GetComponent<LevelController>().startPoint = new Vector3(x, y, -10);
             }
             else if (prefab == "Escalator") {
