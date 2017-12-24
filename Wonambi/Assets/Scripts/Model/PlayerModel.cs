@@ -40,6 +40,7 @@ public class PlayerModel : MonoBehaviour {
         maxHp = _maxHp;
         hp = maxHp;
         spriteRenderer.enabled = true;
+        LevelMgr.Instance.RefreshHP();
     }
 
     private void OnTriggerStay2D(Collider2D collision)
@@ -66,7 +67,7 @@ public class PlayerModel : MonoBehaviour {
     private void OnHit()
     {
         --hp;
-       // gameMgr.RefreshHP();
+        LevelMgr.Instance.RefreshHP();
         if(hp <= 0) {
             Die();
             return;
@@ -109,7 +110,7 @@ public class PlayerModel : MonoBehaviour {
     private void AddHP(int v)
     {
         hp += v;
-        //gameMgr.RefreshHP();
+        LevelMgr.Instance.RefreshHP();
         if(hp > maxHp) {
             hp = maxHp;
         }

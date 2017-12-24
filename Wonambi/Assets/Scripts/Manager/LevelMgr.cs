@@ -38,7 +38,6 @@ public class LevelMgr : Singleton<LevelMgr>
         LoadLevel(DefineString.FirstLevel);
         curLevel = DefineString.FirstLevel;
         SpawnPlayer();
-
     }
 
     public void StartLevel(string levelName)
@@ -135,6 +134,14 @@ public class LevelMgr : Singleton<LevelMgr>
         Vector3 pPos = player.transform.position;
         float distancePow = Mathf.Pow(monsterPos.x - pPos.x, 2) + Mathf.Pow(monsterPos.y - pPos.y, 2);
         return distancePow < DefineNumber.MonsterMoveTriggerDistance * DefineNumber.MonsterMoveTriggerDistance;
+    }
+
+    public void RefreshHP()
+    {
+        if(player != null) {
+            int hp = player.GetComponent<PlayerModel>().hp;
+            uiController.ShowHp(hp);
+        }
     }
 
 }

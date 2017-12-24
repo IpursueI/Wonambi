@@ -3,15 +3,13 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class UIController : MonoBehaviour {
-    public List<GameObject> hpList = new List<GameObject>();
+
+    public GameObject gamePanel;
+    public GameObject menuPanel;
 
     private void Awake()
     {
-        for (int i = 1; i <= 3; ++i) {
-            GameObject heartObj = transform.Find("GamePanel/Heart0" + i.ToString()).gameObject;
-            heartObj.SetActive(false);
-            hpList.Add(heartObj);
-        }
+
     }
     // Use this for initialization
     void Start () {
@@ -24,13 +22,28 @@ public class UIController : MonoBehaviour {
 	}
 
     public void ShowHp(int hp) {
-        if (hp > 3) return;
-        for (int i = 0; i < hpList.Count; ++i) {
-            if( i < hp ) {
-                hpList[i].SetActive(true);
-            } else {
-                hpList[i].SetActive(false);
-            }
+        if(gamePanel.activeSelf) {
+            gamePanel.GetComponent<GamePanelController>().ShowHP(hp);
         }
+    }
+
+    public void ShowGamePanel()
+    {
+        gamePanel.SetActive(true);
+    }
+
+    public void HideGamePanel()
+    {
+        gamePanel.SetActive(false);
+    }
+
+    public void ShowMenuPanel()
+    {
+        menuPanel.SetActive(true);
+    }
+
+    public void HideMenuPanel()
+    {
+        menuPanel.SetActive(false);
     }
 }
