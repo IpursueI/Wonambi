@@ -48,6 +48,8 @@ public class AssetBundlesBuilder
         colorToPrefab["00FFFFFF"] = "Direction";
         colorToPrefab["00FF00FF"] = "SavePoint";
         colorToPrefab["FFFF00FF"] = "Heart";
+        colorToPrefab["C8C800FF"] = "BinaryDoor";
+        colorToPrefab["FF962DFF"] = "CloseDoor";
 
         foreach (string d in Directory.GetFileSystemEntries(pngDirectoryPath, "*.png")) {
             if (File.Exists(d)) {

@@ -22,8 +22,7 @@ public class GameDirector : MonoBehaviour {
 	void Start () {
         //LevelMgr.Instance.StartNewLevel();
         inGame = false;
-        uiController.ShowMenuPanel();
-        uiController.HideGamePanel();
+        uiController.ShowMenuUI();
         uiController.gameObject.SetActive(true);
 	}
 
@@ -32,9 +31,13 @@ public class GameDirector : MonoBehaviour {
 		
 	}
 
+    public void StartCutscene() {
+        uiController.ShowCutsceneUI();    
+    }
+
     public void StartGame()
     {
-        uiController.StartGame();
+        uiController.ShowGameUI();
         inGame = true;
         NewGame();
     }

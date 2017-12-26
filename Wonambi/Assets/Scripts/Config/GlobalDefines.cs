@@ -31,7 +31,7 @@ namespace GlobalDefines
         public static readonly float MonsterMoveTriggerDistance = 20.0f;
         public static readonly float MonsterFireTriggerDistance = 8.0f;
         public static readonly float MaxFallSpeed = -20.0f;
-        public static readonly float PlayerMinY = -10.0f;
+        public static readonly float PlayerMinY = -8.0f;
     }
 
     public static class PrefsKey

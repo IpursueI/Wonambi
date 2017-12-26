@@ -3,9 +3,10 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class UIController : MonoBehaviour {
-
-    public GameObject gamePanel;
+    
     public GameObject menuPanel;
+    public GameObject cutscenePanel;
+    public GameObject gamePanel;
 
     private void Awake()
     {
@@ -27,29 +28,24 @@ public class UIController : MonoBehaviour {
         }
     }
 
-    public void ShowGamePanel()
+    public void ShowMenuUI()
     {
-        gamePanel.SetActive(true);
-    }
-
-    public void HideGamePanel()
-    {
+        menuPanel.SetActive(true);
+        cutscenePanel.SetActive(false);
         gamePanel.SetActive(false);
     }
 
-    public void ShowMenuPanel()
-    {
-        menuPanel.SetActive(true);
-    }
-
-    public void HideMenuPanel()
+    public void ShowCutsceneUI()
     {
         menuPanel.SetActive(false);
+        cutscenePanel.SetActive(true);
+        gamePanel.SetActive(false);
     }
 
-    public void StartGame()
+    public void ShowGameUI()
     {
+        menuPanel.SetActive(false);
+        cutscenePanel.SetActive(false);
         gamePanel.SetActive(true);
-        menuPanel.SetActive(false);
     }
 }

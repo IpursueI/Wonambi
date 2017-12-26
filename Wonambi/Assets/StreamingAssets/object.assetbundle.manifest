@@ -1,12 +1,12 @@
 ManifestFileVersion: 0
-CRC: 135079968
+CRC: 269825761
 Hashes:
   AssetFileHash:
     serializedVersion: 2
-    Hash: ed047470a0365d5e27e8496c6eade58b
+    Hash: a849f27bbc08c57869ebb0008dc1ccf1
   TypeTreeHash:
     serializedVersion: 2
-    Hash: 07fd7edd1531dbbedf3233c28ffc8904
+    Hash: e22dd5e620e3efcad75119e9b5d69c6d
 HashAppended: 0
 ClassTypes:
 - Class: 1
@@ -50,7 +50,11 @@ ClassTypes:
 - Class: 114
   Script: {fileID: 11500000, guid: cf8791d786edc4ccbbb888c6595af717, type: 3}
 - Class: 114
+  Script: {fileID: 11500000, guid: 3ae41419807384dddac0f66d0e3bb924, type: 3}
+- Class: 114
   Script: {fileID: 11500000, guid: 51cc0eaad05094811a3d2097c383366e, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: 49994f7bc1f5949c98e38aa85519b089, type: 3}
 - Class: 114
   Script: {fileID: 11500000, guid: 70ac7bed032794b6ab006ffc255b28cd, type: 3}
 - Class: 114
@@ -79,8 +83,11 @@ Assets:
 - Assets/Bundles/Prefabs/Objects/Lurker.prefab
 - Assets/Bundles/Prefabs/Objects/SavePoint.prefab
 - Assets/Bundles/Prefabs/Objects/MonsterBullet.prefab
+- Assets/Bundles/Prefabs/Objects/Trigger1.prefab
+- Assets/Bundles/Prefabs/Objects/BinaryDoor.prefab
 - Assets/Bundles/Prefabs/Player/Player.prefab
 - Assets/Bundles/Prefabs/Player/Bullet.prefab
+- Assets/Bundles/Prefabs/Objects/CloseDoor.prefab
 - Assets/Bundles/Prefabs/Objects/Patrol.prefab
 - Assets/Bundles/Prefabs/Objects/Pile.prefab
 - Assets/Bundles/Prefabs/Objects/Sentry.prefab

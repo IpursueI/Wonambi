@@ -1,12 +1,12 @@
 ManifestFileVersion: 0
-CRC: 1296617555
+CRC: 2732873271
 Hashes:
   AssetFileHash:
     serializedVersion: 2
-    Hash: 25da0d87150af656026ce38d29445e4d
+    Hash: 38812f1c5bbe80f4b410ec5c41382a90
   TypeTreeHash:
     serializedVersion: 2
-    Hash: d92086ff135296b462584187a85e2652
+    Hash: f60a4288b5647a50f32178a59f9f62d1
 HashAppended: 0
 ClassTypes:
 - Class: 1
@@ -52,6 +52,10 @@ ClassTypes:
 - Class: 114
   Script: {fileID: 11500000, guid: cf8791d786edc4ccbbb888c6595af717, type: 3}
 - Class: 114
+  Script: {fileID: 11500000, guid: 3ae41419807384dddac0f66d0e3bb924, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: 49994f7bc1f5949c98e38aa85519b089, type: 3}
+- Class: 114
   Script: {fileID: 11500000, guid: d5c08aeb61b774d8f9d6ea3548719376, type: 3}
 - Class: 114
   Script: {fileID: 11500000, guid: 70ac7bed032794b6ab006ffc255b28cd, type: 3}
@@ -78,5 +82,7 @@ ClassTypes:
 Assets:
 - Assets/Bundles/Prefabs/Levels/LevelMap1.prefab
 - Assets/Bundles/Sprites/Maps/LevelMap1.png
+- Assets/Bundles/Sprites/Maps/LevelMap2.png
+- Assets/Bundles/Prefabs/Levels/LevelMap2.prefab
 Dependencies:
 - /Users/chenyan/Projects/Wonambi/Wonambi/Assets/StreamingAssets/object.assetbundle

@@ -1,6 +1,6 @@
 fileFormatVersion: 2
-guid: ed3239efaaa3140d6a7f113c5c4dc1ed
-timeCreated: 1513845472
+guid: b393ec3cb3d904b0e8c56eb0c1f07fee
+timeCreated: 1514186881
 licenseType: Free
 TextureImporter:
   fileIDToRecycleName:
@@ -93,11 +93,11 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 0
-        y: 64
-        width: 80
-        height: 64
+        y: 0
+        width: 128
+        height: 128
       alignment: 9
-      pivot: {x: 0.4, y: 0.5}
+      pivot: {x: 0.25, y: 0.25}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -106,12 +106,12 @@ TextureImporter:
       name: fort_1
       rect:
         serializedVersion: 2
-        x: 0
+        x: 128
         y: 0
-        width: 80
-        height: 64
+        width: 128
+        height: 128
       alignment: 9
-      pivot: {x: 0.4, y: 0.5}
+      pivot: {x: 0.25, y: 0.25}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
