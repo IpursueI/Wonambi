@@ -76,7 +76,7 @@ public class LevelMgr : Singleton<LevelMgr>
 
         // Save
         PlayerPrefs.SetInt(PrefsKey.PlayerMaxHP, player.GetComponent<PlayerModel>().GetMaxHP());
-        PlayerPrefs.SetInt(PrefsKey.PlayerMaxHP, player.GetComponent<PlayerController>().GetDoubleJump() ? 1 : 0);
+        PlayerPrefs.SetInt(PrefsKey.PlayerEnableDoubleJump, player.GetComponent<PlayerController>().GetDoubleJump() ? 1 : 0);
         PlayerPrefs.SetString(PrefsKey.LevelMap, curLevel);
         PlayerPrefs.SetString(PrefsKey.SavePoint, levelObj.GetComponent<LevelController>().startPoint.ToString());
     }
@@ -97,9 +97,10 @@ public class LevelMgr : Singleton<LevelMgr>
             player = Instantiate(BundleMgr.Instance.GetObject("Player"), Vector3.zero, Quaternion.identity);
             cameraController.SetPlayer(player);
         }
-
-        player.GetComponent<PlayerController>().Init(false);
-        player.GetComponent<PlayerModel>().Init(DefineNumber.DefaultHP);
+        bool enableDoubleJump = PlayerPrefs.GetInt(PrefsKey.PlayerEnableDoubleJump, 0) > 0;
+        player.GetComponent<PlayerController>().Init(enableDoubleJump);
+        int maxHp = PlayerPrefs.GetInt(PrefsKey.PlayerMaxHP, DefineNumber.DefaultHP);
+        player.GetComponent<PlayerModel>().Init(maxHp);
         string posStr = PlayerPrefs.GetString(PrefsKey.SavePoint, "");
         if(posStr == "") {
             Debug.Log("[LevelMgr] LoadPlayer savepoint not found.");

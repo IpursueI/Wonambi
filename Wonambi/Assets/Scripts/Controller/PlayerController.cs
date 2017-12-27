@@ -61,14 +61,14 @@ public class PlayerController : MonoBehaviour {
         CheckTrigger();
     }
 
-    public void Init(bool _isDoubleJump)
+    public void Init(bool _enableDoubleJump)
     {
         groundDistance = 0.5f;
-        //enableDoubleJump = PlayerPrefs.GetInt(PrefsKey.PlayerEnableDoubleJump, 0) > 0;
-        enableDoubleJump = true;
+
+        enableDoubleJump = _enableDoubleJump;
         moveSpeed = DefineNumber.DefaultMoveSpeed;
         jumpSpeed = DefineNumber.DefaultJumpSpeed;
-        inDoubleJump = _isDoubleJump;
+        inDoubleJump = false;
         leftGrounded = false;
         rightGrounded = false;
         cooldown = DefineNumber.FireCooldown;
@@ -188,4 +188,9 @@ public class PlayerController : MonoBehaviour {
         return inDoubleJump;
     }
 
+    public void EnableDoubleJump()
+    {
+        enableDoubleJump = true;
+        PlayerPrefs.SetInt(PrefsKey.PlayerEnableDoubleJump, 1);
+    }
 }

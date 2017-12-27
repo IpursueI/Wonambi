@@ -58,6 +58,7 @@ public class AssetBundlesBuilder
         colorToPrefab["648C0BFF"] = "JumpTips";
         colorToPrefab["658C0BFF"] = "FireTips";
         colorToPrefab["02FFC8FF"] = "SwitchToLevelMap2";
+        colorToPrefab["FFFF01FF"] = "DoubleJump";
 
 
         foreach (string d in Directory.GetFileSystemEntries(pngDirectoryPath, "*.png")) {

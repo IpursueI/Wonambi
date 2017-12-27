@@ -17,12 +17,14 @@ public class PlayerModel : MonoBehaviour {
     private bool isInvincible;
     private GameDirector gameDirector;
     public int status;
+    public PlayerController controller;
 
     private void Awake()
     {
         spriteRenderer = GetComponent<SpriteRenderer>();
         hitReact = GetComponent<HitReaction>();
         gameDirector = GameObject.Find("GameDirector").GetComponent<GameDirector>();
+        controller = GetComponent<PlayerController>();
     }
     // Use this for initialization
     void Start () 
@@ -66,6 +68,9 @@ public class PlayerModel : MonoBehaviour {
         }
         if (collision.tag == "SavePoint") {
             status |= PlayerStatus.InBonfire;
+        }
+        if(collision.tag == "DoubleJump") {
+            controller.EnableDoubleJump();
         }
     }
 
