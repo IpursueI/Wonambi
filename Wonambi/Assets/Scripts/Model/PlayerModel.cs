@@ -16,6 +16,7 @@ public class PlayerModel : MonoBehaviour {
     public bool isDead;
     private bool isInvincible;
     private GameDirector gameDirector;
+    public int status;
 
     private void Awake()
     {
@@ -63,7 +64,19 @@ public class PlayerModel : MonoBehaviour {
         if (collision.tag == "MonsterBullet" && !isInvincible) {
             OnHit();
         }
+        if (collision.tag == "SavePoint") {
+            status |= PlayerStatus.InBonfire;
+        }
     }
+
+    private void OnTriggerExit2D(Collider2D collision)
+    {
+        if (isDead) return;
+        if(collision.tag == "SavePoint") {
+            status &= ~PlayerStatus.InBonfire;
+        }
+    }
+
     private void OnHit()
     {
         --hp;

@@ -11,6 +11,9 @@ TagManager:
   - Heart
   - SavePoint
   - BinaryTrigger
+  - Tips
+  - Tiles
+  - Switch
   layers:
   - Default
   - TransparentFX

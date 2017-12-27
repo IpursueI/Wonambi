@@ -58,6 +58,7 @@ public class PlayerController : MonoBehaviour {
         Fire();
         SyncAnimator();
         CheckDie();
+        CheckTrigger();
     }
 
     public void Init(bool _isDoubleJump)
@@ -163,6 +164,13 @@ public class PlayerController : MonoBehaviour {
         anim.SetFloat("upSpeed", rb2d.velocity.y);
     }
 
+    private void CheckTrigger()
+    {
+        if(((model.status & PlayerStatus.InBonfire) != 0) && Input.GetKey(KeyCode.L)) {
+            LevelMgr.Instance.RebornPlayer(transform.position);
+        }
+    }
+
     public Vector3 GetMuzzlePos()
     {
         return muzzle.transform.position;
@@ -179,4 +187,5 @@ public class PlayerController : MonoBehaviour {
     {
         return inDoubleJump;
     }
+
 }

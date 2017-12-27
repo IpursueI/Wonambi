@@ -17,7 +17,7 @@ namespace GlobalDefines
     public static class DefineNumber
     {
         public static readonly int DefaultHP = 3;
-        public static readonly float DefaultMoveSpeed = 3.0f;
+        public static readonly float DefaultMoveSpeed = 4.0f;
         public static readonly float DefaultJumpSpeed = 10.0f;
         public static readonly float FallFactor = 1.0f;
         public static readonly float LowJumpFactor = 1.0f;
@@ -32,6 +32,8 @@ namespace GlobalDefines
         public static readonly float MonsterFireTriggerDistance = 8.0f;
         public static readonly float MaxFallSpeed = -20.0f;
         public static readonly float PlayerMinY = -8.0f;
+        public static readonly float CameraOffsetX = 17.1f;
+        public static readonly float CameraOffsetY = 9.4f;
     }
 
     public static class PrefsKey
@@ -45,6 +47,11 @@ namespace GlobalDefines
         public static readonly string LevelMap = "LevelMap";
     }
 
+    public static class PlayerStatus
+    {
+        public static readonly int InBonfire = 0x00000001;
+    }
+
     public enum MoveDirection 
     {
         None = 0,
@@ -52,6 +59,13 @@ namespace GlobalDefines
         Down = 2,
         Left = 3,
         Right = 4
+    }
+
+    public enum TipsType
+    {
+        Move = 1,
+        Jump = 2,
+        Fire = 3
     }
 
     public static class GlobalFunc

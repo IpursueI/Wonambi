@@ -47,12 +47,18 @@ public class AssetBundlesBuilder
         colorToPrefab["FF0006FF"] = "LurkerLeft";
         colorToPrefab["FF0007FF"] = "LurkerRight";
         colorToPrefab["0000FFFF"] = "Escalator";
+        colorToPrefab["0100FFFF"] = "Elevator";
         colorToPrefab["00A0E9FF"] = "TurnPoint";
         colorToPrefab["00FFFFFF"] = "Direction";
         colorToPrefab["00FF00FF"] = "SavePoint";
         colorToPrefab["FFFF00FF"] = "Heart";
         colorToPrefab["C8C800FF"] = "BinaryDoor";
         colorToPrefab["FF962DFF"] = "CloseDoor";
+        colorToPrefab["638C0BFF"] = "MoveTips";
+        colorToPrefab["648C0BFF"] = "JumpTips";
+        colorToPrefab["658C0BFF"] = "FireTips";
+        colorToPrefab["02FFC8FF"] = "SwitchToLevelMap2";
+
 
         foreach (string d in Directory.GetFileSystemEntries(pngDirectoryPath, "*.png")) {
             if (File.Exists(d)) {
@@ -100,7 +106,8 @@ public class AssetBundlesBuilder
                 SpawnObjectAt(allPixels, x, y, width, height, colorToPrefab, level);
             }
         }
-
+        level.GetComponent<LevelController>().width = width;
+        level.GetComponent<LevelController>().height = height;
     }
 
 
@@ -190,7 +197,7 @@ public class AssetBundlesBuilder
             else if (prefab == "PlayerSpawnPoint") {
                 level.GetComponent<LevelController>().startPoint = new Vector3(x, y, -10);
             }
-            else if (prefab == "Escalator") {
+            else if (prefab == "Escalator" || prefab == "Elevator") {
                 // 加一个中继点
                 Object tpObj = AssetDatabase.LoadAssetAtPath("Assets/Bundles/Prefabs/Tiles/TurnPoint.prefab", typeof(GameObject));
                 GameObject turnPoint = GameObject.Instantiate(tpObj, new Vector3(x, y, 0), Quaternion.identity) as GameObject;
@@ -238,7 +245,11 @@ public class AssetBundlesBuilder
                 Object eObj = AssetDatabase.LoadAssetAtPath("Assets/Bundles/Prefabs/Tiles/MovingPlatform.prefab", typeof(GameObject));
                 GameObject eGo = GameObject.Instantiate(eObj, new Vector3(x, y, 0), Quaternion.identity) as GameObject;
                 eGo.transform.SetParent(level.transform);
-                eGo.GetComponent<MovingPlatformController>().auto = true;
+                if(prefab == "Escalator") {
+                    eGo.GetComponent<MovingPlatformController>().auto = true;
+                } else if(prefab == "Evelator") {
+                    eGo.GetComponent<MovingPlatformController>().auto = false;
+                }
             }
             else if (prefab == "TurnPoint") {
                 // 加一个中继点
@@ -288,6 +299,36 @@ public class AssetBundlesBuilder
             }
             else if (prefab == "Direction") {
                 return;
+            }
+            else if (prefab == "MoveTips" || prefab == "JumpTips" || prefab == "FireTips") {
+                Object obj = AssetDatabase.LoadAssetAtPath("Assets/Bundles/Prefabs/Objects/Tips.prefab", typeof(GameObject));
+                GameObject go = GameObject.Instantiate(obj, new Vector3(x, y, 0), Quaternion.identity) as GameObject;
+                go.transform.SetParent(level.transform);
+                switch(prefab) {
+                case "MoveTips":
+                go.GetComponent<TipsController>().tipsType = TipsType.Move;
+                break;
+                case "JumpTips":
+                go.GetComponent<TipsController>().tipsType = TipsType.Jump;
+                break;
+                case "FireTips":
+                go.GetComponent<TipsController>().tipsType = TipsType.Fire;
+                break;
+                default:
+                break;
+                }
+            }
+            else if (prefab == "SwitchToLevelMap2") {
+                Object obj = AssetDatabase.LoadAssetAtPath("Assets/Bundles/Prefabs/Objects/Switch.prefab", typeof(GameObject));
+                GameObject go = GameObject.Instantiate(obj, new Vector3(x, y, 0), Quaternion.identity) as GameObject;
+                go.transform.SetParent(level.transform);
+                switch(prefab) {
+                case "SwitchToLevelMap2":
+                go.GetComponent<SwitchController>().levelName = "LevelMap2";
+                break;
+                default:
+                break;
+                }
             }
             else {
                 Object obj = AssetDatabase.LoadAssetAtPath("Assets/Bundles/Prefabs/Objects/" + prefab + ".prefab", typeof(GameObject));

@@ -1,13 +1,15 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using GlobalDefines;
 
 public class CameraController : MonoBehaviour {
 
     public GameObject player;
     public int moveHoriz;
     public int moveVert;
-
+    public float width;
+    public float height;
 	// Use this for initialization
 	void Start () 
     {
@@ -30,11 +32,32 @@ public class CameraController : MonoBehaviour {
 		else {
             moveVert = 0;
 		}
-        transform.position = new Vector3(player.transform.position.x * moveHoriz, player.transform.position.y * moveVert, transform.position.z);
+        float x = player.transform.position.x * moveHoriz;
+        float y = player.transform.position.y * moveVert;
+
+        if( x < DefineNumber.CameraOffsetX) {
+            x = DefineNumber.CameraOffsetX;
+        } else if(x > width - DefineNumber.CameraOffsetX) {
+            x = width - DefineNumber.CameraOffsetX;
+        }
+
+        if( y < DefineNumber.CameraOffsetY) {
+            y = DefineNumber.CameraOffsetY;
+        } else if( y > height - DefineNumber.CameraOffsetY) {
+            y = height - DefineNumber.CameraOffsetY;
+        }
+
+        transform.position = new Vector3(x, y, transform.position.z);
 	}
 
     public void SetPlayer(GameObject p)
     {
         player = p;
+    }
+
+    public void SetScreenSize(float w, float h) 
+    {
+        width = w;
+        height = h;
     }
 }

@@ -114,6 +114,8 @@ public class LevelMgr : Singleton<LevelMgr>
         ClearLevel();
         levelObj = Instantiate(BundleMgr.Instance.GetLevel(levelName), Vector3.zero, Quaternion.identity);
         levelObj.transform.SetParent(levelContainer.transform);
+        LevelController levelController = levelObj.GetComponent<LevelController>();
+        cameraController.SetScreenSize(levelController.width, levelController.height);
     }
 
     public bool IsPlayerRight(Vector3 monsterPos)

@@ -1,12 +1,12 @@
 ManifestFileVersion: 0
-CRC: 4022229184
+CRC: 1585943971
 Hashes:
   AssetFileHash:
     serializedVersion: 2
-    Hash: 3d7a1330e3af0bcd3b46bb6f7f589ea4
+    Hash: 4d7043ff0ea1b0090e36fbe7365155e3
   TypeTreeHash:
     serializedVersion: 2
-    Hash: e22dd5e620e3efcad75119e9b5d69c6d
+    Hash: 00f14a52da327779068ab59c015d3e01
 HashAppended: 0
 ClassTypes:
 - Class: 1
@@ -46,6 +46,8 @@ ClassTypes:
 - Class: 114
   Script: {fileID: 11500000, guid: 7ae0ee22d80bd41b787e197b3b3c636c, type: 3}
 - Class: 114
+  Script: {fileID: 11500000, guid: a9ea2085c2d4c468192955133fbdc84c, type: 3}
+- Class: 114
   Script: {fileID: 11500000, guid: 67656ac6c7144456589d54389122adab, type: 3}
 - Class: 114
   Script: {fileID: 11500000, guid: cf8791d786edc4ccbbb888c6595af717, type: 3}
@@ -61,6 +63,8 @@ ClassTypes:
   Script: {fileID: 11500000, guid: 91e9b41e78c184d71996cff0b36ae6f1, type: 3}
 - Class: 114
   Script: {fileID: 11500000, guid: dd0d206f3e1144cf1975b5ed3fe70149, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: 48a7b52cbf13748218a8b89bd9b74ed3, type: 3}
 - Class: 115
   Script: {instanceID: 0}
 - Class: 128
@@ -81,6 +85,7 @@ ClassTypes:
   Script: {instanceID: 0}
 Assets:
 - Assets/Bundles/Prefabs/Objects/LurkerUp.prefab
+- Assets/Bundles/Prefabs/Objects/Tips.prefab
 - Assets/Bundles/Prefabs/Objects/SavePoint.prefab
 - Assets/Bundles/Prefabs/Objects/MonsterBullet.prefab
 - Assets/Bundles/Prefabs/Objects/Trigger1.prefab
@@ -92,6 +97,7 @@ Assets:
 - Assets/Bundles/Prefabs/Objects/Patrol.prefab
 - Assets/Bundles/Prefabs/Objects/Pile.prefab
 - Assets/Bundles/Prefabs/Objects/LurkerLeft.prefab
+- Assets/Bundles/Prefabs/Objects/Switch.prefab
 - Assets/Bundles/Prefabs/Objects/Sentry.prefab
 - Assets/Bundles/Prefabs/Objects/Fort.prefab
 - Assets/Bundles/Prefabs/Objects/LurkerDown.prefab
