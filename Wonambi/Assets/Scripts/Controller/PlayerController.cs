@@ -20,6 +20,7 @@ public class PlayerController : MonoBehaviour {
     private bool inDoubleJump;
     private bool leftGrounded;
     private bool rightGrounded;
+    private GameObject doubleJumpEffect;
     // Animator
     private Animator anim;
     // Bullet
@@ -34,6 +35,7 @@ public class PlayerController : MonoBehaviour {
         muzzle = transform.Find("Muzzle").gameObject;
         leftCheck = transform.Find("LeftCheck").gameObject;
         rightCheck = transform.Find("RightCheck").gameObject;
+        doubleJumpEffect = transform.Find("DoubleJump").gameObject;
         rb2d = GetComponent<Rigidbody2D>();
         model = GetComponent<PlayerModel>();
         anim = GetComponent<Animator>();
@@ -65,7 +67,8 @@ public class PlayerController : MonoBehaviour {
     {
         groundDistance = 0.5f;
 
-        enableDoubleJump = _enableDoubleJump;
+        //enableDoubleJump = _enableDoubleJump;
+        enableDoubleJump = true;
         moveSpeed = DefineNumber.DefaultMoveSpeed;
         jumpSpeed = DefineNumber.DefaultJumpSpeed;
         inDoubleJump = false;
@@ -92,6 +95,7 @@ public class PlayerController : MonoBehaviour {
             if (!leftGrounded && !rightGrounded) {
                 if (enableDoubleJump && !inDoubleJump) {
                     inDoubleJump = true;
+                    DoDoubleJumpEffect();
                 }
                 else {
                     return;
@@ -181,6 +185,14 @@ public class PlayerController : MonoBehaviour {
         if(transform.position.y < DefineNumber.PlayerMinY) {
             model.Die();
         }
+    }
+
+    private void DoDoubleJumpEffect()
+    {
+        GameObject go = Instantiate(BundleMgr.Instance.GetObject("DoubleJumpEffect"));
+        go.transform.position = doubleJumpEffect.transform.position;
+        go.SetActive(true);
+        go.transform.SetParent(null);
     }
 
     public bool GetDoubleJump()

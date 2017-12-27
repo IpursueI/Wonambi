@@ -1,12 +1,12 @@
 ManifestFileVersion: 0
-CRC: 50632707
+CRC: 2931290911
 Hashes:
   AssetFileHash:
     serializedVersion: 2
-    Hash: 27aa9d5e99e6218e0cee2c502703ffb0
+    Hash: dbea20187150d2ea573b10c27f796611
   TypeTreeHash:
     serializedVersion: 2
-    Hash: b355d54e2ec44285f351f685d910edb3
+    Hash: 11cb72f5690f86d64c1a2d35c57108a2
 HashAppended: 0
 ClassTypes:
 - Class: 1
@@ -67,6 +67,8 @@ ClassTypes:
   Script: {fileID: 11500000, guid: 48a7b52cbf13748218a8b89bd9b74ed3, type: 3}
 - Class: 114
   Script: {fileID: 11500000, guid: f5dc8f18a82f64e45a644b4af37ea0e9, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: 00b9e0a5f6fa34211b024505f7368cb9, type: 3}
 - Class: 115
   Script: {instanceID: 0}
 - Class: 128
@@ -91,6 +93,7 @@ Assets:
 - Assets/Bundles/Prefabs/Objects/SavePoint.prefab
 - Assets/Bundles/Prefabs/Objects/MonsterBullet.prefab
 - Assets/Bundles/Prefabs/Objects/Trigger1.prefab
+- Assets/Bundles/Prefabs/Objects/DoubleJumpEffect.prefab
 - Assets/Bundles/Prefabs/Objects/BinaryDoor.prefab
 - Assets/Bundles/Prefabs/Player/Player.prefab
 - Assets/Bundles/Prefabs/Player/Bullet.prefab
