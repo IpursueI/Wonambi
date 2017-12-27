@@ -42,7 +42,10 @@ public class AssetBundlesBuilder
         colorToPrefab["FF0001FF"] = "Sentry";
         colorToPrefab["FF0002FF"] = "Patrol";
         colorToPrefab["FF0003FF"] = "Fort";
-        colorToPrefab["FF0004FF"] = "Lurker";
+        colorToPrefab["FF0004FF"] = "LurkerUp";
+        colorToPrefab["FF0005FF"] = "LurkerDown";
+        colorToPrefab["FF0006FF"] = "LurkerLeft";
+        colorToPrefab["FF0007FF"] = "LurkerRight";
         colorToPrefab["0000FFFF"] = "Escalator";
         colorToPrefab["00A0E9FF"] = "TurnPoint";
         colorToPrefab["00FFFFFF"] = "Direction";
