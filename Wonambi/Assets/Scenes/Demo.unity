@@ -388,7 +388,7 @@ MonoBehaviour:
   m_Text: ">$ One day, North Korea's rocket man decides to \ndestroy world. \nHe will
     launch nuclear bomb to \neverywhere of the world.\nThe only way to stop him is
     hacking in \nto North Korea's weapon control computer. \nblahblahblah...\n\n>$
-    So, let's hack it ! \n\n>$ Press space to start..."
+    So, let's hack it ! \n\n>$ Press Space to start..."
 --- !u!222 &567599798
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -913,48 +913,6 @@ MonoBehaviour:
   menuPanel: {fileID: 378077726}
   cutscenePanel: {fileID: 385465778}
   gamePanel: {fileID: 824430089}
---- !u!1001 &850121784
-Prefab:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    m_TransformParent: {fileID: 0}
-    m_Modifications:
-    - target: {fileID: 4666431761410044, guid: 3665cca51652a40a7a3212ebdecbda3c, type: 2}
-      propertyPath: m_LocalPosition.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4666431761410044, guid: 3665cca51652a40a7a3212ebdecbda3c, type: 2}
-      propertyPath: m_LocalPosition.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4666431761410044, guid: 3665cca51652a40a7a3212ebdecbda3c, type: 2}
-      propertyPath: m_LocalPosition.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4666431761410044, guid: 3665cca51652a40a7a3212ebdecbda3c, type: 2}
-      propertyPath: m_LocalRotation.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4666431761410044, guid: 3665cca51652a40a7a3212ebdecbda3c, type: 2}
-      propertyPath: m_LocalRotation.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4666431761410044, guid: 3665cca51652a40a7a3212ebdecbda3c, type: 2}
-      propertyPath: m_LocalRotation.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4666431761410044, guid: 3665cca51652a40a7a3212ebdecbda3c, type: 2}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4666431761410044, guid: 3665cca51652a40a7a3212ebdecbda3c, type: 2}
-      propertyPath: m_RootOrder
-      value: 5
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-  m_ParentPrefab: {fileID: 100100000, guid: 3665cca51652a40a7a3212ebdecbda3c, type: 2}
-  m_IsPrefabParent: 0
 --- !u!1 &1260570722
 GameObject:
   m_ObjectHideFlags: 0

@@ -52,6 +52,7 @@ public class BulletController : MonoBehaviour {
             }
         } else if(gameObject.tag == "MonsterBullet"){
             if(collision.tag == "Tiles" || collision.tag == "Player") {
+                Debug.Log("[BulletController] MonsterBullet.");
                 Destroy(gameObject);
                 return;
             }
