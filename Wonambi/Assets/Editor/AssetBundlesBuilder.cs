@@ -57,7 +57,7 @@ public class AssetBundlesBuilder
         colorToPrefab["638C0BFF"] = "MoveTips";
         colorToPrefab["648C0BFF"] = "JumpTips";
         colorToPrefab["658C0BFF"] = "FireTips";
-        colorToPrefab["02FFC8FF"] = "SwitchToLevelMap2";
+        colorToPrefab["02FFC8FF"] = "SwitchToBossMap1";
         colorToPrefab["FFFF01FF"] = "DoubleJump";
 
 
@@ -319,13 +319,13 @@ public class AssetBundlesBuilder
                 break;
                 }
             }
-            else if (prefab == "SwitchToLevelMap2") {
+            else if (prefab == "SwitchToBossMap1") {
                 Object obj = AssetDatabase.LoadAssetAtPath("Assets/Bundles/Prefabs/Objects/Switch.prefab", typeof(GameObject));
                 GameObject go = GameObject.Instantiate(obj, new Vector3(x, y, 0), Quaternion.identity) as GameObject;
                 go.transform.SetParent(level.transform);
                 switch(prefab) {
-                case "SwitchToLevelMap2":
-                go.GetComponent<SwitchController>().levelName = "LevelMap2";
+                case "SwitchToBossMap1":
+                go.GetComponent<SwitchController>().levelName = "BossMap1";
                 break;
                 default:
                 break;

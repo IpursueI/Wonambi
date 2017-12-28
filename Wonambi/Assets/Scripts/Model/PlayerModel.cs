@@ -60,7 +60,8 @@ public class PlayerModel : MonoBehaviour {
         if (isDead) return;
         if(collision.tag == "Heart") {
             AddHP(1);
-            Destroy(collision.gameObject); 
+            Destroy(collision.gameObject);
+            gameDirector.GetAudio().PlayItem();
 
         }
         if (collision.tag == "MonsterBullet" && !isInvincible) {
@@ -71,6 +72,7 @@ public class PlayerModel : MonoBehaviour {
         }
         if(collision.tag == "DoubleJump") {
             controller.EnableDoubleJump();
+            gameDirector.GetAudio().PlayItem();
         }
     }
 
@@ -90,6 +92,7 @@ public class PlayerModel : MonoBehaviour {
             Die();
             return;
         }
+        gameDirector.GetAudio().PlayPlayerHit();
         spriteRenderer.color = Color.grey;
         hitReact.Begin(Color.white);
         isInvincible = true;
@@ -112,6 +115,7 @@ public class PlayerModel : MonoBehaviour {
         particleOne.Play();
         isDead = true;
         transform.SetParent(null);
+        gameDirector.GetAudio().PlayPlayerDie();
         StartCoroutine(DieCoroutine());
     }
 

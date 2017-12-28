@@ -17,6 +17,7 @@ public class MonsterModel : MonoBehaviour {
     private HitReaction hitReact;
     private bool isDead = false;
     private MonsterController controller;
+    private GameDirector gameDirector;
 	// Use this for initialization
 	void Start () {
         spriteRenderer = GetComponent<SpriteRenderer>();
@@ -24,6 +25,7 @@ public class MonsterModel : MonoBehaviour {
         anim = GetComponent<Animator>();
         hitReact = GetComponent<HitReaction>();
         controller = GetComponent<MonsterController>();
+        gameDirector = GameObject.Find("GameDirector").gameObject.GetComponent<GameDirector>();
         isDead = false;
 	}
 	
@@ -43,6 +45,7 @@ public class MonsterModel : MonoBehaviour {
             Die();
             return;
         }
+        gameDirector.GetAudio().PlayMonsterHit();
         hitReact.Begin(Color.red);
         StartCoroutine(HitCoroutine());
     }
@@ -70,6 +73,7 @@ public class MonsterModel : MonoBehaviour {
         if(controller != null) {
             controller.OnDie();
         }
+        gameDirector.GetAudio().PlayMonsterDie();
         StartCoroutine(DieCoroutine());
     }
 

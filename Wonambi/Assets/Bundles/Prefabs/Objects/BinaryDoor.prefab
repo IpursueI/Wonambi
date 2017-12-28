@@ -25,7 +25,7 @@ GameObject:
   - component: {fileID: 114167415497804016}
   m_Layer: 0
   m_Name: Trigger2
-  m_TagString: BinaryTrigger
+  m_TagString: Tiles
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -44,7 +44,7 @@ GameObject:
   - component: {fileID: 114562217696304208}
   m_Layer: 0
   m_Name: Trigger3
-  m_TagString: BinaryTrigger
+  m_TagString: Tiles
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -63,7 +63,7 @@ GameObject:
   - component: {fileID: 114675058197848378}
   m_Layer: 0
   m_Name: Trigger1
-  m_TagString: BinaryTrigger
+  m_TagString: Tiles
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -82,7 +82,7 @@ GameObject:
   - component: {fileID: 114449366883640632}
   m_Layer: 0
   m_Name: Trigger4
-  m_TagString: BinaryTrigger
+  m_TagString: Tiles
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -99,7 +99,7 @@ GameObject:
   - component: {fileID: 61108743735750964}
   m_Layer: 8
   m_Name: TileGroundL (2)
-  m_TagString: Untagged
+  m_TagString: Tiles
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -116,7 +116,7 @@ GameObject:
   - component: {fileID: 61624878317095016}
   m_Layer: 8
   m_Name: DoorClose
-  m_TagString: Untagged
+  m_TagString: Tiles
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -133,7 +133,7 @@ GameObject:
   - component: {fileID: 61953137488090454}
   m_Layer: 8
   m_Name: TileGroundL
-  m_TagString: Untagged
+  m_TagString: Tiles
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -149,7 +149,7 @@ GameObject:
   - component: {fileID: 114710645479878488}
   m_Layer: 0
   m_Name: BinaryDoor
-  m_TagString: Untagged
+  m_TagString: Tiles
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -166,7 +166,7 @@ GameObject:
   - component: {fileID: 61746308030687736}
   m_Layer: 8
   m_Name: TileGroundLT
-  m_TagString: Untagged
+  m_TagString: Tiles
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -183,7 +183,7 @@ GameObject:
   - component: {fileID: 61846689910140600}
   m_Layer: 8
   m_Name: TileGroundL (1)
-  m_TagString: Untagged
+  m_TagString: Tiles
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -200,7 +200,7 @@ GameObject:
   - component: {fileID: 61744888418588514}
   m_Layer: 8
   m_Name: DoorOpen
-  m_TagString: Untagged
+  m_TagString: Tiles
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

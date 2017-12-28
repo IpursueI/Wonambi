@@ -9,6 +9,8 @@ public class GameDirector : MonoBehaviour {
     private LevelMgr levelMgr;
     private UIController uiController;
     private bool inGame;
+    private AudioController audioController;
+
     void Awake()
     {
         bundleMgr = BundleMgr.Instance;
@@ -16,6 +18,7 @@ public class GameDirector : MonoBehaviour {
         levelMgr = LevelMgr.Instance;
         levelMgr.Init(this);
         uiController = GameObject.Find("UICanvas").GetComponent<UIController>();
+        audioController = GameObject.Find("GameDirector").GetComponent<AudioController>();
     }
 
 	// Use this for initialization
@@ -60,5 +63,10 @@ public class GameDirector : MonoBehaviour {
     public bool IsInGame()
     {
         return inGame;
+    }
+
+    public AudioController GetAudio()
+    {
+        return audioController;
     }
 }

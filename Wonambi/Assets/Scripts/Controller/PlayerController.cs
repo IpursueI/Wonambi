@@ -29,6 +29,7 @@ public class PlayerController : MonoBehaviour {
     private GameObject muzzle;
     // model
     private PlayerModel model;
+    private GameDirector gameDirector;
 
     private void Awake()
     {
@@ -39,6 +40,7 @@ public class PlayerController : MonoBehaviour {
         rb2d = GetComponent<Rigidbody2D>();
         model = GetComponent<PlayerModel>();
         anim = GetComponent<Animator>();
+        gameDirector = GameObject.Find("GameDirector").gameObject.GetComponent<GameDirector>();
     }
 
     // Use this for initialization
@@ -101,6 +103,7 @@ public class PlayerController : MonoBehaviour {
                     return;
                 }
             }
+            gameDirector.GetAudio().PlayJump();
             rb2d.velocity = new Vector2(rb2d.velocity.x, jumpSpeed * Vector2.up.y);
         }
         if (rb2d.velocity.y < 0) {
@@ -158,6 +161,7 @@ public class PlayerController : MonoBehaviour {
             bulletCtrl.Init(DefineNumber.BulletSpeed, DefineNumber.BulletDuration, GetMuzzlePos(), gameObject);
             curBullet.SetActive(true);
             cooldown = DefineNumber.FireCooldown;
+            gameDirector.GetAudio().PlayAttack();
         }
     }
 

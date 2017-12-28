@@ -117,6 +117,11 @@ public class LevelMgr : Singleton<LevelMgr>
         levelObj.transform.SetParent(levelContainer.transform);
         LevelController levelController = levelObj.GetComponent<LevelController>();
         cameraController.SetScreenSize(levelController.width, levelController.height);
+        if(levelName.Substring(0,5) == "Level") {
+            gameDirector.GetAudio().PlayBGM();
+        } else {
+            gameDirector.GetAudio().PlayBossBGM();
+        }
     }
 
     public bool IsPlayerRight(Vector3 monsterPos)
