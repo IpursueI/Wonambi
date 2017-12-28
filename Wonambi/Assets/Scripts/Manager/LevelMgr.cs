@@ -59,9 +59,17 @@ public class LevelMgr : Singleton<LevelMgr>
         Vector3 savePointVec3 = new Vector3(savePos.x, savePos.y, -10.0f);
         PlayerPrefs.SetString(PrefsKey.LevelMap, curLevel);
         PlayerPrefs.SetString(PrefsKey.SavePoint, savePointVec3.ToString());
-        RestartLevel();
+
+        uiController.ShowBonfireMask();
+
+        StartCoroutine(RebornCoroutine());
     }
 
+    public IEnumerator RebornCoroutine()
+    {
+        yield return new WaitForSeconds(1.0f);
+        RestartLevel();
+    }
     private void SpawnPlayer()
     {
         if(player == null) {

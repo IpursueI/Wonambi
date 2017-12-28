@@ -48,4 +48,9 @@ public class UIController : MonoBehaviour {
         cutscenePanel.SetActive(false);
         gamePanel.SetActive(true);
     }
+
+    public void ShowBonfireMask()
+    {
+        gamePanel.GetComponent<GamePanelController>().ShowBonfireMask();
+    }
 }
