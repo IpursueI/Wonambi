@@ -41,7 +41,7 @@ public class AudioController : MonoBehaviour
     {
         audioSource.Stop();
         audioSource.clip = bgm;
-        audioSource.PlayDelayed(0.5f);
+        audioSource.PlayDelayed(0.3f);
 
     }
 

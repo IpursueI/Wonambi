@@ -175,6 +175,7 @@ public class PlayerController : MonoBehaviour {
     private void CheckTrigger()
     {
         if(((model.status & PlayerStatus.InBonfire) != 0) && Input.GetKey(KeyCode.L)) {
+            gameDirector.GetAudio().Stop();
             gameDirector.GetAudio().PlayBonfire();
             LevelMgr.Instance.RebornPlayer(transform.position);
         }

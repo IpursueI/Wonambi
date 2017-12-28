@@ -19,6 +19,8 @@ public class GameDirector : MonoBehaviour {
         levelMgr.Init(this);
         uiController = GameObject.Find("UICanvas").GetComponent<UIController>();
         audioController = GameObject.Find("GameDirector").GetComponent<AudioController>();
+        // Hide cursor
+        Cursor.visible = false;
     }
 
 	// Use this for initialization
