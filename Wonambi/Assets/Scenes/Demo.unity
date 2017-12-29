@@ -247,7 +247,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   bgm: {fileID: 8300000, guid: 79307cf66a94b4e6d83f6cb34997889c, type: 3}
   bossBgm: {fileID: 8300000, guid: a8ef0e9fbacb24eabbaa5e0382a095e2, type: 3}
-  attack: {fileID: 8300000, guid: ef462d25c97cd4ebfb5f67506b8dc0cd, type: 3}
+  attack: {fileID: 8300000, guid: 41e45937d1dc14110a8af79b225e5207, type: 3}
   playerHit: {fileID: 8300000, guid: 9753ac55b1680482ebe4eb106747244c, type: 3}
   monsterHit: {fileID: 8300000, guid: 9753ac55b1680482ebe4eb106747244c, type: 3}
   item: {fileID: 8300000, guid: cc40506e9645d40f6a7b13c4b546c7c1, type: 3}
@@ -498,49 +498,6 @@ CanvasRenderer:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 567599795}
---- !u!1 &614659942
-GameObject:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  serializedVersion: 5
-  m_Component:
-  - component: {fileID: 614659944}
-  - component: {fileID: 614659943}
-  m_Layer: 0
-  m_Name: New Game Object
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &614659943
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 614659942}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d5c08aeb61b774d8f9d6ea3548719376, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  startPoint: {x: 0, y: 0, z: 0}
-  width: 0
-  height: 0
---- !u!4 &614659944
-Transform:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 614659942}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 5
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &635748425
 GameObject:
   m_ObjectHideFlags: 0
@@ -1107,7 +1064,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 0.384, g: 0.7607844, b: 0.284, a: 0}
   m_RaycastTarget: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
