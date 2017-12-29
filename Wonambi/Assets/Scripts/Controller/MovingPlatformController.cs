@@ -11,6 +11,7 @@ public class MovingPlatformController : MonoBehaviour
     public bool isRun;
     public float speed;
     public bool willTurn = false;
+    public bool isTrigger = false;
     public Vector3 turnPosition;
     public MoveDirection turnDirection;
     public MoveDirection direction = MoveDirection.None;
@@ -70,6 +71,10 @@ public class MovingPlatformController : MonoBehaviour
                     }
                 }
             }
+        }
+        if(isTrigger) {
+            isRun = true;
+            isTrigger = false;
         }
     }
 
@@ -138,6 +143,10 @@ public class MovingPlatformController : MonoBehaviour
 
     public void OnTrigger()
     {
-        if (isEnd) isRun = true;
+        if (auto) return;
+        if (isEnd) {
+            isRun = true;
+            isTrigger = true;
+        }
     }
 }

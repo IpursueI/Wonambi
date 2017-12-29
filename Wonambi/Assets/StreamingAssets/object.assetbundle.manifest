@@ -1,0 +1,111 @@
+ManifestFileVersion: 0
+CRC: 1814327849
+Hashes:
+  AssetFileHash:
+    serializedVersion: 2
+    Hash: 1bbacc3b4b92c4891c8ddef15b16dbf6
+  TypeTreeHash:
+    serializedVersion: 2
+    Hash: 26c0263dbbd05d5dd1592b518d25c058
+HashAppended: 0
+ClassTypes:
+- Class: 1
+  Script: {instanceID: 0}
+- Class: 4
+  Script: {instanceID: 0}
+- Class: 21
+  Script: {instanceID: 0}
+- Class: 28
+  Script: {instanceID: 0}
+- Class: 48
+  Script: {instanceID: 0}
+- Class: 50
+  Script: {instanceID: 0}
+- Class: 58
+  Script: {instanceID: 0}
+- Class: 61
+  Script: {instanceID: 0}
+- Class: 62
+  Script: {instanceID: 0}
+- Class: 74
+  Script: {instanceID: 0}
+- Class: 91
+  Script: {instanceID: 0}
+- Class: 95
+  Script: {instanceID: 0}
+- Class: 114
+  Script: {fileID: 11500000, guid: b6358000af560493a8ead14c9bb06b7c, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: 707365103c072497b87c7d1281c56ccd, type: 3}
+- Class: 114
+  Script: {fileID: 1980459831, guid: f70555f144d8491a825f0804e09c671c, type: 3}
+- Class: 114
+  Script: {fileID: 1301386320, guid: f70555f144d8491a825f0804e09c671c, type: 3}
+- Class: 114
+  Script: {fileID: 708705254, guid: f70555f144d8491a825f0804e09c671c, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: 7ae0ee22d80bd41b787e197b3b3c636c, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: a9ea2085c2d4c468192955133fbdc84c, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: 00b9e0a5f6fa34211b024505f7368cb9, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: 67656ac6c7144456589d54389122adab, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: cf8791d786edc4ccbbb888c6595af717, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: f5dc8f18a82f64e45a644b4af37ea0e9, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: 3ae41419807384dddac0f66d0e3bb924, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: 51cc0eaad05094811a3d2097c383366e, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: 49994f7bc1f5949c98e38aa85519b089, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: 48a7b52cbf13748218a8b89bd9b74ed3, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: 70ac7bed032794b6ab006ffc255b28cd, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: 91e9b41e78c184d71996cff0b36ae6f1, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: dd0d206f3e1144cf1975b5ed3fe70149, type: 3}
+- Class: 115
+  Script: {instanceID: 0}
+- Class: 128
+  Script: {instanceID: 0}
+- Class: 198
+  Script: {instanceID: 0}
+- Class: 199
+  Script: {instanceID: 0}
+- Class: 212
+  Script: {instanceID: 0}
+- Class: 213
+  Script: {instanceID: 0}
+- Class: 222
+  Script: {instanceID: 0}
+- Class: 223
+  Script: {instanceID: 0}
+- Class: 224
+  Script: {instanceID: 0}
+Assets:
+- Assets/Bundles/Prefabs/Objects/LurkerUp.prefab
+- Assets/Bundles/Prefabs/Objects/Tips.prefab
+- Assets/Bundles/Prefabs/Objects/SavePoint.prefab
+- Assets/Bundles/Prefabs/Objects/MonsterBullet.prefab
+- Assets/Bundles/Prefabs/Objects/Trigger1.prefab
+- Assets/Bundles/Prefabs/Objects/DoubleJumpEffect.prefab
+- Assets/Bundles/Prefabs/Objects/BinaryDoor.prefab
+- Assets/Bundles/Prefabs/Player/Player.prefab
+- Assets/Bundles/Prefabs/Player/Bullet.prefab
+- Assets/Bundles/Prefabs/Objects/LurkerRight.prefab
+- Assets/Bundles/Prefabs/Objects/CloseDoor.prefab
+- Assets/Bundles/Prefabs/Objects/Patrol.prefab
+- Assets/Bundles/Prefabs/Objects/DoubleJump.prefab
+- Assets/Bundles/Prefabs/Objects/Pile.prefab
+- Assets/Bundles/Prefabs/Objects/LurkerLeft.prefab
+- Assets/Bundles/Prefabs/Objects/Switch.prefab
+- Assets/Bundles/Prefabs/Objects/Sentry.prefab
+- Assets/Bundles/Prefabs/Objects/Fort.prefab
+- Assets/Bundles/Prefabs/Objects/LurkerDown.prefab
+- Assets/Bundles/Prefabs/Objects/Heart.prefab
+Dependencies: []
