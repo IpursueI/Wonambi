@@ -15,7 +15,6 @@ public class PlayerModel : MonoBehaviour {
     private HitReaction hitReact;
     public bool isDead;
     private bool isInvincible;
-    private GameDirector gameDirector;
     public int status;
     public PlayerController controller;
 
@@ -23,7 +22,6 @@ public class PlayerModel : MonoBehaviour {
     {
         spriteRenderer = GetComponent<SpriteRenderer>();
         hitReact = GetComponent<HitReaction>();
-        gameDirector = GameObject.Find("GameDirector").GetComponent<GameDirector>();
         controller = GetComponent<PlayerController>();
     }
     // Use this for initialization
@@ -61,7 +59,7 @@ public class PlayerModel : MonoBehaviour {
         if(collision.tag == "Heart") {
             AddHP(1);
             Destroy(collision.gameObject);
-            gameDirector.GetAudio().PlayItem();
+            GameMgr.Instance.PlayPickSFX();
 
         }
         if (collision.tag == "MonsterBullet" && !isInvincible) {
@@ -72,7 +70,7 @@ public class PlayerModel : MonoBehaviour {
         }
         if(collision.tag == "DoubleJump") {
             controller.EnableDoubleJump();
-            gameDirector.GetAudio().PlayItem();
+            GameMgr.Instance.PlayPickSFX();
         }
     }
 
@@ -92,7 +90,7 @@ public class PlayerModel : MonoBehaviour {
             Die();
             return;
         }
-        gameDirector.GetAudio().PlayPlayerHit();
+        GameMgr.Instance.PlayPlayerHitSFX();
         spriteRenderer.color = Color.grey;
         hitReact.Begin(Color.white);
         isInvincible = true;
@@ -115,7 +113,7 @@ public class PlayerModel : MonoBehaviour {
         particleOne.Play();
         isDead = true;
         transform.SetParent(null);
-        gameDirector.GetAudio().PlayPlayerDie();
+        GameMgr.Instance.PlayPlayerDieSFX();
         StartCoroutine(DieCoroutine());
     }
 

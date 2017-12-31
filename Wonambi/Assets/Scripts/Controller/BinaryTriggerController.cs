@@ -37,10 +37,24 @@ public class BinaryTriggerController : MonoBehaviour {
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
+        if (controller.isSolve) return;
         if(collision.tag == "PlayerBullet") {
             isTriggered = !isTriggered;
             anim.SetBool("isTrigger", isTriggered);
             controller.OnTriggerHit();
         }
+    }
+
+    public void SetTrigger(bool isOn)
+    {
+        if(isOn)
+        {
+            isTriggered = true;
+        }
+        else
+        {
+            isTriggered = false;
+        }
+        anim.SetBool("isTrigger", isTriggered);
     }
 }

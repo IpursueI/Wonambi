@@ -1,12 +1,12 @@
 ManifestFileVersion: 0
-CRC: 3468425329
+CRC: 4115600226
 Hashes:
   AssetFileHash:
     serializedVersion: 2
-    Hash: 8ee3b9117418597637ea72a77e271863
+    Hash: 5666bbf2cdca9e4b368c1801ec8c0915
   TypeTreeHash:
     serializedVersion: 2
-    Hash: 676181bed797be23fde267b1346699d9
+    Hash: a091c9c969bd572c0aa7b2b942c12c98
 HashAppended: 0
 ClassTypes:
 - Class: 1
@@ -87,8 +87,8 @@ ClassTypes:
   Script: {instanceID: 0}
 Assets:
 - Assets/Bundles/Prefabs/Levels/LevelMap1.prefab
-- Assets/Bundles/Sprites/Maps/BossMap1.png
 - Assets/Bundles/Prefabs/Levels/BossMap1.prefab
+- Assets/Bundles/Sprites/Maps/BossMap1.png
 - Assets/Bundles/Sprites/Maps/LevelMap1.png
 Dependencies:
-- /Users/chenyan/Projects/Wonambi/Wonambi/Assets/StreamingAssets/object.assetbundle
+- D:/Projects/Wonambi/Wonambi/Assets/StreamingAssets/object.assetbundle

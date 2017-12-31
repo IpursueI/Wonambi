@@ -210,6 +210,7 @@ MonoBehaviour:
   isRun: 0
   speed: 0
   willTurn: 0
+  isTrigger: 0
   turnPosition: {x: 0, y: 0, z: 0}
   turnDirection: 0
   direction: 0
@@ -247,7 +248,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: d044877ef1c2e4c8297c8d750159afdc, type: 3}
+  m_Sprite: {fileID: 21300000, guid: bcf0f191032855f46a9db573c79b0223, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 0.007843138}
   m_FlipX: 0
   m_FlipY: 0
@@ -291,7 +292,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 45a11c224084c4ae0ace4ec6c17cd88e, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 57b5215bf18d0f0458d55c8b20976749, type: 3}
   m_Color: {r: 0.029411793, g: 0.67870164, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -335,7 +336,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 4b635c14af8ba4266a157bc368588567, type: 3}
+  m_Sprite: {fileID: 21300004, guid: 57b5215bf18d0f0458d55c8b20976749, type: 3}
   m_Color: {r: 0.029411793, g: 0.67870164, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0

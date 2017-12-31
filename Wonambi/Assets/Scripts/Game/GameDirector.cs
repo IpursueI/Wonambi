@@ -7,18 +7,17 @@ public class GameDirector : MonoBehaviour {
 
     private BundleMgr bundleMgr;
     private LevelMgr levelMgr;
-    private UIController uiController;
+    private GameMgr gameMgr;
     private bool inGame;
-    private AudioController audioController;
 
     void Awake()
     {
         bundleMgr = BundleMgr.Instance;
         bundleMgr.Init();
         levelMgr = LevelMgr.Instance;
-        levelMgr.Init(this);
-        uiController = GameObject.Find("UICanvas").GetComponent<UIController>();
-        audioController = GameObject.Find("GameDirector").GetComponent<AudioController>();
+        levelMgr.Init();
+        gameMgr = GameMgr.Instance;
+        gameMgr.Init();
         // Hide cursor
         Cursor.visible = false;
     }
@@ -27,8 +26,7 @@ public class GameDirector : MonoBehaviour {
 	void Start () {
         //LevelMgr.Instance.StartNewLevel();
         inGame = false;
-        uiController.ShowMenuUI();
-        uiController.gameObject.SetActive(true);
+        gameMgr.UIOnStart();
 	}
 
 	// Update is called once per frame
@@ -37,12 +35,12 @@ public class GameDirector : MonoBehaviour {
 	}
 
     public void StartCutscene() {
-        uiController.ShowCutsceneUI();    
+        gameMgr.ShowCutscene();   
     }
 
     public void StartGame()
     {
-        uiController.ShowGameUI();
+        gameMgr.ShowGameUI();
         inGame = true;
         NewGame();
     }
@@ -54,7 +52,7 @@ public class GameDirector : MonoBehaviour {
 
     public void ContinueGame() 
     {
-        levelMgr.RestartLevel();
+       levelMgr.RestartLevel();
     }
 
     public void NextLevel(string levelName)
@@ -65,10 +63,5 @@ public class GameDirector : MonoBehaviour {
     public bool IsInGame()
     {
         return inGame;
-    }
-
-    public AudioController GetAudio()
-    {
-        return audioController;
     }
 }

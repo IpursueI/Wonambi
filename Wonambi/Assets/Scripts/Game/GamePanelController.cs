@@ -45,12 +45,18 @@ public class GamePanelController : MonoBehaviour {
     public void ShowBonfireMask()
     {
         bonfireMask.gameObject.SetActive(true);
-        bonfireMask.DOFade(1.0f, 1.0f).OnComplete(EndTween);
+        bonfireMask.DOFade(1.0f, 1.0f);
     }
 
     private void EndTween()
     {
         bonfireMask.color = new Color(bonfireMask.color.r, bonfireMask.color.g, bonfireMask.color.b, 0.0f);
         bonfireMask.gameObject.SetActive(false);
+        GameMgr.Instance.EnableInput();
+    }
+
+    public void CompleteTween()
+    {
+        bonfireMask.DOFade(0.0f, 1.0f).OnComplete(EndTween);
     }
 }

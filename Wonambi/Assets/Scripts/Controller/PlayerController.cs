@@ -29,7 +29,9 @@ public class PlayerController : MonoBehaviour {
     private GameObject muzzle;
     // model
     private PlayerModel model;
-    private GameDirector gameDirector;
+
+    private int maxBulletNumber;
+    private int bulletCount;
 
     private void Awake()
     {
@@ -40,7 +42,6 @@ public class PlayerController : MonoBehaviour {
         rb2d = GetComponent<Rigidbody2D>();
         model = GetComponent<PlayerModel>();
         anim = GetComponent<Animator>();
-        gameDirector = GameObject.Find("GameDirector").gameObject.GetComponent<GameDirector>();
     }
 
     // Use this for initialization
@@ -65,33 +66,25 @@ public class PlayerController : MonoBehaviour {
         CheckTrigger();
     }
 
-    public void Init(bool _enableDoubleJump)
+    public void Init(bool _enableDoubleJump, int _maxBulletNumber)
     {
         groundDistance = 0.5f;
 
-        //enableDoubleJump = _enableDoubleJump;
-        enableDoubleJump = true;
+        enableDoubleJump = _enableDoubleJump;
+        maxBulletNumber = _maxBulletNumber;
+
         moveSpeed = DefineNumber.DefaultMoveSpeed;
         jumpSpeed = DefineNumber.DefaultJumpSpeed;
         inDoubleJump = false;
         leftGrounded = false;
         rightGrounded = false;
         cooldown = DefineNumber.FireCooldown;
-    }
-
-    public void Save()
-    {
-        if(enableDoubleJump) {
-            PlayerPrefs.SetInt(PrefsKey.PlayerEnableDoubleJump, 1);
-        } else {
-            PlayerPrefs.SetInt(PrefsKey.PlayerEnableDoubleJump, 0);
-        }
-        PlayerPrefs.SetFloat(PrefsKey.PlayerMoveSpeed, moveSpeed);
-        PlayerPrefs.SetFloat(PrefsKey.PlayerJumpSpeed, jumpSpeed);
+        bulletCount = 0;
     }
 
     private void Move()
     {
+        if (!GameMgr.Instance.IsInputEnable()) return;
         rb2d.velocity = new Vector2(moveSpeed * Input.GetAxis("Horizontal"), rb2d.velocity.y);
         if (Input.GetButtonDown("Jump")) {
             if (!leftGrounded && !rightGrounded) {
@@ -103,7 +96,7 @@ public class PlayerController : MonoBehaviour {
                     return;
                 }
             }
-            gameDirector.GetAudio().PlayJump();
+            GameMgr.Instance.PlayJumpSFX();
             rb2d.velocity = new Vector2(rb2d.velocity.x, jumpSpeed * Vector2.up.y);
         }
         if (rb2d.velocity.y < 0) {
@@ -122,13 +115,13 @@ public class PlayerController : MonoBehaviour {
         if (rb2d.velocity.x < 0.0f && forward) {
             transform.localScale = new Vector3(-1f, 1f, 1f);
             forward = false;
-            leftCheck.transform.localPosition = new Vector3(-0.45f, -0.6f, 0.0f);
-            rightCheck.transform.localPosition = new Vector3(0.05f, -0.6f, 0.0f);
+            leftCheck.transform.localPosition = new Vector3(-0.36f, -0.58f, 0.0f);
+            rightCheck.transform.localPosition = new Vector3(0.14f, -0.58f, 0.0f);
         } else if (rb2d.velocity.x > 0.0f && !forward){
             transform.localScale = new Vector3(1f, 1f, 1f);
             forward = true;
-            leftCheck.transform.localPosition = new Vector3(0.05f, -0.6f, 0.0f);
-            rightCheck.transform.localPosition = new Vector3(-0.45f, -0.6f, 0.0f);
+            leftCheck.transform.localPosition = new Vector3(0.14f, -0.58f, 0.0f);
+            rightCheck.transform.localPosition = new Vector3(-0.36f, -0.58f, 0.0f);
         }    
     }
 
@@ -154,14 +147,16 @@ public class PlayerController : MonoBehaviour {
 
     private void Fire()
     {
+        if (!GameMgr.Instance.IsInputEnable()) return;
         cooldown -= Time.deltaTime;
-        if (Input.GetKey(KeyCode.J) && cooldown <= 0f) {
+        if (Input.GetKey(KeyCode.J) && cooldown <= 0f && bulletCount < maxBulletNumber) {
             GameObject curBullet = Instantiate(bullet, transform) as GameObject;
             BulletController bulletCtrl = curBullet.GetComponent<BulletController>();
-            bulletCtrl.Init(DefineNumber.BulletSpeed, DefineNumber.BulletDuration, GetMuzzlePos(), gameObject);
+            bulletCtrl.Init(DefineNumber.BulletSpeed, 0, GetMuzzlePos(), gameObject);
             curBullet.SetActive(true);
             cooldown = DefineNumber.FireCooldown;
-            gameDirector.GetAudio().PlayAttack();
+            GameMgr.Instance.PlayAttackSFX();
+            bulletCount++;
         }
     }
 
@@ -174,10 +169,12 @@ public class PlayerController : MonoBehaviour {
 
     private void CheckTrigger()
     {
-        if(((model.status & PlayerStatus.InBonfire) != 0) && Input.GetKey(KeyCode.L)) {
-            gameDirector.GetAudio().Stop();
-            gameDirector.GetAudio().PlayBonfire();
+        if (!GameMgr.Instance.IsInputEnable()) return;
+        if(((model.status & PlayerStatus.InBonfire) != 0) && Input.GetKeyDown(KeyCode.L)) {
+            GameMgr.Instance.PlayBonfireSFX();
             LevelMgr.Instance.RebornPlayer(transform.position);
+            rb2d.velocity = new Vector2(0.0f, 0.0f);
+            GameMgr.Instance.DisableInput();
         }
     }
 
@@ -210,5 +207,22 @@ public class PlayerController : MonoBehaviour {
     {
         enableDoubleJump = true;
         PlayerPrefs.SetInt(PrefsKey.PlayerEnableDoubleJump, 1);
+        LevelMgr.Instance.SaveDoubleJumpItem();
+    }
+
+    public void AddBulletNumber()
+    {
+        maxBulletNumber++;
+        PlayerPrefs.SetInt(PrefsKey.PlayerBulletNumber, maxBulletNumber);
+    }
+    public void OnBulletDestroy()
+    {
+        bulletCount--;
+        if (bulletCount <= 0) bulletCount = 0;
+    }
+
+    public int GetPlayerMaxBulletNumber()
+    {
+        return maxBulletNumber;
     }
 }

@@ -9,6 +9,7 @@ public class BulletController : MonoBehaviour {
     public float duration;
     private Vector3 spawnPos;
     private Rigidbody2D rb2d;
+    private GameObject owner;
 
     private void Awake()
     {
@@ -17,7 +18,10 @@ public class BulletController : MonoBehaviour {
     // Use this for initialization
     void Start () 
     {
-        StartCoroutine(Die());
+        if(gameObject.tag == "MonsterBullet")
+        {
+            StartCoroutine(Disapper());
+        }
 	}
 	
 	// Update is called once per frame
@@ -35,9 +39,10 @@ public class BulletController : MonoBehaviour {
         }
         transform.position = _spawnPos;
         transform.SetParent(null);
+        owner = _owner;
     }
 
-    IEnumerator Die() 
+    IEnumerator Disapper() 
     {
         yield return new WaitForSeconds(duration);
         Destroy(gameObject);
@@ -55,6 +60,26 @@ public class BulletController : MonoBehaviour {
                 Destroy(gameObject);
                 return;
             }
+        }
+    }
+
+    private void Die()
+    {
+        if(gameObject.tag == "PlayerBullet")
+        {
+            if(owner != null)
+            {
+                owner.GetComponent<PlayerController>().OnBulletDestroy();
+            }
+        }
+        Destroy(gameObject);
+    }
+
+    private void OnBecameInvisible()
+    {
+        if(gameObject.tag == "PlayerBullet")
+        {
+            Die();
         }
     }
 }

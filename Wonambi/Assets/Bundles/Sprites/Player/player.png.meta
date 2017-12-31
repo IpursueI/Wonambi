@@ -1,6 +1,6 @@
 fileFormatVersion: 2
-guid: 7a5c222b588a8534c8c5b4bc11ab0f93
-timeCreated: 1513520574
+guid: cc281f556a9461544915c8dddf67d5dd
+timeCreated: 1514628144
 licenseType: Free
 TextureImporter:
   fileIDToRecycleName:
@@ -104,11 +104,11 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 0
-        y: 83
-        width: 62
-        height: 83
+        y: 75
+        width: 46
+        height: 74
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -117,12 +117,12 @@ TextureImporter:
       name: player_1
       rect:
         serializedVersion: 2
-        x: 63
-        y: 83
-        width: 61
-        height: 83
+        x: 46
+        y: 75
+        width: 46
+        height: 74
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -133,10 +133,10 @@ TextureImporter:
         serializedVersion: 2
         x: 0
         y: 0
-        width: 62
-        height: 83
+        width: 46
+        height: 74
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -145,12 +145,12 @@ TextureImporter:
       name: player_3
       rect:
         serializedVersion: 2
-        x: 62
+        x: 46
         y: 0
-        width: 62
-        height: 83
+        width: 46
+        height: 74
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []

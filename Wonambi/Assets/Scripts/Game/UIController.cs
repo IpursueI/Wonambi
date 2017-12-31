@@ -53,4 +53,9 @@ public class UIController : MonoBehaviour {
     {
         gamePanel.GetComponent<GamePanelController>().ShowBonfireMask();
     }
+
+    public void HideBonfireMask()
+    {
+        gamePanel.GetComponent<GamePanelController>().CompleteTween();
+    }
 }

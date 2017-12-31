@@ -59,12 +59,13 @@ public class AssetBundlesBuilder
         colorToPrefab["658C0BFF"] = "FireTips";
         colorToPrefab["02FFC8FF"] = "SwitchToBossMap1";
         colorToPrefab["FFFF01FF"] = "DoubleJump";
+        colorToPrefab["FFFF02FF"] = "ExtraBullet";
 
 
         foreach (string d in Directory.GetFileSystemEntries(pngDirectoryPath, "*.png")) {
             if (File.Exists(d)) {
                 GameObject level = new GameObject();
-                level.AddComponent<LevelController>();
+                level.AddComponent<LevelContext>().levelName = Path.GetFileNameWithoutExtension(d);
                 Texture2D png = (Texture2D)AssetDatabase.LoadAssetAtPath(d, typeof(Texture2D));
                 BuildMapPrefab(level, png, colorToPrefab);
                 string levelPath = levelDirectoryPath + "/" + Path.GetFileNameWithoutExtension(d) + ".prefab";
@@ -107,8 +108,8 @@ public class AssetBundlesBuilder
                 SpawnObjectAt(allPixels, x, y, width, height, colorToPrefab, level);
             }
         }
-        level.GetComponent<LevelController>().width = width;
-        level.GetComponent<LevelController>().height = height;
+        level.GetComponent<LevelContext>().width = width;
+        level.GetComponent<LevelContext>().height = height;
     }
 
 
@@ -137,68 +138,87 @@ public class AssetBundlesBuilder
         string colorKey = ColorUtility.ToHtmlStringRGBA(c);
         if (colorToPrefab.ContainsKey(colorKey)) {
             string prefab = colorToPrefab[colorKey];
-            if (prefab == "Tile") {
+            if (prefab == "Tile")
+            {
                 bool top = y >= height - 1 || IsColorNotTile(pixels[((y + 1) * width) + x], colorToPrefab);
-                bool bottom = y <= 0 || IsColorNotTile(pixels[((y - 1) * width) + x],colorToPrefab);
-                bool left = x <= 0 || IsColorNotTile(pixels[(y * width) + x - 1],colorToPrefab);
-                bool right = x >= width - 1 || IsColorNotTile(pixels[(y * width) + x + 1],colorToPrefab);
+                bool bottom = y <= 0 || IsColorNotTile(pixels[((y - 1) * width) + x], colorToPrefab);
+                bool left = x <= 0 || IsColorNotTile(pixels[(y * width) + x - 1], colorToPrefab);
+                bool right = x >= width - 1 || IsColorNotTile(pixels[(y * width) + x + 1], colorToPrefab);
 
-                if (top && bottom && left && right) {
+                if (top && bottom && left && right)
+                {
                     prefab += "Block";
                 }
-                else if (top && bottom && left && !right) {
+                else if (top && bottom && left && !right)
+                {
                     prefab += "PlatformL";
                 }
-                else if (top && bottom && !left && right) {
+                else if (top && bottom && !left && right)
+                {
                     prefab += "PlatformR";
                 }
-                else if (top && bottom && !left && !right) {
+                else if (top && bottom && !left && !right)
+                {
                     prefab += "PlatformM";
                 }
-                else if (top && !bottom && left && right) {
+                else if (top && !bottom && left && right)
+                {
                     prefab += "PillarT";
                 }
-                else if (top && !bottom && left && !right) {
+                else if (top && !bottom && left && !right)
+                {
                     prefab += "GroundLT";
                 }
-                else if (top && !bottom && !left && right) {
+                else if (top && !bottom && !left && right)
+                {
                     prefab += "GroundRT";
                 }
-                else if (top && !bottom && !left && !right) {
+                else if (top && !bottom && !left && !right)
+                {
                     prefab += "GroundT";
                 }
-                else if (!top && bottom && left && right) {
+                else if (!top && bottom && left && right)
+                {
                     prefab += "PillarB";
                 }
-                else if (!top && bottom && left && !right) {
+                else if (!top && bottom && left && !right)
+                {
                     prefab += "GroundLB";
                 }
-                else if (!top && bottom && !left && right) {
+                else if (!top && bottom && !left && right)
+                {
                     prefab += "GroundRB";
                 }
-                else if (!top && bottom && !left && !right) {
+                else if (!top && bottom && !left && !right)
+                {
                     prefab += "GroundB";
                 }
-                else if (!top && !bottom && left && right) {
+                else if (!top && !bottom && left && right)
+                {
                     prefab += "PillarM";
                 }
-                else if (!top && !bottom && left && !right) {
+                else if (!top && !bottom && left && !right)
+                {
                     prefab += "GroundL";
                 }
-                else if (!top && !bottom && !left && right) {
+                else if (!top && !bottom && !left && right)
+                {
                     prefab += "GroundR";
                 }
-                else if (!top && !bottom && !left && !right) {
-                    return;
+                else if (!top && !bottom && !left && !right)
+                {
+                    prefab += "GroundM";
                 }
                 Object obj = AssetDatabase.LoadAssetAtPath("Assets/Bundles/Prefabs/Tiles/" + prefab + ".prefab", typeof(GameObject));
                 GameObject go = GameObject.Instantiate(obj, new Vector3(x, y, 0), Quaternion.identity) as GameObject;
                 go.transform.SetParent(level.transform);
             }
-            else if (prefab == "PlayerSpawnPoint") {
-                level.GetComponent<LevelController>().startPoint = new Vector3(x, y, -10);
+            else if (prefab == "PlayerSpawnPoint")
+            {
+                level.GetComponent<LevelContext>().startPoint = new Vector3(x, y, -10);
             }
-            else if (prefab == "Escalator" || prefab == "Elevator") {
+            else if (prefab == "Escalator" || prefab == "Elevator")
+            {
                 // 加一个中继点
                 Object tpObj = AssetDatabase.LoadAssetAtPath("Assets/Bundles/Prefabs/Tiles/TurnPoint.prefab", typeof(GameObject));
                 GameObject turnPoint = GameObject.Instantiate(tpObj, new Vector3(x, y, 0), Quaternion.identity) as GameObject;
@@ -210,35 +230,47 @@ public class AssetBundlesBuilder
                 bool left = x > 0 && IsDirectionTile(pixels[(y * width) + x - 1], colorToPrefab);
                 bool right = x < width - 1 && IsDirectionTile(pixels[(y * width) + x + 1], colorToPrefab);
                 TurnPointController tpCtrl = turnPoint.GetComponent<TurnPointController>();
-                if (top) {
-                    if (tpCtrl.direction1 == MoveDirection.None) {
+                if (top)
+                {
+                    if (tpCtrl.direction1 == MoveDirection.None)
+                    {
                         tpCtrl.direction1 = MoveDirection.Up;
                     }
-                    else if (tpCtrl.direction2 == MoveDirection.None) {
+                    else if (tpCtrl.direction2 == MoveDirection.None)
+                    {
                         tpCtrl.direction2 = MoveDirection.Up;
                     }
                 }
-                if (bottom) {
-                    if (tpCtrl.direction1 == MoveDirection.None) {
+                if (bottom)
+                {
+                    if (tpCtrl.direction1 == MoveDirection.None)
+                    {
                         tpCtrl.direction1 = MoveDirection.Down;
                     }
-                    else if (tpCtrl.direction2 == MoveDirection.None) {
+                    else if (tpCtrl.direction2 == MoveDirection.None)
+                    {
                         tpCtrl.direction2 = MoveDirection.Down;
                     }
                 }
-                if (left) {
-                    if (tpCtrl.direction1 == MoveDirection.None) {
+                if (left)
+                {
+                    if (tpCtrl.direction1 == MoveDirection.None)
+                    {
                         tpCtrl.direction1 = MoveDirection.Left;
                     }
-                    else if (tpCtrl.direction2 == MoveDirection.None) {
+                    else if (tpCtrl.direction2 == MoveDirection.None)
+                    {
                         tpCtrl.direction2 = MoveDirection.Left;
                     }
                 }
-                if (right) {
-                    if (tpCtrl.direction1 == MoveDirection.None) {
+                if (right)
+                {
+                    if (tpCtrl.direction1 == MoveDirection.None)
+                    {
                         tpCtrl.direction1 = MoveDirection.Right;
                     }
-                    else if (tpCtrl.direction2 == MoveDirection.None) {
+                    else if (tpCtrl.direction2 == MoveDirection.None)
+                    {
                         tpCtrl.direction2 = MoveDirection.Right;
                     }
                 }
@@ -246,13 +278,17 @@ public class AssetBundlesBuilder
                 Object eObj = AssetDatabase.LoadAssetAtPath("Assets/Bundles/Prefabs/Tiles/MovingPlatform.prefab", typeof(GameObject));
                 GameObject eGo = GameObject.Instantiate(eObj, new Vector3(x, y, 0), Quaternion.identity) as GameObject;
                 eGo.transform.SetParent(level.transform);
-                if(prefab == "Escalator") {
+                if (prefab == "Escalator")
+                {
                     eGo.GetComponent<MovingPlatformController>().auto = true;
-                } else if(prefab == "Evelator") {
+                }
+                else if (prefab == "Evelator")
+                {
                     eGo.GetComponent<MovingPlatformController>().auto = false;
                 }
             }
-            else if (prefab == "TurnPoint") {
+            else if (prefab == "TurnPoint")
+            {
                 // 加一个中继点
                 Object tpObj = AssetDatabase.LoadAssetAtPath("Assets/Bundles/Prefabs/Tiles/TurnPoint.prefab", typeof(GameObject));
                 GameObject turnPoint = GameObject.Instantiate(tpObj, new Vector3(x, y, 0), Quaternion.identity) as GameObject;
@@ -265,73 +301,111 @@ public class AssetBundlesBuilder
                 bool right = IsDirectionTile(pixels[(y * width) + x + 1], colorToPrefab);
 
                 TurnPointController tpCtrl = turnPoint.GetComponent<TurnPointController>();
-                if (top) {
-                    if (tpCtrl.direction1 == MoveDirection.None) {
+                if (top)
+                {
+                    if (tpCtrl.direction1 == MoveDirection.None)
+                    {
                         tpCtrl.direction1 = MoveDirection.Up;
                     }
-                    else if (tpCtrl.direction2 == MoveDirection.None) {
+                    else if (tpCtrl.direction2 == MoveDirection.None)
+                    {
                         tpCtrl.direction2 = MoveDirection.Up;
                     }
                 }
-                if (bottom) {
-                    if (tpCtrl.direction1 == MoveDirection.None) {
+                if (bottom)
+                {
+                    if (tpCtrl.direction1 == MoveDirection.None)
+                    {
                         tpCtrl.direction1 = MoveDirection.Down;
                     }
-                    else if (tpCtrl.direction2 == MoveDirection.None) {
+                    else if (tpCtrl.direction2 == MoveDirection.None)
+                    {
                         tpCtrl.direction2 = MoveDirection.Down;
                     }
                 }
-                if (left) {
-                    if (tpCtrl.direction1 == MoveDirection.None) {
+                if (left)
+                {
+                    if (tpCtrl.direction1 == MoveDirection.None)
+                    {
                         tpCtrl.direction1 = MoveDirection.Left;
                     }
-                    else if (tpCtrl.direction2 == MoveDirection.None) {
+                    else if (tpCtrl.direction2 == MoveDirection.None)
+                    {
                         tpCtrl.direction2 = MoveDirection.Left;
                     }
                 }
-                if (right) {
-                    if (tpCtrl.direction1 == MoveDirection.None) {
+                if (right)
+                {
+                    if (tpCtrl.direction1 == MoveDirection.None)
+                    {
                         tpCtrl.direction1 = MoveDirection.Right;
                     }
-                    else if (tpCtrl.direction2 == MoveDirection.None) {
+                    else if (tpCtrl.direction2 == MoveDirection.None)
+                    {
                         tpCtrl.direction2 = MoveDirection.Right;
                     }
                 }
             }
-            else if (prefab == "Direction") {
+            else if (prefab == "Direction")
+            {
                 return;
             }
-            else if (prefab == "MoveTips" || prefab == "JumpTips" || prefab == "FireTips") {
+            else if (prefab == "MoveTips" || prefab == "JumpTips" || prefab == "FireTips")
+            {
                 Object obj = AssetDatabase.LoadAssetAtPath("Assets/Bundles/Prefabs/Objects/Tips.prefab", typeof(GameObject));
                 GameObject go = GameObject.Instantiate(obj, new Vector3(x, y, 0), Quaternion.identity) as GameObject;
                 go.transform.SetParent(level.transform);
-                switch(prefab) {
-                case "MoveTips":
-                go.GetComponent<TipsController>().tipsType = TipsType.Move;
-                break;
-                case "JumpTips":
-                go.GetComponent<TipsController>().tipsType = TipsType.Jump;
-                break;
-                case "FireTips":
-                go.GetComponent<TipsController>().tipsType = TipsType.Fire;
-                break;
-                default:
-                break;
+                switch (prefab)
+                {
+                    case "MoveTips":
+                        go.GetComponent<TipsController>().tipsType = TipsType.Move;
+                        break;
+                    case "JumpTips":
+                        go.GetComponent<TipsController>().tipsType = TipsType.Jump;
+                        break;
+                    case "FireTips":
+                        go.GetComponent<TipsController>().tipsType = TipsType.Fire;
+                        break;
+                    default:
+                        break;
                 }
             }
-            else if (prefab == "SwitchToBossMap1") {
+            else if (prefab == "SwitchToBossMap1")
+            {
                 Object obj = AssetDatabase.LoadAssetAtPath("Assets/Bundles/Prefabs/Objects/Switch.prefab", typeof(GameObject));
                 GameObject go = GameObject.Instantiate(obj, new Vector3(x, y, 0), Quaternion.identity) as GameObject;
                 go.transform.SetParent(level.transform);
-                switch(prefab) {
-                case "SwitchToBossMap1":
-                go.GetComponent<SwitchController>().levelName = "BossMap1";
-                break;
-                default:
-                break;
+                switch (prefab)
+                {
+                    case "SwitchToBossMap1":
+                        go.GetComponent<SwitchController>().levelName = "BossMap1";
+                        break;
+                    default:
+                        break;
                 }
             }
-            else {
+            else if (prefab == "DoubleJump")
+            {
+                Object obj = AssetDatabase.LoadAssetAtPath("Assets/Bundles/Prefabs/Objects/" + prefab + ".prefab", typeof(GameObject));
+                GameObject go = GameObject.Instantiate(obj, new Vector3(x, y, 0), Quaternion.identity) as GameObject;
+                go.transform.SetParent(level.transform);
+                level.GetComponent<LevelContext>().doubleJumpItem = go;
+            }
+            else if(prefab == "BinaryDoor")
+            {
+                Object obj = AssetDatabase.LoadAssetAtPath("Assets/Bundles/Prefabs/Objects/" + prefab + ".prefab", typeof(GameObject));
+                GameObject go = GameObject.Instantiate(obj, new Vector3(x, y, 0), Quaternion.identity) as GameObject;
+                go.transform.SetParent(level.transform);
+                level.GetComponent<LevelContext>().binaryDoorItem = go;
+            }
+            else if(prefab == "ExtraBullet")
+            {
+                Object obj = AssetDatabase.LoadAssetAtPath("Assets/Bundles/Prefabs/Objects/" + prefab + ".prefab", typeof(GameObject));
+                GameObject go = GameObject.Instantiate(obj, new Vector3(x, y, 0), Quaternion.identity) as GameObject;
+                go.transform.SetParent(level.transform);
+                level.GetComponent<LevelContext>().extraBulletItem = go;
+            }
+            else{
                 Object obj = AssetDatabase.LoadAssetAtPath("Assets/Bundles/Prefabs/Objects/" + prefab + ".prefab", typeof(GameObject));
                 GameObject go = GameObject.Instantiate(obj, new Vector3(x, y, 0), Quaternion.identity) as GameObject;
                 go.transform.SetParent(level.transform);

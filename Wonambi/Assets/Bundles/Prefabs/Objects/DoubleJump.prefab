@@ -39,7 +39,7 @@ GameObject:
   - component: {fileID: 4242861188191850}
   - component: {fileID: 61841406515092706}
   - component: {fileID: 212989816793922788}
-  - component: {fileID: 114202901222386590}
+  - component: {fileID: 114139132075780818}
   m_Layer: 0
   m_Name: DoubleJump
   m_TagString: DoubleJump
@@ -94,8 +94,8 @@ BoxCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 1.953125, y: 0.265625}
-    newSize: {x: 2, y: 2}
+    oldSize: {x: 1, y: 1}
+    newSize: {x: 0.64, y: 0.64}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
     adaptiveTiling: 0
@@ -103,7 +103,7 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 2.4174817, y: 0.55087566}
   m_EdgeRadius: 0
---- !u!114 &114202901222386590
+--- !u!114 &114139132075780818
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -135,7 +135,7 @@ MonoBehaviour:
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
   m_FontData:
     m_Font: {fileID: 12800000, guid: e1da83185c66544a5bffaf341e1e85f7, type: 3}
-    m_FontSize: 60
+    m_FontSize: 120
     m_FontStyle: 0
     m_BestFit: 0
     m_MinSize: 0
@@ -146,7 +146,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: You obtain ability of Double Jump!
+  m_Text: Double Jump ability obtained!
 --- !u!114 &114516870374828106
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -218,12 +218,12 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 3c5d98efe35f3463c8e6580f7063c6ab, type: 3}
+  m_Sprite: {fileID: 21300000, guid: def6edc8d5b274e4ab51e3af542d940c, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 2, y: 2}
+  m_Size: {x: 0.64, y: 0.64}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
@@ -261,7 +261,7 @@ RectTransform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1869924162147188}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: -9.400002, z: 0}
+  m_LocalPosition: {x: 0, y: 1.300003, z: 0}
   m_LocalScale: {x: 0.1, y: 0.1, z: 1}
   m_Children: []
   m_Father: {fileID: 224290292170291866}
@@ -269,7 +269,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: -9.4}
+  m_AnchoredPosition: {x: 0, y: 1.3}
   m_SizeDelta: {x: 839.62, y: 211.29}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!224 &224290292170291866
