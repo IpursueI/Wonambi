@@ -60,7 +60,6 @@ public class BinaryDoorController : MonoBehaviour {
 
     public void SetRightTrigger()
     {
-        Debug.Log("[BinaryDoorController] SetRightTrigger.");
         triggers[0].GetComponent<BinaryTriggerController>().SetTrigger(true);
         triggers[1].GetComponent<BinaryTriggerController>().SetTrigger(false);
         triggers[2].GetComponent<BinaryTriggerController>().SetTrigger(true);

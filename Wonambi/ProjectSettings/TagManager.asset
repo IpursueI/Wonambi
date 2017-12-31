@@ -15,6 +15,7 @@ TagManager:
   - Tiles
   - Switch
   - DoubleJump
+  - ExtraBullet
   layers:
   - Default
   - TransparentFX

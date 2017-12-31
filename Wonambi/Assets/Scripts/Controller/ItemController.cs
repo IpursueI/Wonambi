@@ -18,7 +18,7 @@ public class ItemController : MonoBehaviour {
     }
     // Use this for initialization
     void Start () {
-        scaleTweener = transform.DOScale(2.0f, 1f).SetLoops(-1, LoopType.Yoyo);
+        scaleTweener = transform.DOScale(1.5f, 1f).SetLoops(-1, LoopType.Yoyo);
 
     }
 	

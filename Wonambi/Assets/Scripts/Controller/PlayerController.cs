@@ -214,6 +214,7 @@ public class PlayerController : MonoBehaviour {
     {
         maxBulletNumber++;
         PlayerPrefs.SetInt(PrefsKey.PlayerBulletNumber, maxBulletNumber);
+        LevelMgr.Instance.SaveExtraBulletItem();
     }
     public void OnBulletDestroy()
     {

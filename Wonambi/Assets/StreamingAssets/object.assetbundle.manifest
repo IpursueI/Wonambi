@@ -1,9 +1,9 @@
 ManifestFileVersion: 0
-CRC: 575430325
+CRC: 4117856960
 Hashes:
   AssetFileHash:
     serializedVersion: 2
-    Hash: 3071b0af3cc3bdc9381ca3c2db266833
+    Hash: 55fcf08eff40df41b7c918a060c9fd55
   TypeTreeHash:
     serializedVersion: 2
     Hash: 898c5d2195a0232d3f6191e8795994c0
@@ -99,6 +99,7 @@ Assets:
 - Assets/Bundles/Prefabs/Player/Bullet.prefab
 - Assets/Bundles/Prefabs/Objects/LurkerRight.prefab
 - Assets/Bundles/Prefabs/Objects/CloseDoor.prefab
+- Assets/Bundles/Prefabs/Objects/ExtraBullet.prefab
 - Assets/Bundles/Prefabs/Objects/Patrol.prefab
 - Assets/Bundles/Prefabs/Objects/DoubleJump.prefab
 - Assets/Bundles/Prefabs/Objects/Pile.prefab

@@ -72,6 +72,11 @@ public class PlayerModel : MonoBehaviour {
             controller.EnableDoubleJump();
             GameMgr.Instance.PlayPickSFX();
         }
+        if(collision.tag == "ExtraBullet")
+        {
+            controller.AddBulletNumber();
+            GameMgr.Instance.PlayPickSFX();
+        }
     }
 
     private void OnTriggerExit2D(Collider2D collision)
