@@ -51,7 +51,7 @@ public class BinaryDoorController : MonoBehaviour {
             doorOpen.SetActive(true);
             doorClose.SetActive(false);
             isSolve = true;
-            LevelMgr.Instance.SaveBinaryDoor();
+            LevelMgr.Instance.OnEnableBinaryDoor();
         } else {
             doorOpen.SetActive(false);
             doorClose.SetActive(true);

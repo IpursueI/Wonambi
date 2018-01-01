@@ -172,6 +172,8 @@ public class PlayerController : MonoBehaviour {
         if (!GameMgr.Instance.IsInputEnable()) return;
         if(((model.status & PlayerStatus.InBonfire) != 0) && Input.GetKeyDown(KeyCode.L)) {
             GameMgr.Instance.PlayBonfireSFX();
+            PlayerPrefs.SetInt(PrefsKey.PlayerBulletNumber, maxBulletNumber);
+            PlayerPrefs.SetInt(PrefsKey.PlayerEnableDoubleJump, enableDoubleJump?1:0);
             LevelMgr.Instance.RebornPlayer(transform.position);
             rb2d.velocity = new Vector2(0.0f, 0.0f);
             GameMgr.Instance.DisableInput();
@@ -206,15 +208,14 @@ public class PlayerController : MonoBehaviour {
     public void EnableDoubleJump()
     {
         enableDoubleJump = true;
-        PlayerPrefs.SetInt(PrefsKey.PlayerEnableDoubleJump, 1);
-        LevelMgr.Instance.SaveDoubleJumpItem();
+        LevelMgr.Instance.OnEnableDoubleJump();
     }
 
     public void AddBulletNumber()
     {
         maxBulletNumber++;
-        PlayerPrefs.SetInt(PrefsKey.PlayerBulletNumber, maxBulletNumber);
-        LevelMgr.Instance.SaveExtraBulletItem();
+        LevelMgr.Instance.OnEnableExtraBullet();
+
     }
     public void OnBulletDestroy()
     {

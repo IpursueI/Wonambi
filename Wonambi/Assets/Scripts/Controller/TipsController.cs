@@ -28,13 +28,13 @@ public class TipsController : MonoBehaviour {
         if (collision.tag != "Player") return;
         switch(tipsType) {
         case TipsType.Move:
-        text.text = "Press A or D to move your cursor guy.";
+        text.text = "Press <color=#4299FFFF>A</color> or <color=#4299FFFF>D</color> to move your cursor guy.";
         break;
         case TipsType.Jump:
-        text.text = "Press K to jump.";
+        text.text = "Press <color=#4299FFFF>K</color> to jump.";
         break;
         case TipsType.Fire:
-        text.text = "Press J to fire.";
+        text.text = "Press <color=#4299FFFF>J</color> to fire.";
         break;
         default:
         break;

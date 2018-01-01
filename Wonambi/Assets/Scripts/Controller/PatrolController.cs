@@ -53,15 +53,8 @@ public class PatrolController : MonsterController {
         if(model.IsDead()) {
             return;
         }
-        if (LevelMgr.Instance.IsPlayerClose(transform.position)) {
-            if (isFire)
-            {
-                anim.SetInteger("status", 0);
-                isFire = false;
-            }
-            Move();
-            CheckGround();
-        } else if(LevelMgr.Instance.IsPlayerSoClose(transform.position)) {
+        if (LevelMgr.Instance.IsPlayerSoClose(transform.position))
+        {
             if (!isFire)
             {
                 anim.SetInteger("status", 1);
@@ -71,6 +64,14 @@ public class PatrolController : MonsterController {
             // Fire
             ForwardToPlayer();
             Fire();
+        }else if (LevelMgr.Instance.IsPlayerClose(transform.position)) {
+            if (isFire)
+            {
+                anim.SetInteger("status", 0);
+                isFire = false;
+            }
+            Move();
+            CheckGround();
         } else {
             if(isFire) {
                 anim.SetInteger("status", 0);

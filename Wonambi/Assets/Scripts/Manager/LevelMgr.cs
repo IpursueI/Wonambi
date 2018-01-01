@@ -52,6 +52,9 @@ public class LevelMgr : Singleton<LevelMgr>
         Vector3 savePointVec3 = new Vector3(savePos.x, savePos.y, -10.0f);
         PlayerPrefs.SetString(PrefsKey.LevelMap, curLevel);
         PlayerPrefs.SetString(PrefsKey.SavePoint, savePointVec3.ToString());
+        SaveDoubleJumpItem();
+        SaveExtraBulletItem();
+        SaveBinaryDoor();
 
         uiController.ShowBonfireMask();
 
@@ -224,8 +227,14 @@ public class LevelMgr : Singleton<LevelMgr>
         PlayerPrefs.DeleteKey(PrefsKey.LevelBinaryDoor);
     }
 
-    public void SaveDoubleJumpItem()
+    private void SaveDoubleJumpItem()
     {
+        if (levelObj == null ||
+            levelObj.GetComponent<LevelContext>().doubleJumpItem == null ||
+            levelObj.GetComponent<LevelContext>().isDoubleJumpDone == false)
+        {
+            return;
+        }
         string doubleJumpItem = PlayerPrefs.GetString(PrefsKey.LevelDoubleJump, "");
         if(doubleJumpItem == "")
         {
@@ -239,8 +248,14 @@ public class LevelMgr : Singleton<LevelMgr>
         PlayerPrefs.SetString(PrefsKey.LevelDoubleJump, doubleJumpItem);
     }
 
-    public void SaveExtraBulletItem()
+    private void SaveExtraBulletItem()
     {
+        if (levelObj == null ||
+            levelObj.GetComponent<LevelContext>().extraBulletItem == null ||
+            levelObj.GetComponent<LevelContext>().isExtraBulletDone == false)
+        {
+            return;
+        }
         string extraBulletItem = PlayerPrefs.GetString(PrefsKey.LevelExtraBullet, "");
         if (extraBulletItem == "")
         {
@@ -253,8 +268,14 @@ public class LevelMgr : Singleton<LevelMgr>
         PlayerPrefs.SetString(PrefsKey.LevelExtraBullet, extraBulletItem);
     }
 
-    public void SaveBinaryDoor()
+    private void SaveBinaryDoor()
     {
+        if (levelObj == null ||
+            levelObj.GetComponent<LevelContext>().binaryDoorItem == null ||
+            levelObj.GetComponent<LevelContext>().isBinaryDoorDown == false)
+        {
+            return;
+        }
         string binaryDoorItem = PlayerPrefs.GetString(PrefsKey.LevelBinaryDoor, "");
         if (binaryDoorItem == "")
         {
@@ -267,4 +288,39 @@ public class LevelMgr : Singleton<LevelMgr>
         PlayerPrefs.SetString(PrefsKey.LevelBinaryDoor, binaryDoorItem);
     }
 
+    public void OnEnableDoubleJump()
+    {
+        if(levelObj)
+        {
+            LevelContext context = levelObj.GetComponent<LevelContext>();
+            if(context.doubleJumpItem != null)
+            {
+                context.isDoubleJumpDone = true;
+            }
+        }
+    }
+
+    public void OnEnableExtraBullet()
+    {
+        if (levelObj)
+        {
+            LevelContext context = levelObj.GetComponent<LevelContext>();
+            if (context.extraBulletItem != null)
+            {
+                context.isExtraBulletDone = true;
+            }
+        }
+    }
+
+    public void OnEnableBinaryDoor()
+    {
+        if (levelObj)
+        {
+            LevelContext context = levelObj.GetComponent<LevelContext>();
+            if (context.binaryDoorItem != null)
+            {
+                context.isBinaryDoorDown = true;
+            }
+        }
+    }
 }
