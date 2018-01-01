@@ -44,8 +44,6 @@ public class PatrolController : MonsterController {
         anim = GetComponent<Animator>();
         muzzle = transform.Find("Muzzle").gameObject;
         timer = cooldown;
-        fireTriggerDistance = DefineNumber.MonsterFireTriggerDistance * DefineNumber.MonsterFireTriggerDistance;
-        moveTriggerDistance = DefineNumber.MonsterMoveTriggerDistance * DefineNumber.MonsterMoveTriggerDistance;
         isFire = false;
         model = GetComponent<MonsterModel>();
 	}
@@ -55,10 +53,17 @@ public class PatrolController : MonsterController {
         if(model.IsDead()) {
             return;
         }
-        float distance = LevelMgr.Instance.DistanceToPlayer(transform.position);
-        if (distance < 0.0f) return;
-        if (distance < fireTriggerDistance) {
-            if(!isFire) {
+        if (LevelMgr.Instance.IsPlayerClose(transform.position)) {
+            if (isFire)
+            {
+                anim.SetInteger("status", 0);
+                isFire = false;
+            }
+            Move();
+            CheckGround();
+        } else if(LevelMgr.Instance.IsPlayerSoClose(transform.position)) {
+            if (!isFire)
+            {
                 anim.SetInteger("status", 1);
                 rb2d.velocity = Vector2.zero;
                 isFire = true;
@@ -66,13 +71,6 @@ public class PatrolController : MonsterController {
             // Fire
             ForwardToPlayer();
             Fire();
-        } else if(distance < moveTriggerDistance) {
-            if(isFire) {
-                anim.SetInteger("status", 0);
-                isFire = false;
-            }
-            Move();
-            CheckGround();
         } else {
             if(isFire) {
                 anim.SetInteger("status", 0);

@@ -29,8 +29,10 @@ namespace GlobalDefines
         public static readonly float InvincibleDuration = 1.0f;
         public static readonly float HitBlinkDuration = 0.1f;
         public static readonly float CloseTurnDistance = 0.1f;
-        public static readonly float MonsterMoveTriggerDistance = 20.0f;
-        public static readonly float MonsterFireTriggerDistance = 8.0f;
+        public static readonly float MonsterMoveTriggerDistanceX = 12.0f;
+        public static readonly float MonsterMoveTriggerDistanceY = 6.0f;
+        public static readonly float MonsterFireTriggerDistanceX = 6.0f;
+        public static readonly float MonsterFireTriggerDistanceY = 3.0f;
         public static readonly float MaxFallSpeed = -20.0f;
         public static readonly float PlayerMinY = -8.0f;
         public static readonly float CameraOffsetX = 11f;

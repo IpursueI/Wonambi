@@ -25,7 +25,7 @@ public class MovingPlatformController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (auto && LevelMgr.Instance.IsPlayerClose(transform.position)) {
+        if (auto && LevelMgr.Instance.IsPlayerSoClose(transform.position)) {
             isRun = true;
         }
         if (!isRun) {
@@ -86,18 +86,16 @@ public class MovingPlatformController : MonoBehaviour
             TurnPointController tpCtrl = collision.GetComponent<TurnPointController>();
             if (tpCtrl.direction1 == MoveDirection.None) {
                 turnDirection = tpCtrl.direction2;
-                isEnd = true;
             }
             else {
                 if (tpCtrl.direction2 == MoveDirection.None) {
                     turnDirection = tpCtrl.direction1;
-                    isEnd = true;
                 }
                 else {
                     turnDirection = PickOneDirection(tpCtrl.direction1, tpCtrl.direction2, direction);
-                    isEnd = false;
                 }
             }
+            isEnd = tpCtrl.isEnd;
         }
     }
 

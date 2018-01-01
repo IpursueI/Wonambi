@@ -239,7 +239,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 707365103c072497b87c7d1281c56ccd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  hp: 2
+  hp: 4
   particleOne: {fileID: 198163031534694820}
   particleZero: {fileID: 198000785654871560}
 --- !u!114 &114550806109671886
@@ -253,7 +253,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 70ac7bed032794b6ab006ffc255b28cd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 2
+  speed: 3
   forward: 0
   groundDistance: 0.2
   wallDistance: 0.3

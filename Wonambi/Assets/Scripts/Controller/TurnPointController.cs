@@ -7,6 +7,7 @@ public class TurnPointController : MonoBehaviour {
 
     public MoveDirection direction1 = MoveDirection.None;
     public MoveDirection direction2 = MoveDirection.None;
+    public bool isEnd = false;
 
     // Use this for initialization
     void Start () {

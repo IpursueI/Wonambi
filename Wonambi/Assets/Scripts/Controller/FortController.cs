@@ -19,7 +19,6 @@ public class FortController : MonsterController {
         muzzle = transform.Find("Muzzle").gameObject;
         timer = cooldown;
         model = GetComponent<MonsterModel>();
-        fireTriggerDistance = DefineNumber.MonsterMoveTriggerDistance * DefineNumber.MonsterMoveTriggerDistance;
         forward = true;
 	}
 	
@@ -27,9 +26,8 @@ public class FortController : MonsterController {
 	void Update () 
     {
         if (model.IsDead()) return;
-        float distance = LevelMgr.Instance.DistanceToPlayer(transform.position);
-        if (distance < 0.0f) return;
-        if (distance < fireTriggerDistance) {
+        if(LevelMgr.Instance.IsPlayerClose(transform.position))
+        {
             ForwardToPlayer();
             Fire();
         }

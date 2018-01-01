@@ -187,8 +187,26 @@ public class LevelMgr : Singleton<LevelMgr>
     {
         if (player == null) return false;
         Vector3 pPos = player.transform.position;
-        float distancePow = Mathf.Pow(monsterPos.x - pPos.x, 2) + Mathf.Pow(monsterPos.y - pPos.y, 2);
-        return distancePow < DefineNumber.MonsterMoveTriggerDistance * DefineNumber.MonsterMoveTriggerDistance;
+        float distanceX = Mathf.Abs(monsterPos.x - pPos.x);
+        float distanceY = Mathf.Abs(monsterPos.y - pPos.y);
+        if(distanceX < DefineNumber.MonsterMoveTriggerDistanceX && distanceY < DefineNumber.MonsterMoveTriggerDistanceY)
+        {
+            return true;
+        }
+        return false;
+    }
+
+    public bool IsPlayerSoClose(Vector3 monsterPos)
+    {
+        if (player == null) return false;
+        Vector3 pPos = player.transform.position;
+        float distanceX = Mathf.Abs(monsterPos.x - pPos.x);
+        float distanceY = Mathf.Abs(monsterPos.y - pPos.y);
+        if (distanceX < DefineNumber.MonsterFireTriggerDistanceX && distanceY < DefineNumber.MonsterFireTriggerDistanceY)
+        {
+            return true;
+        }
+        return false;
     }
 
     public void RefreshHP()

@@ -230,6 +230,7 @@ public class AssetBundlesBuilder
                 bool left = x > 0 && IsDirectionTile(pixels[(y * width) + x - 1], colorToPrefab);
                 bool right = x < width - 1 && IsDirectionTile(pixels[(y * width) + x + 1], colorToPrefab);
                 TurnPointController tpCtrl = turnPoint.GetComponent<TurnPointController>();
+                tpCtrl.isEnd = true;
                 if (top)
                 {
                     if (tpCtrl.direction1 == MoveDirection.None)
@@ -301,6 +302,7 @@ public class AssetBundlesBuilder
                 bool right = IsDirectionTile(pixels[(y * width) + x + 1], colorToPrefab);
 
                 TurnPointController tpCtrl = turnPoint.GetComponent<TurnPointController>();
+                tpCtrl.isEnd = false;
                 if (top)
                 {
                     if (tpCtrl.direction1 == MoveDirection.None)

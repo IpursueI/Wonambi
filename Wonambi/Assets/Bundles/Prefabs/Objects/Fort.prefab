@@ -200,7 +200,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 707365103c072497b87c7d1281c56ccd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  hp: 5
+  hp: 6
   particleOne: {fileID: 198095405319241242}
   particleZero: {fileID: 198444015550579554}
 --- !u!114 &114946105766422342
@@ -214,7 +214,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b6358000af560493a8ead14c9bb06b7c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cooldown: 1
+  cooldown: 1.5
   bullet: {fileID: 1956704864712264, guid: e9d27bb2fab7841f2b89bfb73af94f7c, type: 2}
 --- !u!198 &198095405319241242
 ParticleSystem:
