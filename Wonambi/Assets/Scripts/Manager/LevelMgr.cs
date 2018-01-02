@@ -71,6 +71,7 @@ public class LevelMgr : Singleton<LevelMgr>
     public void RestartLevel()
     {
         string levelName = PlayerPrefs.GetString(PrefsKey.LevelMap, curLevel);
+        curLevel = levelName;
         LoadLevel(levelName);
         LoadPlayer();
     }
