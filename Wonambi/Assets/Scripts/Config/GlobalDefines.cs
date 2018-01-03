@@ -23,7 +23,7 @@ namespace GlobalDefines
         public static readonly float FallFactor = 1.0f;
         public static readonly float LowJumpFactor = 1.0f;
         public static readonly float BulletSpeed = 9.0f;
-        public static readonly float BulletDuration = 1.0f;
+        public static readonly float BulletDuration = 8.0f;
         public static readonly float FireCooldown = 0.2f;
         public static readonly float DieDuration = 0.8f;
         public static readonly float InvincibleDuration = 1.0f;
@@ -35,7 +35,7 @@ namespace GlobalDefines
         public static readonly float MonsterFireTriggerDistanceY = 3.0f;
         public static readonly float MaxFallSpeed = -20.0f;
         public static readonly float PlayerMinY = -8.0f;
-        public static readonly float CameraOffsetX = 11f;
+        public static readonly float CameraOffsetX = 10.5f;
         public static readonly float CameraOffsetY = 5.4f;
     }
 
