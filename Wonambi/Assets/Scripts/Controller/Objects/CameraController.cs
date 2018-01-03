@@ -12,15 +12,16 @@ public class CameraController : MonoBehaviour {
     public float width;
     public float height;
     public Camera mainCamera;
-    public float timer;
-    public bool isScale;
+    private float offsetX;
+    private float offsetY;
 	// Use this for initialization
 	void Start () 
     {
         player = GameObject.FindGameObjectWithTag("Player");
         mainCamera = GetComponent<Camera>();
-        isScale = false;
-	}
+        offsetX = DefineNumber.CameraOffsetX;
+        offsetY = DefineNumber.CameraOffsetY;
+    }
 	
 	// Update is called once per frame
 	void Update () 
@@ -41,16 +42,16 @@ public class CameraController : MonoBehaviour {
         float x = player.transform.position.x * moveHoriz;
         float y = player.transform.position.y * moveVert;
 
-        if( x < DefineNumber.CameraOffsetX) {
-            x = DefineNumber.CameraOffsetX;
-        } else if(x > width - DefineNumber.CameraOffsetX - 1) {
-            x = width - DefineNumber.CameraOffsetX - 1;
+        if( x < offsetX) {
+            x = offsetX;
+        } else if(x > width - offsetX - 1) {
+            x = width - offsetX - 1;
         }
 
-        if( y < DefineNumber.CameraOffsetY) {
-            y = DefineNumber.CameraOffsetY;
-        } else if( y > height - DefineNumber.CameraOffsetY - 1) {
-            y = height - DefineNumber.CameraOffsetY - 1;
+        if( y < offsetY) {
+            y = offsetY;
+        } else if( y > height - offsetY - 1) {
+            y = height - offsetY - 1;
         }
 
         transform.position = new Vector3(x, y, transform.position.z);
@@ -71,5 +72,8 @@ public class CameraController : MonoBehaviour {
     {
         if (mainCamera.orthographicSize == o) return;
         mainCamera.orthographicSize = o;
+        float aspectRatio = Screen.width * 1.0f / Screen.height;
+        offsetY = mainCamera.orthographicSize;
+        offsetX = offsetY * aspectRatio;
     }
 }

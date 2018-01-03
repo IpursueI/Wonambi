@@ -139,7 +139,7 @@ public class LevelMgr : Singleton<LevelMgr>
             cameraController.SetOrthoSize(5.0f);
         } else {
             GameMgr.Instance.PlayBossBGM();
-            cameraController.SetOrthoSize(10.0f);
+            cameraController.SetOrthoSize(8.0f);
         }
 
         // DoubleJump
