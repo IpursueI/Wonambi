@@ -67,8 +67,9 @@ public class CameraController : MonoBehaviour {
         height = h;
     }
 
-    public void ScaleCamera()
+    public void SetOrthoSize(float o)
     {
-        mainCamera.DOOrthoSize(8.0f, 1.0f);
+        if (mainCamera.orthographicSize == o) return;
+        mainCamera.orthographicSize = o;
     }
 }

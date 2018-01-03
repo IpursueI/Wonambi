@@ -136,8 +136,10 @@ public class LevelMgr : Singleton<LevelMgr>
         cameraController.SetScreenSize(levelController.width, levelController.height);
         if(levelName.Substring(0,5) == "Level") {
             GameMgr.Instance.PlayBGM();
+            cameraController.SetOrthoSize(5.0f);
         } else {
             GameMgr.Instance.PlayBossBGM();
+            cameraController.SetOrthoSize(10.0f);
         }
 
         // DoubleJump

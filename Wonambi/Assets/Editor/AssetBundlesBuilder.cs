@@ -57,6 +57,8 @@ public class AssetBundlesBuilder
         colorToPrefab["638C0BFF"] = "MoveTips";
         colorToPrefab["648C0BFF"] = "JumpTips";
         colorToPrefab["658C0BFF"] = "FireTips";
+        colorToPrefab["668C0BFF"] = "CameraOrthoSize6";
+        colorToPrefab["678C0BFF"] = "CameraOrthoSize10";
         colorToPrefab["02FFC8FF"] = "SwitchToBossMap1";
         colorToPrefab["FFFF01FF"] = "DoubleJump";
         colorToPrefab["FFFF02FF"] = "ExtraBullet";
