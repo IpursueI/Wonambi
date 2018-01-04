@@ -81,13 +81,7 @@ public class Boss1CSharpController : MonoBehaviour {
     {
         yield return new WaitForSeconds(DefineNumber.DieDuration);
         Destroy(gameObject);
-        bodyController.OnHandDie();\
-
-
-
-
-
-
+        bodyController.OnHandDie();
     }
 
     private void OnTriggerExit2D(Collider2D collision)

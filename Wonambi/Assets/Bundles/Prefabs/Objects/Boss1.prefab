@@ -139,9 +139,10 @@ GameObject:
   - component: {fileID: 4357906105340348}
   - component: {fileID: 212026516031332874}
   - component: {fileID: 114609531729745312}
+  - component: {fileID: 61315307841154738}
   m_Layer: 0
   m_Name: Sharp
-  m_TagString: Untagged
+  m_TagString: InvincibleMonsterBullet
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -192,6 +193,7 @@ GameObject:
   - component: {fileID: 212173404678705738}
   - component: {fileID: 114866287487687914}
   - component: {fileID: 61946170114397274}
+  - component: {fileID: 95071018272145758}
   m_Layer: 0
   m_Name: Body
   m_TagString: Tiles
@@ -291,7 +293,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 4435122232863582}
-  m_RootOrder: 2
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &4239932207676410
 Transform:
@@ -343,8 +345,8 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4239932207676410}
-  - {fileID: 4858103852901684}
   - {fileID: 4165899415998720}
+  - {fileID: 4858103852901684}
   m_Father: {fileID: 4838102723195906}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 180}
@@ -448,7 +450,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 4435122232863582}
-  m_RootOrder: 1
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: -86.87501}
 --- !u!4 &4996800078333666
 Transform:
@@ -476,6 +478,31 @@ Transform:
   m_Father: {fileID: 4558922627392612}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!61 &61315307841154738
+BoxCollider2D:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1665105807225532}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.5, y: 0.5}
+    oldSize: {x: 1.0625, y: 1.375}
+    newSize: {x: 1.0625, y: 1.375}
+    adaptiveTilingThreshold: 0.5
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 1.0625, y: 1.375}
+  m_EdgeRadius: 0
 --- !u!61 &61331085192009432
 BoxCollider2D:
   m_ObjectHideFlags: 1
@@ -576,6 +603,23 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 4.9305153, y: 14.21875}
   m_EdgeRadius: 0
+--- !u!95 &95071018272145758
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1834860788851294}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 16898e2c307b8b24286730ae2b25d7f9, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
 --- !u!114 &114057949522549150
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -587,9 +631,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bb0bc62cd03934ffbb64a556f0f7d63e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  hp: 10
+  hp: 4
   particleOne: {fileID: 198351458742374082}
   particleZero: {fileID: 198556682525251116}
+  bodyController: {fileID: 114866287487687914}
 --- !u!114 &114095287319413578
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -603,9 +648,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   cooldown: 3
   bullet: {fileID: 1069346265281900, guid: 9c7c8f817fd574c52908d53501411095, type: 2}
-  hp: 10
+  hp: 4
   particleOne: {fileID: 198276455940994564}
   particleZero: {fileID: 198494740479759016}
+  bodyController: {fileID: 114866287487687914}
 --- !u!114 &114394565907108818
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -652,9 +698,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   cooldown: 3
   bullet: {fileID: 1839867984425752, guid: 431fc644f399244bd8edb4a7ff24b9f7, type: 2}
-  hp: 10
+  hp: 4
   particleOne: {fileID: 198011285987044108}
   particleZero: {fileID: 198215694497882856}
+  bodyController: {fileID: 114866287487687914}
 --- !u!114 &114866287487687914
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -666,6 +713,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b459e725fbe1c42d58478bef5b177939, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  handNum: 0
 --- !u!114 &114897108039546248
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -14089,7 +14137,7 @@ ParticleSystem:
   moveWithTransform: 0
   moveWithCustomTransform: {fileID: 0}
   scalingMode: 1
-  randomSeed: -241069128
+  randomSeed: 647223701
   InitialModule:
     serializedVersion: 3
     enabled: 1

@@ -42,7 +42,7 @@ public class Boss1CPlusController : MonoBehaviour {
     void Update()
     {
         if (!isTrigger || isDead) return;
-        //Fire();
+        Fire();
     }
 
     private void Fire()

@@ -255,6 +255,7 @@ MonoBehaviour:
   jump: {fileID: 8300000, guid: 6dc850f612c39434eb9c325017660d6b, type: 3}
   playerDie: {fileID: 8300000, guid: 2972ce3ebdd6f459cb3fc8a22a177f78, type: 3}
   monsterDie: {fileID: 8300000, guid: f10821a81c94d4bd9a554e942db33c63, type: 3}
+  boss1Die: {fileID: 8300000, guid: 89f117a82f58e0a499b800ca09dbd5dd, type: 3}
 --- !u!1 &378077726
 GameObject:
   m_ObjectHideFlags: 0
@@ -1018,52 +1019,6 @@ MonoBehaviour:
   menuPanel: {fileID: 378077726}
   cutscenePanel: {fileID: 385465778}
   gamePanel: {fileID: 824430089}
---- !u!1001 &944269384
-Prefab:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    m_TransformParent: {fileID: 0}
-    m_Modifications:
-    - target: {fileID: 4838102723195906, guid: 656ec7c650dd94872b8c20810a2f9e4d, type: 2}
-      propertyPath: m_LocalPosition.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4838102723195906, guid: 656ec7c650dd94872b8c20810a2f9e4d, type: 2}
-      propertyPath: m_LocalPosition.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4838102723195906, guid: 656ec7c650dd94872b8c20810a2f9e4d, type: 2}
-      propertyPath: m_LocalPosition.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4838102723195906, guid: 656ec7c650dd94872b8c20810a2f9e4d, type: 2}
-      propertyPath: m_LocalRotation.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4838102723195906, guid: 656ec7c650dd94872b8c20810a2f9e4d, type: 2}
-      propertyPath: m_LocalRotation.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4838102723195906, guid: 656ec7c650dd94872b8c20810a2f9e4d, type: 2}
-      propertyPath: m_LocalRotation.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4838102723195906, guid: 656ec7c650dd94872b8c20810a2f9e4d, type: 2}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4838102723195906, guid: 656ec7c650dd94872b8c20810a2f9e4d, type: 2}
-      propertyPath: m_RootOrder
-      value: 5
-      objectReference: {fileID: 0}
-    - target: {fileID: 1665105807225532, guid: 656ec7c650dd94872b8c20810a2f9e4d, type: 2}
-      propertyPath: m_TagString
-      value: InvincibleMonsterBullet
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-  m_ParentPrefab: {fileID: 100100000, guid: 656ec7c650dd94872b8c20810a2f9e4d, type: 2}
-  m_IsPrefabParent: 0
 --- !u!1 &1182520183
 GameObject:
   m_ObjectHideFlags: 0
