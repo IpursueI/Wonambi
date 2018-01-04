@@ -70,7 +70,8 @@ public class PlayerController : MonoBehaviour {
     {
         groundDistance = 0.5f;
 
-        enableDoubleJump = _enableDoubleJump;
+        //enableDoubleJump = _enableDoubleJump;
+        enableDoubleJump = true;
         maxBulletNumber = _maxBulletNumber;
 
         moveSpeed = DefineNumber.DefaultMoveSpeed;

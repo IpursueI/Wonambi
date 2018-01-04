@@ -23,16 +23,26 @@
 	uniform float _ColorFactor;
 	uniform float _DissolveEdge;
 	
+	struct appdata_t
+	{
+		float4 vertex : POSITION;
+		float4 color : COLOR;
+		float2 texcoord : TEXCOORD0;
+		float3 normal : NORMAL;
+	};
+
 	struct v2f
 	{
 		float4 pos : SV_POSITION;
 		float3 worldNormal : TEXCOORD0;
 		float2 uv : TEXCOORD1;
+		fixed4 color : COLOR;
 	};
 	
-	v2f vert(appdata_base v)
+	v2f vert(appdata_t v)
 	{
 		v2f o;
+		o.color = v.color;
 		o.pos = UnityObjectToClipPos(v.vertex);
 		o.uv = TRANSFORM_TEX(v.texcoord, _MainTex);
 		o.worldNormal = mul(v.normal, (float3x3)unity_WorldToObject);
@@ -43,17 +53,13 @@
 	{
 		//采样Dissolve Map
 		fixed4 dissolveValue = tex2D(_DissolveMap, i.uv);
-		fixed4 mapValue = tex2D(_MainTex, i.uv);
+		fixed4 mapValue = tex2D(_MainTex, i.uv) * i.color;
 		//小于阈值的部分直接discard
 		if (dissolveValue.r < _DissolveThreshold || mapValue.a <= 0)
 		{
 			discard;
 		}
-		//fixed3 worldNormal = normalize(i.worldNormal);
-		//fixed3 worldLightDir = normalize(_WorldSpaceLightPos0.xyz);
-		//fixed3 lambert = saturate(dot(worldNormal, worldLightDir));
-		//fixed3 albedo = lambert * _Diffuse.xyz * _LightColor0.xyz + UNITY_LIGHTMODEL_AMBIENT.xyz;
-		fixed3 color = tex2D(_MainTex, i.uv).rgb;
+		fixed3 color = (tex2D(_MainTex, i.uv) * i.color).rgb;
 
 		float percentage = _DissolveThreshold / dissolveValue.r;
 		//如果当前百分比 - 颜色权重 - 边缘颜色

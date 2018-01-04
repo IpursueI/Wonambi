@@ -11,13 +11,13 @@ namespace GlobalDefines
 
     public static class DefineString
     {
-        public static readonly string FirstLevel = "LevelMap1";
+        public static readonly string FirstLevel = "BossMap1";
     }
 
     public static class DefineNumber
     {
         public static readonly int DefaultHP = 3;
-        public static readonly float DefaultMoveSpeed = 4.0f;
+        public static readonly float DefaultMoveSpeed = 3.0f;
         public static readonly float DefaultJumpSpeed = 10.0f;
         public static readonly int DefaultBulletNumber = 3;
         public static readonly float FallFactor = 1.0f;

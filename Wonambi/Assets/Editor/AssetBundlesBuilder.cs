@@ -62,6 +62,7 @@ public class AssetBundlesBuilder
         colorToPrefab["02FFC8FF"] = "SwitchToBossMap1";
         colorToPrefab["FFFF01FF"] = "DoubleJump";
         colorToPrefab["FFFF02FF"] = "ExtraBullet";
+        colorToPrefab["FF00FFFF"] = "Boss1";
 
 
         foreach (string d in Directory.GetFileSystemEntries(pngDirectoryPath, "*.png")) {
@@ -408,6 +409,13 @@ public class AssetBundlesBuilder
                 GameObject go = GameObject.Instantiate(obj, new Vector3(x, y, 0), Quaternion.identity) as GameObject;
                 go.transform.SetParent(level.transform);
                 level.GetComponent<LevelContext>().extraBulletItem = go;
+            }
+            else if(prefab == "Boss1")
+            {
+                Object obj = AssetDatabase.LoadAssetAtPath("Assets/Bundles/Prefabs/Objects/" + prefab + ".prefab", typeof(GameObject));
+                GameObject go = GameObject.Instantiate(obj, new Vector3(x, y, 0), Quaternion.identity) as GameObject;
+                go.transform.localScale = new Vector3(0.75f, 0.75f, 1.0f);
+                go.transform.SetParent(level.transform);
             }
             else{
                 Object obj = AssetDatabase.LoadAssetAtPath("Assets/Bundles/Prefabs/Objects/" + prefab + ".prefab", typeof(GameObject));

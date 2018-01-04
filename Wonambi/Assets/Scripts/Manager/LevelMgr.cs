@@ -247,7 +247,6 @@ public class LevelMgr : Singleton<LevelMgr>
         {
             doubleJumpItem += ("," + curLevel);
         }
-        Debug.Log("[LevelMgr] SaveDoubleJumpItem, doubleJumpItem = " + doubleJumpItem);
         PlayerPrefs.SetString(PrefsKey.LevelDoubleJump, doubleJumpItem);
     }
 
@@ -325,5 +324,11 @@ public class LevelMgr : Singleton<LevelMgr>
                 context.isBinaryDoorDown = true;
             }
         }
+    }
+
+    public Vector3 GetPlayerPos()
+    {
+        if (player == null) return Vector3.zero;
+        return player.transform.position;
     }
 }
