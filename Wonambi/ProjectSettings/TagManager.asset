@@ -16,6 +16,7 @@ TagManager:
   - Switch
   - DoubleJump
   - ExtraBullet
+  - InvincibleMonsterBullet
   layers:
   - Default
   - TransparentFX

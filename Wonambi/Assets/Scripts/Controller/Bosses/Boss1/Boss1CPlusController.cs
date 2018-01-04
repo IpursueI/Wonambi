@@ -22,6 +22,9 @@ public class Boss1CPlusController : MonoBehaviour {
 
     private GameObject plus1;
     private GameObject plus2;
+
+    public Boss1Controller bodyController;
+
     // Use this for initialization
     void Start()
     {
@@ -39,7 +42,7 @@ public class Boss1CPlusController : MonoBehaviour {
     void Update()
     {
         if (!isTrigger || isDead) return;
-        Fire();
+        //Fire();
     }
 
     private void Fire()
@@ -105,5 +108,6 @@ public class Boss1CPlusController : MonoBehaviour {
     {
         yield return new WaitForSeconds(DefineNumber.DieDuration);
         Destroy(gameObject);
+        bodyController.OnHandDie();
     }
 }

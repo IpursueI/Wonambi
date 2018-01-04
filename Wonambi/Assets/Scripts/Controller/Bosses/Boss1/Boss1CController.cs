@@ -21,6 +21,8 @@ public class Boss1CController : MonoBehaviour {
     public ParticleSystem particleZero;
     private SpriteRenderer spriteRenderer;
     private BoxCollider2D bc2d;
+
+    public Boss1Controller bodyController;
 	// Use this for initialization
 	void Start () {
         muzzle = transform.Find("Muzzle").gameObject;
@@ -105,5 +107,6 @@ public class Boss1CController : MonoBehaviour {
     {
         yield return new WaitForSeconds(DefineNumber.DieDuration);
         Destroy(gameObject);
+        bodyController.OnHandDie();
     }
 }

@@ -51,7 +51,7 @@ public class BulletController : MonoBehaviour {
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if(gameObject.tag == "PlayerBullet"){
-            if(collision.tag == "Tiles" || collision.tag == "Monster") {
+            if(collision.tag == "Tiles" || collision.tag == "Monster" || collision.tag == "InvincibleMonsterBullet") {
                 Destroy(gameObject);
                 return;
             }

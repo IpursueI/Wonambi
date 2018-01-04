@@ -13,4 +13,9 @@ public class Boss1Controller : MonoBehaviour {
 	void Update () {
 		
 	}
+
+    public void OnHandDie()
+    {
+        Debug.Log("[OnHandDie]");
+    }
 }

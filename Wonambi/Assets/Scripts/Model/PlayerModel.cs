@@ -48,7 +48,7 @@ public class PlayerModel : MonoBehaviour {
     {
         if (isDead) return;
         if (isInvincible) return;
-        if(collision.tag == "Monster") {
+        if(collision.tag == "Monster" || collision.tag == "InvincibleMonsterBullet") {
             OnHit();
         }
     }
@@ -62,8 +62,10 @@ public class PlayerModel : MonoBehaviour {
             GameMgr.Instance.PlayPickSFX();
 
         }
-        if (collision.tag == "MonsterBullet" && !isInvincible) {
-            OnHit();
+        if (collision.tag == "MonsterBullet") {
+            if(!isInvincible) {
+                OnHit();
+            }
         }
         if (collision.tag == "SavePoint") {
             status |= PlayerStatus.InBonfire;
