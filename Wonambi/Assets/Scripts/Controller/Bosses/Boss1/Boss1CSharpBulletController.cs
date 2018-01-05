@@ -27,4 +27,12 @@ public class Boss1CSharpBulletController : MonoBehaviour {
         tSequence.Append(transform.DOMove(new Vector3(5.0f, 5.0f, -1.0f), 3.0f));
         tSequence.SetLoops(-1, LoopType.Yoyo);
     }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if(collision.tag == "PlayerBullet")
+        {
+            GameMgr.Instance.PlayerInvincibleMonsterHitSFX();
+        }
+    }
 }

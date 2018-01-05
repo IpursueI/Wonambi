@@ -16,6 +16,7 @@ public class AudioController : MonoBehaviour
     public AudioClip playerDie;
     public AudioClip monsterDie;
     public AudioClip boss1Die;
+    public AudioClip invincibleMonsterHit;
 
     private bool isMute;
     private AudioSource audioSource;
@@ -96,6 +97,11 @@ public class AudioController : MonoBehaviour
     public void PlayBoss1Die()
     {
         audioSource.PlayOneShot(boss1Die);
+    }
+
+    public void PlayInvincibleMonsterHit()
+    {
+        audioSource.PlayOneShot(invincibleMonsterHit);
     }
 
     public void Stop()
