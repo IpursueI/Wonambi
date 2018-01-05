@@ -136,7 +136,7 @@ public class LevelMgr : Singleton<LevelMgr>
         cameraController.SetScreenSize(levelController.width, levelController.height);
         if(levelName.Substring(0,5) == "Level") {
             GameMgr.Instance.PlayBGM();
-            cameraController.SetOrthoSize(5.0f);
+            cameraController.SetOrthoSize(6.0f);
         } else {
             GameMgr.Instance.PlayBossBGM();
             cameraController.SetOrthoSize(8.0f);
@@ -330,5 +330,15 @@ public class LevelMgr : Singleton<LevelMgr>
     {
         if (player == null) return Vector3.zero;
         return player.transform.position;
+    }
+
+    public void QuitGame()
+    {
+        if(levelObj != null) {
+            Destroy(levelObj);
+        }
+        if(player != null) {
+            Destroy(player);
+        }
     }
 }

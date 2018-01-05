@@ -7,6 +7,7 @@ public class UIController : MonoBehaviour {
     public GameObject menuPanel;
     public GameObject cutscenePanel;
     public GameObject gamePanel;
+    public GameObject demoEndPanel;
 
     private void Awake()
     {
@@ -33,6 +34,7 @@ public class UIController : MonoBehaviour {
         menuPanel.SetActive(true);
         cutscenePanel.SetActive(false);
         gamePanel.SetActive(false);
+        demoEndPanel.SetActive(false);
     }
 
     public void ShowCutsceneUI()
@@ -40,6 +42,7 @@ public class UIController : MonoBehaviour {
         menuPanel.SetActive(false);
         cutscenePanel.SetActive(true);
         gamePanel.SetActive(false);
+        demoEndPanel.SetActive(false);
     }
 
     public void ShowGameUI()
@@ -47,6 +50,15 @@ public class UIController : MonoBehaviour {
         menuPanel.SetActive(false);
         cutscenePanel.SetActive(false);
         gamePanel.SetActive(true);
+        demoEndPanel.SetActive(false);
+    }
+
+    public void ShowDemoEndUI()
+    {
+        menuPanel.SetActive(false);
+        cutscenePanel.SetActive(false);
+        gamePanel.SetActive(false);
+        demoEndPanel.SetActive(true);
     }
 
     public void ShowBonfireMask()

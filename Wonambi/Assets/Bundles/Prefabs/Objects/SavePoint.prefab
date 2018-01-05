@@ -190,19 +190,19 @@ MonoBehaviour:
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
   m_FontData:
     m_Font: {fileID: 12800000, guid: e1da83185c66544a5bffaf341e1e85f7, type: 3}
-    m_FontSize: 60
+    m_FontSize: 80
     m_FontStyle: 0
     m_BestFit: 0
     m_MinSize: 0
     m_MaxSize: 300
-    m_Alignment: 3
+    m_Alignment: 4
     m_AlignByGeometry: 0
     m_RichText: 1
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: This bonfire looks so familiar.\nYou can rest here, but enemies will recover
-    too.
+  m_Text: "This bonfire looks \nso familiar.\nPress <color=#4299FFFF>L</color> to
+    rest here"
 --- !u!212 &212694888660596738
 SpriteRenderer:
   m_ObjectHideFlags: 1
@@ -299,7 +299,7 @@ RectTransform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1785005092005474}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.30000305, z: 0}
+  m_LocalPosition: {x: 0, y: 2.8935013, z: 0}
   m_LocalScale: {x: 0.1, y: 0.1, z: 1}
   m_Children: []
   m_Father: {fileID: 224629880221197656}
@@ -307,6 +307,6 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 0.3}
-  m_SizeDelta: {x: 839.62, y: 211.29}
+  m_AnchoredPosition: {x: 0, y: 2.8935}
+  m_SizeDelta: {x: 986.93, y: 247.61}
   m_Pivot: {x: 0.5, y: 0.5}

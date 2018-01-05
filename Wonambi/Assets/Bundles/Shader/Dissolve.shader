@@ -1,4 +1,6 @@
-﻿Shader "ApcShader/DissolveEffect"
+﻿// Upgrade NOTE: replaced 'mul(UNITY_MATRIX_MVP,*)' with 'UnityObjectToClipPos(*)'
+
+Shader "ApcShader/DissolveEffect"
 {
 	Properties{
 		_Diffuse("Diffuse", Color) = (1,1,1,1)
@@ -9,6 +11,8 @@
 		_DissolveThreshold("DissolveThreshold", Range(0,1)) = 0
 		_ColorFactor("ColorFactor", Range(0,1)) = 0.7
 		_DissolveEdge("DissolveEdge", Range(0,1)) = 0.8
+		_FlyThreshold("FlyThreshold", Range(0,1)) = 0.8
+		_FlyFactor("FlyFactor", Range(0,10)) = 0.8
 	}
 	
 	CGINCLUDE
@@ -22,6 +26,8 @@
 	uniform float _DissolveThreshold;
 	uniform float _ColorFactor;
 	uniform float _DissolveEdge;
+	uniform float _FlyThreshold;
+	uniform float _FlyFactor;
 	
 	struct appdata_t
 	{
@@ -46,6 +52,8 @@
 		o.pos = UnityObjectToClipPos(v.vertex);
 		o.uv = TRANSFORM_TEX(v.texcoord, _MainTex);
 		o.worldNormal = mul(v.normal, (float3x3)unity_WorldToObject);
+		v.vertex.xyz += v.normal * _DissolveThreshold * 0.5;
+		o.vertex = UnityObjectToClipPos(v.vertex);
 		return o;
 	}
 	

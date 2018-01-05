@@ -200,7 +200,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 707365103c072497b87c7d1281c56ccd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  hp: 6
+  hp: 8
   particleOne: {fileID: 198095405319241242}
   particleZero: {fileID: 198444015550579554}
 --- !u!114 &114946105766422342

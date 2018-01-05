@@ -11,7 +11,7 @@ namespace GlobalDefines
 
     public static class DefineString
     {
-        public static readonly string FirstLevel = "BossMap1";
+        public static readonly string FirstLevel = "LevelMap1";
     }
 
     public static class DefineNumber
@@ -24,7 +24,7 @@ namespace GlobalDefines
         public static readonly float LowJumpFactor = 1.0f;
         public static readonly float BulletSpeed = 9.0f;
         public static readonly float BulletDuration = 8.0f;
-        public static readonly float FireCooldown = 0.2f;
+        public static readonly float FireCooldown = 0.15f;
         public static readonly float DieDuration = 0.8f;
         public static readonly float InvincibleDuration = 1.0f;
         public static readonly float HitBlinkDuration = 0.1f;

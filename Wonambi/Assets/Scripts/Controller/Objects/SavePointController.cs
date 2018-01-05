@@ -28,7 +28,7 @@ public class SavePointController : MonoBehaviour {
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.tag != "Player") return;
-        text.text = "This bonfire looks so familiar.\nYou can press L to rest here, but enemies will recover too.";
+        text.text = "This bonfire looks \nso familiar.\nPress <color=#4299FFFF>L</color> to rest here";
         text.gameObject.SetActive(true);
     }
 

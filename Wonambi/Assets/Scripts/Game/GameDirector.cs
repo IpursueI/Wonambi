@@ -64,4 +64,9 @@ public class GameDirector : MonoBehaviour {
     {
         return inGame;
     }
+
+    public void QuitGame()
+    {
+        inGame = false;
+    }
 }

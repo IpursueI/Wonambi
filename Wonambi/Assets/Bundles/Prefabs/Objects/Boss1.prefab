@@ -357,7 +357,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1383418691362278}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -5, y: 4.6, z: 0}
+  m_LocalPosition: {x: -5, y: 0, z: 0}
   m_LocalScale: {x: -1, y: 1, z: 1}
   m_Children:
   - {fileID: 4998118576030474}
@@ -400,7 +400,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1827437124530524}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -5, y: 0, z: 0}
+  m_LocalPosition: {x: -5, y: 4.6, z: 0}
   m_LocalScale: {x: -1, y: 1, z: 1}
   m_Children:
   - {fileID: 4357906105340348}
@@ -631,7 +631,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bb0bc62cd03934ffbb64a556f0f7d63e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  hp: 4
+  hp: 30
   particleOne: {fileID: 198351458742374082}
   particleZero: {fileID: 198556682525251116}
   bodyController: {fileID: 114866287487687914}
@@ -648,7 +648,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   cooldown: 3
   bullet: {fileID: 1069346265281900, guid: 9c7c8f817fd574c52908d53501411095, type: 2}
-  hp: 4
+  hp: 30
   particleOne: {fileID: 198276455940994564}
   particleZero: {fileID: 198494740479759016}
   bodyController: {fileID: 114866287487687914}
@@ -696,9 +696,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9ff0c6af412ea4729877dc93a12b3f7a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cooldown: 3
+  cooldown: 2
   bullet: {fileID: 1839867984425752, guid: 431fc644f399244bd8edb4a7ff24b9f7, type: 2}
-  hp: 4
+  hp: 30
   particleOne: {fileID: 198011285987044108}
   particleZero: {fileID: 198215694497882856}
   bodyController: {fileID: 114866287487687914}
@@ -21135,7 +21135,7 @@ SpriteRenderer:
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
   m_Materials:
-  - {fileID: 2100000, guid: 149c6f620c0d646c8a272d5325bb8e0c, type: 2}
+  - {fileID: 2100000, guid: 176a2ab1173344584ba3a26a7e600c3a, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -21156,7 +21156,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: 1096a079906c74e3392b7cae00b3de42, type: 3}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 0}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0

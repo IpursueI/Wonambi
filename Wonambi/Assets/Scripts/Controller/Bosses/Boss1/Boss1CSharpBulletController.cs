@@ -19,12 +19,13 @@ public class Boss1CSharpBulletController : MonoBehaviour {
 
     IEnumerator MoveCoroutine()
     {
-        yield return new WaitForSeconds(1.0f);
+        yield return new WaitForSeconds(0.5f);
         tSequence = DOTween.Sequence();
-        tSequence.AppendInterval(3.0f);
-        tSequence.Append(transform.DOMove(new Vector3(10.0f, 10.0f, -1.0f), 3.0f));
         tSequence.AppendInterval(5.0f);
-        tSequence.Append(transform.DOMove(new Vector3(5.0f, 5.0f, -1.0f), 3.0f));
+        tSequence.Append(transform.DOMove(new Vector3(12.0f, 7.0f, -1.0f), 3.0f));
+        tSequence.AppendInterval(5.0f);
+        tSequence.Append(transform.DOMove(new Vector3(7.0f, 11.0f, -1.0f), 3.0f));
+        tSequence.AppendInterval(5.0f);
         tSequence.SetLoops(-1, LoopType.Yoyo);
     }
 
