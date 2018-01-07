@@ -204,6 +204,7 @@ GameObject:
   - component: {fileID: 357259230}
   - component: {fileID: 357259233}
   - component: {fileID: 357259232}
+  - component: {fileID: 357259234}
   m_Layer: 0
   m_Name: GameDirector
   m_TagString: Untagged
@@ -339,6 +340,17 @@ MonoBehaviour:
   boss1Die: {fileID: 8300000, guid: 89f117a82f58e0a499b800ca09dbd5dd, type: 3}
   invincibleMonsterHit: {fileID: 8300000, guid: 03cceec14a6b64e21b3d5d025124fcb7,
     type: 3}
+--- !u!114 &357259234
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 357259229}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7f90caac896fea34cabea6909ce738cd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &378077726
 GameObject:
   m_ObjectHideFlags: 0
@@ -780,10 +792,10 @@ Camera:
   m_TargetTexture: {fileID: 0}
   m_TargetDisplay: 0
   m_TargetEye: 3
-  m_HDR: 1
+  m_HDR: 0
   m_AllowMSAA: 0
   m_ForceIntoRT: 0
-  m_OcclusionCulling: 1
+  m_OcclusionCulling: 0
   m_StereoConvergence: 10
   m_StereoSeparation: 0.022
 --- !u!4 &778212731
@@ -1038,7 +1050,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_UiScaleMode: 1
-  m_ReferencePixelsPerUnit: 100
+  m_ReferencePixelsPerUnit: 64
   m_ScaleFactor: 1
   m_ReferenceResolution: {x: 1920, y: 1080}
   m_ScreenMatchMode: 0
