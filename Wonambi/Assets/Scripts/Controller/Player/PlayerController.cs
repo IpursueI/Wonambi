@@ -174,6 +174,7 @@ public class PlayerController : MonoBehaviour {
             GameMgr.Instance.PlayBonfireSFX();
             PlayerPrefs.SetInt(PrefsKey.PlayerBulletNumber, maxBulletNumber);
             PlayerPrefs.SetInt(PrefsKey.PlayerEnableDoubleJump, enableDoubleJump?1:0);
+            // TODO Save
             LevelMgr.Instance.RebornPlayer(transform.position);
             rb2d.velocity = new Vector2(0.0f, 0.0f);
             GameMgr.Instance.DisableInput();
