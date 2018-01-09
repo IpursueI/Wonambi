@@ -29,6 +29,7 @@ public class PlayerController : MonoBehaviour {
     private GameObject muzzle;
     // model
     private PlayerModel model;
+    private PlayerDialogController dialog;
 
     private int maxBulletNumber;
     private int bulletCount;
@@ -41,6 +42,7 @@ public class PlayerController : MonoBehaviour {
         doubleJumpEffect = transform.Find("DoubleJump").gameObject;
         rb2d = GetComponent<Rigidbody2D>();
         model = GetComponent<PlayerModel>();
+        dialog = GetComponent<PlayerDialogController>();
         anim = GetComponent<Animator>();
     }
 
@@ -120,11 +122,13 @@ public class PlayerController : MonoBehaviour {
             forward = false;
             leftCheck.transform.localPosition = new Vector3(-0.36f, -0.58f, 0.0f);
             rightCheck.transform.localPosition = new Vector3(0.14f, -0.58f, 0.0f);
+            dialog.Rotate(forward);
         } else if (rb2d.velocity.x > 0.0f && !forward){
             transform.localScale = new Vector3(1f, 1f, 1f);
             forward = true;
             leftCheck.transform.localPosition = new Vector3(0.14f, -0.58f, 0.0f);
             rightCheck.transform.localPosition = new Vector3(-0.36f, -0.58f, 0.0f);
+            dialog.Rotate(forward);
         }    
     }
 

@@ -332,4 +332,20 @@ public class LevelMgr : Singleton<LevelMgr>
             PlayerPrefs.SetString(PrefsKey.SavePoint, savePoint.ToString());
         }
     }
+
+    public void ShowTips(string content, float duration)
+    {
+        if(player == null) {
+            return;
+        }   
+        player.GetComponent<PlayerDialogController>().ShowDialog(content, duration);
+    }
+
+    public void HideTips()
+    {
+        if(player == null) {
+            return;
+        }
+        player.GetComponent<PlayerDialogController>().HideDialog();
+    }
 }
