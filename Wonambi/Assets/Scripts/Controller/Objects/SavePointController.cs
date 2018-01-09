@@ -7,12 +7,14 @@ using UnityEngine.UI;
 public class SavePointController : MonoBehaviour {
 
     private Text text;
+    private bool isTrigger;
 
     // Use this for initialization
     private void Awake()
     {
         text = transform.Find("Canvas/Text").gameObject.GetComponent<Text>();
         text.gameObject.SetActive(false);
+        isTrigger = false;
     }
 
     void Start () 
@@ -23,13 +25,25 @@ public class SavePointController : MonoBehaviour {
 	// Update is called once per frame
 	void Update () 
     {
+        CheckSaveTrigger();
 	}
 
+    private void CheckSaveTrigger()
+    {
+        if (!GameMgr.Instance.IsInputEnable()) return;
+        if (isTrigger && Input.GetKeyDown(KeyCode.L)) {
+            GameMgr.Instance.PlayBonfireSFX();
+            LevelMgr.Instance.OnTriggerSave(transform.position);
+            text.text = "Game saved";
+            isTrigger = false;
+        }
+    }
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.tag != "Player") return;
-        text.text = "This bonfire looks \nso familiar.\nPress <color=#4299FFFF>L</color> to rest here";
+        text.text = "\nPress <color=#4299FFFF>L</color> to save";
         text.gameObject.SetActive(true);
+        isTrigger = true;
     }
 
     private void OnTriggerExit2D(Collider2D collision)

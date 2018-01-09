@@ -63,10 +63,9 @@ public class PlayerController : MonoBehaviour {
         Fire();
         SyncAnimator();
         CheckDie();
-        CheckTrigger();
     }
 
-    public void Init(bool _enableDoubleJump, int _maxBulletNumber)
+    public void Init(bool _enableDoubleJump, int _maxBulletNumber, int _maxHP)
     {
         groundDistance = 0.5f;
 
@@ -80,6 +79,10 @@ public class PlayerController : MonoBehaviour {
         rightGrounded = false;
         cooldown = DefineNumber.FireCooldown;
         bulletCount = 0;
+
+        model.Init(_maxHP);
+
+        Save();
     }
 
     private void Move()
@@ -167,20 +170,6 @@ public class PlayerController : MonoBehaviour {
         anim.SetFloat("upSpeed", rb2d.velocity.y);
     }
 
-    private void CheckTrigger()
-    {
-        if (!GameMgr.Instance.IsInputEnable()) return;
-        if(((model.status & PlayerStatus.InBonfire) != 0) && Input.GetKeyDown(KeyCode.L)) {
-            GameMgr.Instance.PlayBonfireSFX();
-            PlayerPrefs.SetInt(PrefsKey.PlayerBulletNumber, maxBulletNumber);
-            PlayerPrefs.SetInt(PrefsKey.PlayerEnableDoubleJump, enableDoubleJump?1:0);
-            // TODO Save
-            LevelMgr.Instance.RebornPlayer(transform.position);
-            rb2d.velocity = new Vector2(0.0f, 0.0f);
-            GameMgr.Instance.DisableInput();
-        }
-    }
-
     public Vector3 GetMuzzlePos()
     {
         return muzzle.transform.position;
@@ -227,5 +216,18 @@ public class PlayerController : MonoBehaviour {
     public int GetPlayerMaxBulletNumber()
     {
         return maxBulletNumber;
+    }
+   
+    public void Save()
+    {
+        PlayerPrefs.SetInt(PrefsKey.PlayerBulletNumber, maxBulletNumber);
+        PlayerPrefs.SetInt(PrefsKey.PlayerEnableDoubleJump, enableDoubleJump ? 1 : 0);
+        PlayerPrefs.SetInt(PrefsKey.PlayerMaxHP, model.GetMaxHP());
+    }
+
+    public void OnTriggerSave()
+    {
+        model.FullHP();
+        Save();
     }
 }

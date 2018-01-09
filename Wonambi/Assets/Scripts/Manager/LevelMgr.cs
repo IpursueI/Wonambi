@@ -37,6 +37,7 @@ public class LevelMgr : Singleton<LevelMgr>
         ResetLevelPrefs();
         LoadLevel(DefineString.FirstLevel);
         curLevel = DefineString.FirstLevel;
+        SaveCheckPoint(levelObj.GetComponent<LevelContext>().startPoint);
         SpawnPlayer();
     }
 
@@ -47,25 +48,16 @@ public class LevelMgr : Singleton<LevelMgr>
         TeleportPlayer();
     }
 
-    public void RebornPlayer(Vector3 savePos)
+    public void OnTriggerSave(Vector3 savePos)
     {
-        Vector3 savePointVec3 = new Vector3(savePos.x, savePos.y, -10.0f);
-        PlayerPrefs.SetString(PrefsKey.LevelMap, curLevel);
-        PlayerPrefs.SetString(PrefsKey.SavePoint, savePointVec3.ToString());
+        Vector3 savePoint = new Vector3(savePos.x, savePos.y, -10.0f);
+        SaveCheckPoint(savePoint);
         SaveDoubleJumpItem();
         SaveExtraBulletItem();
         SaveBinaryDoor();
-
-        uiController.ShowBonfireMask();
-
-        StartCoroutine(RebornCoroutine());
-    }
-
-    public IEnumerator RebornCoroutine()
-    {
-        yield return new WaitForSeconds(1.5f);
-        RestartLevel();
-        uiController.HideBonfireMask();
+        if(player != null) {
+            player.GetComponent<PlayerController>().OnTriggerSave();
+        }
     }
 
     public void RestartLevel()
@@ -83,17 +75,9 @@ public class LevelMgr : Singleton<LevelMgr>
             cameraController.SetPlayer(player);
             GameMgr.Instance.EnableInput();
         }
-        player.GetComponent<PlayerController>().Init(false, DefineNumber.DefaultBulletNumber);
-        player.GetComponent<PlayerModel>().Init(DefineNumber.DefaultHP);
+        player.GetComponent<PlayerController>().Init(false, DefineNumber.DefaultBulletNumber, DefineNumber.DefaultHP);
         player.transform.position = levelObj.GetComponent<LevelContext>().startPoint;
         player.transform.SetParent(null);
-
-        // Save
-        PlayerPrefs.SetInt(PrefsKey.PlayerMaxHP, player.GetComponent<PlayerModel>().GetMaxHP());
-        PlayerPrefs.SetInt(PrefsKey.PlayerEnableDoubleJump, player.GetComponent<PlayerController>().GetDoubleJump() ? 1 : 0);
-        PlayerPrefs.SetInt(PrefsKey.PlayerBulletNumber, player.GetComponent<PlayerController>().GetPlayerMaxBulletNumber());
-        PlayerPrefs.SetString(PrefsKey.LevelMap, curLevel);
-        PlayerPrefs.SetString(PrefsKey.SavePoint, levelObj.GetComponent<LevelContext>().startPoint.ToString());
     }
 
     private void TeleportPlayer()
@@ -115,9 +99,8 @@ public class LevelMgr : Singleton<LevelMgr>
         }
         bool enableDoubleJump = PlayerPrefs.GetInt(PrefsKey.PlayerEnableDoubleJump, 0) > 0;
         int bulletNumber = PlayerPrefs.GetInt(PrefsKey.PlayerBulletNumber, DefineNumber.DefaultBulletNumber);
-        player.GetComponent<PlayerController>().Init(enableDoubleJump, bulletNumber);
         int maxHp = PlayerPrefs.GetInt(PrefsKey.PlayerMaxHP, DefineNumber.DefaultHP);
-        player.GetComponent<PlayerModel>().Init(maxHp);
+        player.GetComponent<PlayerController>().Init(enableDoubleJump, bulletNumber, maxHp);
         string posStr = PlayerPrefs.GetString(PrefsKey.SavePoint, "");
         if(posStr == "") {
             Debug.LogError("[LevelMgr] LoadPlayer savepoint not found.");
@@ -339,6 +322,14 @@ public class LevelMgr : Singleton<LevelMgr>
         }
         if(player != null) {
             Destroy(player);
+        }
+    }
+
+    private void SaveCheckPoint(Vector3 savePoint)
+    {
+        if(levelObj != null) {
+            PlayerPrefs.SetString(PrefsKey.LevelMap, curLevel);
+            PlayerPrefs.SetString(PrefsKey.SavePoint, savePoint.ToString());
         }
     }
 }
