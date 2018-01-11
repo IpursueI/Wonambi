@@ -37,7 +37,10 @@ public class AssetBundlesBuilder
         Dictionary<string, string> colorToPrefab = new Dictionary<string, string>();
 
         colorToPrefab["000000FF"] = "Tile";
-        colorToPrefab["89C997FF"] = "PlayerSpawnPoint";
+        colorToPrefab["0000FFFF"] = "Escalator";
+        colorToPrefab["0064FFFF"] = "TurnPoint";
+        colorToPrefab["00FFFFFF"] = "Direction";
+        colorToPrefab["00FF00FF"] = "StartPoint";
         colorToPrefab["FF0000FF"] = "Pile";
         colorToPrefab["FF0001FF"] = "Sentry";
         colorToPrefab["FF0002FF"] = "Patrol";
