@@ -37,34 +37,23 @@ public class LevelMgr : Singleton<LevelMgr>
         ResetLevelPrefs();
         LoadLevel(DefineString.FirstLevel);
         curLevel = DefineString.FirstLevel;
-        SaveCheckPoint(levelObj.GetComponent<LevelContext>().startPoint);
+        PlayerPrefs.SetString(PrefsKey.LevelMap, curLevel);
         SpawnPlayer();
     }
 
-    public void StartLevel(string levelName)
+    public void StartLevel(string levelName, Vector3 pos)
     {
-        LoadLevel(levelName);
         curLevel = levelName;
-        TeleportPlayer();
-    }
-
-    public void OnTriggerSave(Vector3 savePos)
-    {
-        Vector3 savePoint = new Vector3(savePos.x, savePos.y, -10.0f);
-        SaveCheckPoint(savePoint);
-        SaveDoubleJumpItem();
-        SaveExtraBulletItem();
-        SaveBinaryDoor();
-        if(player != null) {
-            player.GetComponent<PlayerController>().OnTriggerSave();
-        }
+        PlayerPrefs.SetString(PrefsKey.LevelMap, curLevel);
+        LoadLevel(curLevel);
+        TeleportPlayer(pos);
     }
 
     public void RestartLevel()
     {
         string levelName = PlayerPrefs.GetString(PrefsKey.LevelMap, curLevel);
         curLevel = levelName;
-        LoadLevel(levelName);
+        LoadLevel(curLevel);
         LoadPlayer();
     }
 
@@ -80,14 +69,14 @@ public class LevelMgr : Singleton<LevelMgr>
         player.transform.SetParent(null);
     }
 
-    private void TeleportPlayer()
+    private void TeleportPlayer(Vector3 pos)
     {
         if (player == null) {
             Debug.LogError("[LevelMgr] TeleportPlayer failed. player is null.");
             return;
         }
 
-        player.transform.position = levelObj.GetComponent<LevelContext>().startPoint;
+        player.transform.position = pos;
     }
 
     private void LoadPlayer()
@@ -101,12 +90,7 @@ public class LevelMgr : Singleton<LevelMgr>
         int bulletNumber = PlayerPrefs.GetInt(PrefsKey.PlayerBulletNumber, DefineNumber.DefaultBulletNumber);
         int maxHp = PlayerPrefs.GetInt(PrefsKey.PlayerMaxHP, DefineNumber.DefaultHP);
         player.GetComponent<PlayerController>().Init(enableDoubleJump, bulletNumber, maxHp);
-        string posStr = PlayerPrefs.GetString(PrefsKey.SavePoint, "");
-        if(posStr == "") {
-            Debug.LogError("[LevelMgr] LoadPlayer savepoint not found.");
-            return;
-        }
-        player.transform.position = GlobalFunc.StringToVector3(posStr);
+        player.transform.position = levelObj.GetComponent<LevelContext>().startPoint;
         player.transform.SetParent(null);
     }
 
@@ -143,16 +127,6 @@ public class LevelMgr : Singleton<LevelMgr>
             if (levelController.levelName == item && levelController.extraBulletItem != null)
             {
                 levelController.extraBulletItem.SetActive(false);
-            }
-        }
-
-        string binaryDoorItem = PlayerPrefs.GetString(PrefsKey.LevelBinaryDoor, "");
-        string[] binaryDoorArray = binaryDoorItem.Split(',');
-        foreach (string item in binaryDoorArray)
-        {
-            if (levelController.levelName == item && levelController.binaryDoorItem != null)
-            {
-                levelController.binaryDoorItem.GetComponent<BinaryDoorController>().SetRightTrigger();
             }
         }
     }
@@ -253,26 +227,6 @@ public class LevelMgr : Singleton<LevelMgr>
         PlayerPrefs.SetString(PrefsKey.LevelExtraBullet, extraBulletItem);
     }
 
-    private void SaveBinaryDoor()
-    {
-        if (levelObj == null ||
-            levelObj.GetComponent<LevelContext>().binaryDoorItem == null ||
-            levelObj.GetComponent<LevelContext>().isBinaryDoorDown == false)
-        {
-            return;
-        }
-        string binaryDoorItem = PlayerPrefs.GetString(PrefsKey.LevelBinaryDoor, "");
-        if (binaryDoorItem == "")
-        {
-            binaryDoorItem = curLevel;
-        }
-        else
-        {
-            binaryDoorItem += ("," + curLevel);
-        }
-        PlayerPrefs.SetString(PrefsKey.LevelBinaryDoor, binaryDoorItem);
-    }
-
     public void OnEnableDoubleJump()
     {
         if(levelObj)
@@ -281,6 +235,7 @@ public class LevelMgr : Singleton<LevelMgr>
             if(context.doubleJumpItem != null)
             {
                 context.isDoubleJumpDone = true;
+                SaveDoubleJumpItem();
             }
         }
     }
@@ -293,6 +248,7 @@ public class LevelMgr : Singleton<LevelMgr>
             if (context.extraBulletItem != null)
             {
                 context.isExtraBulletDone = true;
+                SaveExtraBulletItem();
             }
         }
     }
@@ -322,14 +278,6 @@ public class LevelMgr : Singleton<LevelMgr>
         }
         if(player != null) {
             Destroy(player);
-        }
-    }
-
-    private void SaveCheckPoint(Vector3 savePoint)
-    {
-        if(levelObj != null) {
-            PlayerPrefs.SetString(PrefsKey.LevelMap, curLevel);
-            PlayerPrefs.SetString(PrefsKey.SavePoint, savePoint.ToString());
         }
     }
 

@@ -33,7 +33,6 @@ public class SavePointController : MonoBehaviour {
         if (!GameMgr.Instance.IsInputEnable()) return;
         if (isTrigger && Input.GetKeyDown(KeyCode.L)) {
             GameMgr.Instance.PlayBonfireSFX();
-            LevelMgr.Instance.OnTriggerSave(transform.position);
             text.text = "Game saved";
             isTrigger = false;
         }

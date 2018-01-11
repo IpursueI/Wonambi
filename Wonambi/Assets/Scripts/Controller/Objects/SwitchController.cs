@@ -5,6 +5,7 @@ using UnityEngine;
 public class SwitchController : MonoBehaviour {
 
     public string levelName;
+    public Vector3 switchPos;
 	// Use this for initialization
 	void Start () {
 		
@@ -18,7 +19,7 @@ public class SwitchController : MonoBehaviour {
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if(collision.tag == "Player") {
-            LevelMgr.Instance.StartLevel(levelName);
+            LevelMgr.Instance.StartLevel(levelName, switchPos);
         }
     }
 }

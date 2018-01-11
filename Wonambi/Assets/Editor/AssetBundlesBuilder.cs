@@ -37,7 +37,17 @@ public class AssetBundlesBuilder
         Dictionary<string, string> colorToPrefab = new Dictionary<string, string>();
 
         colorToPrefab["000000FF"] = "Tile";
-        colorToPrefab["89C997FF"] = "PlayerSpawnPoint";
+        colorToPrefab["0000FFFF"] = "Escalator";
+        colorToPrefab["0064FFFF"] = "TurnPoint";
+        colorToPrefab["00FFFFFF"] = "Direction";
+        colorToPrefab["00FF00FF"] = "StartPoint";
+        colorToPrefab["00FF01FF"] = "MoveTips";
+        colorToPrefab["00FF02FF"] = "JumpTips";
+        colorToPrefab["00FF03FF"] = "ShootTips";
+        colorToPrefab["00FF64FF"] = "SwitchLevel";
+        colorToPrefab["FFFF00FF"] = "Heart";
+        colorToPrefab["FFFF01FF"] = "ExtraBullet";
+        colorToPrefab["FFFF02FF"] = "DoubleJump";
         colorToPrefab["FF0000FF"] = "Pile";
         colorToPrefab["FF0001FF"] = "Sentry";
         colorToPrefab["FF0002FF"] = "Patrol";
@@ -46,24 +56,6 @@ public class AssetBundlesBuilder
         colorToPrefab["FF0005FF"] = "LurkerDown";
         colorToPrefab["FF0006FF"] = "LurkerLeft";
         colorToPrefab["FF0007FF"] = "LurkerRight";
-        colorToPrefab["0000FFFF"] = "Escalator";
-        colorToPrefab["0100FFFF"] = "Elevator";
-        colorToPrefab["00A0E9FF"] = "TurnPoint";
-        colorToPrefab["00FFFFFF"] = "Direction";
-        colorToPrefab["00FF00FF"] = "SavePoint";
-        colorToPrefab["FFFF00FF"] = "Heart";
-        colorToPrefab["C8C800FF"] = "BinaryDoor";
-        colorToPrefab["FF962DFF"] = "CloseDoor";
-        colorToPrefab["638C0BFF"] = "MoveTips";
-        colorToPrefab["648C0BFF"] = "JumpTips";
-        colorToPrefab["658C0BFF"] = "FireTips";
-        colorToPrefab["668C0BFF"] = "CameraOrthoSize6";
-        colorToPrefab["678C0BFF"] = "CameraOrthoSize10";
-        colorToPrefab["02FFC8FF"] = "SwitchToBossMap1";
-        colorToPrefab["FFFF01FF"] = "DoubleJump";
-        colorToPrefab["FFFF02FF"] = "ExtraBullet";
-        colorToPrefab["FF00FFFF"] = "Boss1";
-
 
         foreach (string d in Directory.GetFileSystemEntries(pngDirectoryPath, "*.png")) {
             if (File.Exists(d)) {
@@ -216,11 +208,12 @@ public class AssetBundlesBuilder
                 GameObject go = GameObject.Instantiate(obj, new Vector3(x, y, 0), Quaternion.identity) as GameObject;
                 go.transform.SetParent(level.transform);
             }
-            else if (prefab == "PlayerSpawnPoint")
+            else if (prefab == "StartPoint")
             {
                 level.GetComponent<LevelContext>().startPoint = new Vector3(x, y, -10);
+                return;
             }
-            else if (prefab == "Escalator" || prefab == "Elevator")
+            else if (prefab == "Escalator")
             {
                 // 加一个中继点
                 Object tpObj = AssetDatabase.LoadAssetAtPath("Assets/Bundles/Prefabs/Tiles/TurnPoint.prefab", typeof(GameObject));
@@ -282,14 +275,7 @@ public class AssetBundlesBuilder
                 Object eObj = AssetDatabase.LoadAssetAtPath("Assets/Bundles/Prefabs/Tiles/MovingPlatform.prefab", typeof(GameObject));
                 GameObject eGo = GameObject.Instantiate(eObj, new Vector3(x, y, 0), Quaternion.identity) as GameObject;
                 eGo.transform.SetParent(level.transform);
-                if (prefab == "Escalator")
-                {
-                    eGo.GetComponent<MovingPlatformController>().auto = true;
-                }
-                else if (prefab == "Evelator")
-                {
-                    eGo.GetComponent<MovingPlatformController>().auto = false;
-                }
+                eGo.GetComponent<MovingPlatformController>().auto = true;
             }
             else if (prefab == "TurnPoint")
             {
@@ -355,7 +341,7 @@ public class AssetBundlesBuilder
             {
                 return;
             }
-            else if (prefab == "MoveTips" || prefab == "JumpTips" || prefab == "FireTips")
+            else if (prefab == "MoveTips" || prefab == "JumpTips" || prefab == "ShootTips")
             {
                 Object obj = AssetDatabase.LoadAssetAtPath("Assets/Bundles/Prefabs/Objects/Tips.prefab", typeof(GameObject));
                 GameObject go = GameObject.Instantiate(obj, new Vector3(x, y, 0), Quaternion.identity) as GameObject;
@@ -368,22 +354,8 @@ public class AssetBundlesBuilder
                     case "JumpTips":
                         go.GetComponent<TipsController>().tipsType = TipsType.Jump;
                         break;
-                    case "FireTips":
-                        go.GetComponent<TipsController>().tipsType = TipsType.Fire;
-                        break;
-                    default:
-                        break;
-                }
-            }
-            else if (prefab == "SwitchToBossMap1")
-            {
-                Object obj = AssetDatabase.LoadAssetAtPath("Assets/Bundles/Prefabs/Objects/Switch.prefab", typeof(GameObject));
-                GameObject go = GameObject.Instantiate(obj, new Vector3(x, y, 0), Quaternion.identity) as GameObject;
-                go.transform.SetParent(level.transform);
-                switch (prefab)
-                {
-                    case "SwitchToBossMap1":
-                        go.GetComponent<SwitchController>().levelName = "BossMap1";
+                    case "ShootTips":
+                        go.GetComponent<TipsController>().tipsType = TipsType.Shoot;
                         break;
                     default:
                         break;
@@ -396,21 +368,21 @@ public class AssetBundlesBuilder
                 go.transform.SetParent(level.transform);
                 level.GetComponent<LevelContext>().doubleJumpItem = go;
             }
-            else if(prefab == "BinaryDoor")
+            else if (prefab == "BinaryDoor")
             {
                 Object obj = AssetDatabase.LoadAssetAtPath("Assets/Bundles/Prefabs/Objects/" + prefab + ".prefab", typeof(GameObject));
                 GameObject go = GameObject.Instantiate(obj, new Vector3(x, y, 0), Quaternion.identity) as GameObject;
                 go.transform.SetParent(level.transform);
                 level.GetComponent<LevelContext>().binaryDoorItem = go;
             }
-            else if(prefab == "ExtraBullet")
+            else if (prefab == "ExtraBullet")
             {
                 Object obj = AssetDatabase.LoadAssetAtPath("Assets/Bundles/Prefabs/Objects/" + prefab + ".prefab", typeof(GameObject));
                 GameObject go = GameObject.Instantiate(obj, new Vector3(x, y, 0), Quaternion.identity) as GameObject;
                 go.transform.SetParent(level.transform);
                 level.GetComponent<LevelContext>().extraBulletItem = go;
             }
-            else if(prefab == "Boss1")
+            else if (prefab == "Boss1")
             {
                 Object obj = AssetDatabase.LoadAssetAtPath("Assets/Bundles/Prefabs/Objects/" + prefab + ".prefab", typeof(GameObject));
                 GameObject go = GameObject.Instantiate(obj, new Vector3(x, y, 0), Quaternion.identity) as GameObject;

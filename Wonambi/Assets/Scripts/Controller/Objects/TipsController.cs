@@ -31,7 +31,7 @@ public class TipsController : MonoBehaviour {
         case TipsType.Jump:
         tipsContent = "Press <color=#4299FFFF>K</color> to jump";
         break;
-        case TipsType.Fire:
+        case TipsType.Shoot:
         tipsContent = "Press <color=#4299FFFF>J</color> to fire";
         break;
         default:
