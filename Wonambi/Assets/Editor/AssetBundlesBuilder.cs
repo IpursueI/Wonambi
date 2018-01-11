@@ -59,7 +59,20 @@ public class AssetBundlesBuilder
         colorToPrefab["658C0BFF"] = "FireTips";
         colorToPrefab["668C0BFF"] = "CameraOrthoSize6";
         colorToPrefab["678C0BFF"] = "CameraOrthoSize10";
-        colorToPrefab["02FFC8FF"] = "SwitchToBossMap1";
+        colorToPrefab["00FFC8FF"] = "SwitchLevel1ToLevel2";
+        colorToPrefab["01FFC8FF"] = "SwitchLevel2ToLevel1";
+        colorToPrefab["02FFC8FF"] = "SwitchLevel2ToLevel3";
+        colorToPrefab["03FFC8FF"] = "SwitchLevel3ToLevel2";
+        colorToPrefab["04FFC8FF"] = "SwitchLevel3ToLevel4";
+        colorToPrefab["05FFC8FF"] = "SwitchLevel4ToBoss1";
+        colorToPrefab["06FFC8FF"] = "SwitchLevel3ToLevel5";
+        colorToPrefab["07FFC8FF"] = "SwitchLevel5ToLevel3";
+        colorToPrefab["08FFC8FF"] = "SwitchLevel5ToLevel6";
+        colorToPrefab["09FFC8FF"] = "SwitchLevel6ToLevel5";
+        colorToPrefab["0AFFC8FF"] = "SwitchLevel6ToLevel7";
+        colorToPrefab["0BFFC8FF"] = "SwitchLevel7ToLevel8";
+        colorToPrefab["0CFFC8FF"] = "SwitchLevel8ToLevel7";
+        colorToPrefab["0DFFC8FF"] = "SwitchLevel8ToLevel3";
         colorToPrefab["FFFF01FF"] = "DoubleJump";
         colorToPrefab["FFFF02FF"] = "ExtraBullet";
         colorToPrefab["FF00FFFF"] = "Boss1";
@@ -375,19 +388,20 @@ public class AssetBundlesBuilder
                         break;
                 }
             }
-            else if (prefab == "SwitchToBossMap1")
+            else if (prefab == "SwitchLevel1ToLevel2")
             {
                 Object obj = AssetDatabase.LoadAssetAtPath("Assets/Bundles/Prefabs/Objects/Switch.prefab", typeof(GameObject));
                 GameObject go = GameObject.Instantiate(obj, new Vector3(x, y, 0), Quaternion.identity) as GameObject;
                 go.transform.SetParent(level.transform);
-                switch (prefab)
-                {
-                    case "SwitchToBossMap1":
-                        go.GetComponent<SwitchController>().levelName = "BossMap1";
-                        break;
-                    default:
-                        break;
-                }
+                go.transform.GetComponent<SwitchController>().levelName = "LevelMap2";
+                go.transform.GetComponent<SwitchController>().switchPos = new Vector3(3.0f, 2.0f, -10.0f);
+            }
+            else if (prefab == "SwitchLevel2ToLevel1") {
+                Object obj = AssetDatabase.LoadAssetAtPath("Assets/Bundles/Prefabs/Objects/Switch.prefab", typeof(GameObject));
+                GameObject go = GameObject.Instantiate(obj, new Vector3(x, y, 0), Quaternion.identity) as GameObject;
+                go.transform.SetParent(level.transform);
+                go.transform.GetComponent<SwitchController>().levelName = "LevelMap1";
+                go.transform.GetComponent<SwitchController>().switchPos = new Vector3(45.0f, 9.0f, -10.0f);
             }
             else if (prefab == "DoubleJump")
             {

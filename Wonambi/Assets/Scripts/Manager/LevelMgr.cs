@@ -41,11 +41,11 @@ public class LevelMgr : Singleton<LevelMgr>
         SpawnPlayer();
     }
 
-    public void StartLevel(string levelName)
+    public void StartLevel(string levelName, Vector3 pos)
     {
-        LoadLevel(levelName);
         curLevel = levelName;
-        TeleportPlayer();
+        LoadLevel(levelName);
+        TeleportPlayer(pos);
     }
 
     public void OnTriggerSave(Vector3 savePos)
@@ -80,14 +80,14 @@ public class LevelMgr : Singleton<LevelMgr>
         player.transform.SetParent(null);
     }
 
-    private void TeleportPlayer()
+    private void TeleportPlayer(Vector3 pos)
     {
         if (player == null) {
             Debug.LogError("[LevelMgr] TeleportPlayer failed. player is null.");
             return;
         }
 
-        player.transform.position = levelObj.GetComponent<LevelContext>().startPoint;
+        player.transform.position = pos;
     }
 
     private void LoadPlayer()

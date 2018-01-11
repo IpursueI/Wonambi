@@ -55,11 +55,6 @@ public class GameDirector : MonoBehaviour {
        levelMgr.RestartLevel();
     }
 
-    public void NextLevel(string levelName)
-    {
-        levelMgr.StartLevel(levelName);
-    }
-
     public bool IsInGame()
     {
         return inGame;
