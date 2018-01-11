@@ -73,7 +73,7 @@ namespace GlobalDefines
     {
         Move = 1,
         Jump = 2,
-        Fire = 3
+        Shoot = 3
     }
 
     public static class GlobalFunc
