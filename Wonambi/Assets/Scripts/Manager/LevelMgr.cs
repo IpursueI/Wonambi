@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using GlobalDefines;
+using SimpleJSON;
 
 public class LevelMgr : Singleton<LevelMgr>
 {
@@ -12,6 +13,8 @@ public class LevelMgr : Singleton<LevelMgr>
     private GameObject levelObj;
     private GameObject player;
 
+    private Dictionary<string, JSONClass> levelConfigHash = new Dictionary<string, JSONClass>();
+
     private string curLevel;
     private CameraController cameraController;
     private UIController uiController;
@@ -21,6 +24,22 @@ public class LevelMgr : Singleton<LevelMgr>
         levelContainer = GameObject.Find("LevelContainer");
         uiController = GameObject.Find("UICanvas").GetComponent<UIController>();
         cameraController = GameObject.Find("MainCamera").GetComponent<CameraController>();
+
+
+        TextAsset levelFile = BundleMgr.Instance.GetJson("LevelConfig");
+        if (levelFile == null) {
+            Debug.LogError("[ThemeMgr] ThemeFile not found!");
+            return;
+        }
+        levelConfigHash.Clear();
+        JSONClass levelJson = JSON.Parse(levelFile.text) as JSONClass;
+        JSONArray levelArray = levelJson["LevelConfig"].AsArray;
+        for (int i = 0; i < levelArray.Count; ++i) {
+            JSONClass levelData = levelArray[i] as JSONClass;
+            string levelName = levelData["Name"];
+            levelConfigHash[levelName] = levelData;
+            Debug.Log("[LevelMgr] Init levelName = " + levelName);
+        }
     }
 
     public void ClearLevel()
@@ -35,29 +54,36 @@ public class LevelMgr : Singleton<LevelMgr>
     public void StartNewLevel()
     {
         ResetLevelPrefs();
-        LoadLevel(DefineString.FirstLevel);
         curLevel = DefineString.FirstLevel;
+        var playerPos = LoadLevel(curLevel);
         PlayerPrefs.SetString(PrefsKey.LevelMap, curLevel);
-        SpawnPlayer();
+        SpawnPlayer(playerPos);
     }
 
-    public void StartLevel(string levelName, Vector3 pos)
+    public void NextLevel()
+    {
+        if (levelObj == null) return;
+        string levelName = levelObj.GetComponent<LevelContext>().nextLevel;
+        StartLevel(levelName);
+    }
+
+    public void StartLevel(string levelName)
     {
         curLevel = levelName;
         PlayerPrefs.SetString(PrefsKey.LevelMap, curLevel);
-        LoadLevel(curLevel);
-        TeleportPlayer(pos);
+        var playerPos = LoadLevel(curLevel);
+        TeleportPlayer(playerPos);
     }
 
     public void RestartLevel()
     {
         string levelName = PlayerPrefs.GetString(PrefsKey.LevelMap, curLevel);
         curLevel = levelName;
-        LoadLevel(curLevel);
-        LoadPlayer();
+        var playerPos = LoadLevel(curLevel);
+        LoadPlayer(playerPos);
     }
 
-    private void SpawnPlayer()
+    private void SpawnPlayer(Vector3 startPos)
     {
         if(player == null) {
             player = Instantiate(BundleMgr.Instance.GetObject("Player"), Vector3.zero, Quaternion.identity);
@@ -65,7 +91,7 @@ public class LevelMgr : Singleton<LevelMgr>
             GameMgr.Instance.EnableInput();
         }
         player.GetComponent<PlayerController>().Init(false, DefineNumber.DefaultBulletNumber, DefineNumber.DefaultHP);
-        player.transform.position = levelObj.GetComponent<LevelContext>().startPoint;
+        player.transform.position = startPos;
         player.transform.SetParent(null);
     }
 
@@ -79,7 +105,7 @@ public class LevelMgr : Singleton<LevelMgr>
         player.transform.position = pos;
     }
 
-    private void LoadPlayer()
+    private void LoadPlayer(Vector3 startPos)
     {
         if(player == null) {
             player = Instantiate(BundleMgr.Instance.GetObject("Player"), Vector3.zero, Quaternion.identity);
@@ -90,33 +116,32 @@ public class LevelMgr : Singleton<LevelMgr>
         int bulletNumber = PlayerPrefs.GetInt(PrefsKey.PlayerBulletNumber, DefineNumber.DefaultBulletNumber);
         int maxHp = PlayerPrefs.GetInt(PrefsKey.PlayerMaxHP, DefineNumber.DefaultHP);
         player.GetComponent<PlayerController>().Init(enableDoubleJump, bulletNumber, maxHp);
-        player.transform.position = levelObj.GetComponent<LevelContext>().startPoint;
+        player.transform.position = startPos;
         player.transform.SetParent(null);
     }
 
-    private void LoadLevel(string levelName)
+    private Vector3 LoadLevel(string levelName)
     {
         ClearLevel();
         levelObj = Instantiate(BundleMgr.Instance.GetLevel(levelName), Vector3.zero, Quaternion.identity);
         levelObj.transform.SetParent(levelContainer.transform);
-        LevelContext levelController = levelObj.GetComponent<LevelContext>();
-        cameraController.SetScreenSize(levelController.width, levelController.height);
-        if(levelName.Substring(0,5) == "Level") {
-            GameMgr.Instance.PlayBGM();
-            cameraController.SetOrthoSize(6.0f);
-        } else {
-            GameMgr.Instance.PlayBossBGM();
-            cameraController.SetOrthoSize(8.0f);
-        }
+        LevelContext levelContext = levelObj.GetComponent<LevelContext>();
+        cameraController.SetScreenSize(levelContext.width, levelContext.height);
+        var levelData = levelConfigHash[levelName];
+        levelContext.bgm = levelData["BGM"];
+        levelContext.nextLevel = levelData["NextLevel"];
+        levelContext.cameraSize = levelData["CameraSize"].AsFloat;
 
+        cameraController.SetOrthoSize(levelContext.cameraSize);
+        GameMgr.Instance.PlayBGM(levelContext.bgm);
         // DoubleJump
         string doubleJumpItem = PlayerPrefs.GetString(PrefsKey.LevelDoubleJump, "");
         string[] doubleJumpArray = doubleJumpItem.Split(','); 
         foreach(string item in doubleJumpArray)
         {
-            if(levelController.levelName == item && levelController.doubleJumpItem != null)
+            if(levelContext.levelName == item && levelContext.doubleJumpItem != null)
             {
-                levelController.doubleJumpItem.SetActive(false);
+                levelContext.doubleJumpItem.SetActive(false);
             }
         }
 
@@ -124,11 +149,13 @@ public class LevelMgr : Singleton<LevelMgr>
         string[] extraBulletArray = extraBulletItem.Split(',');
         foreach (string item in extraBulletArray)
         {
-            if (levelController.levelName == item && levelController.extraBulletItem != null)
+            if (levelContext.levelName == item && levelContext.extraBulletItem != null)
             {
-                levelController.extraBulletItem.SetActive(false);
+                levelContext.extraBulletItem.SetActive(false);
             }
         }
+
+        return levelContext.startPoint;
     }
 
     public bool IsPlayerRight(Vector3 monsterPos)

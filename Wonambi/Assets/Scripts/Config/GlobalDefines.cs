@@ -11,7 +11,7 @@ namespace GlobalDefines
 
     public static class DefineString
     {
-        public static readonly string FirstLevel = "LevelMap1";
+        public static readonly string FirstLevel = "Level11";
     }
 
     public static class DefineNumber

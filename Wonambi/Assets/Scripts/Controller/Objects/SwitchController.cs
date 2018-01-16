@@ -19,7 +19,7 @@ public class SwitchController : MonoBehaviour {
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if(collision.tag == "Player") {
-            LevelMgr.Instance.StartLevel(levelName, switchPos);
+            LevelMgr.Instance.NextLevel();
         }
     }
 }

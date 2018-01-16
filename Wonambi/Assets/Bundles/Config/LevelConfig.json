@@ -1,0 +1,28 @@
+{
+    "LevelConfig" : [
+        {
+            "Name" : "Level11",
+            "NextLevel" : "Level12",
+            "BGM" : "Normal",
+            "CameraSize" : 6.0
+        },
+        {
+            "Name" : "Level12",
+            "NextLevel" : "Level12",
+            "BGM" : "Normal",
+            "CameraSize" : 6.0
+        },
+        {
+            "Name" : "Level12",
+            "NextLevel" : "Boss1",
+            "BGM" : "Normal",
+            "CameraSize" : 6.0
+        },
+        {
+            "Name" : "Boss1",
+            "NextLevel" : "Level21",
+            "BGM" : "Boss",
+            "CameraSize" : 6.0
+        }
+    ]
+}

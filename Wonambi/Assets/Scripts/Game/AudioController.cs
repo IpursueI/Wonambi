@@ -39,12 +39,22 @@ public class AudioController : MonoBehaviour
 
     }
 
-    public void PlayBGM()
+    public void PlayBGM(string bgmName)
     {
         audioSource.Stop();
-        audioSource.clip = bgm;
+        switch(bgmName) {
+        case "Normal":
+            audioSource.clip = bgm;
+            break;
+        case "Boss":
+            audioSource.clip = bossBgm;
+            break;
+        default:
+            Debug.Log("[AudioController] PlayBGM, bgm not found. bgm name = " + bgmName);
+            break;
+        }
+       
         audioSource.PlayDelayed(0.3f);
-
     }
 
     public void PlayBossBGM()

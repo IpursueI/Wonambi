@@ -5,6 +5,9 @@ using UnityEngine;
 public class LevelContext : MonoBehaviour {
 
     public string levelName;
+    public string nextLevel;
+    public string bgm;
+    public float cameraSize;
     public Vector3 startPoint;
     public float width;
     public float height;

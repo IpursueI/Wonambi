@@ -9,8 +9,7 @@ using GlobalDefines;
 public class MonsterModel : MonoBehaviour {
     //hp
     public int hp;
-    public ParticleSystem particleOne;
-    public ParticleSystem particleZero;
+    public GameObject dieFxPoint;
     private SpriteRenderer spriteRenderer;
     private BoxCollider2D bc2d;
     private Animator anim;
@@ -24,6 +23,7 @@ public class MonsterModel : MonoBehaviour {
         anim = GetComponent<Animator>();
         hitReact = GetComponent<HitReaction>();
         controller = GetComponent<MonsterController>();
+        dieFxPoint = transform.Find("DieFxPoint").gameObject;
         isDead = false;
 	}
 	
@@ -65,8 +65,7 @@ public class MonsterModel : MonoBehaviour {
     private void Die() {
         spriteRenderer.enabled = false;
         bc2d.enabled = false;
-        particleZero.Play();
-        particleOne.Play();
+        GameMgr.Instance.PlayMonsterDieFx(dieFxPoint.transform.position);
         isDead = true;
         if(controller != null) {
             controller.OnDie();
