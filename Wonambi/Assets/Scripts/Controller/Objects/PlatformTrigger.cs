@@ -23,6 +23,7 @@ public class PlatformTrigger : MonoBehaviour {
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if(collision.tag == "Player") {
+            Debug.Log("[PlatformTrigger] OnTriggerEnter2D.");
             moveController.OnTrigger();
             collision.gameObject.transform.SetParent(moveController.gameObject.transform);
         }
