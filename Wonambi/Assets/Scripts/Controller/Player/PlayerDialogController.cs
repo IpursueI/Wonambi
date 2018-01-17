@@ -17,6 +17,7 @@ public class PlayerDialogController : MonoBehaviour {
     // Use this for initialization
     void Start () 
     {	 
+        HideDialog();
 	}
 	
 	// Update is called once per frame

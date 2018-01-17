@@ -38,7 +38,6 @@ public class LevelMgr : Singleton<LevelMgr>
             JSONClass levelData = levelArray[i] as JSONClass;
             string levelName = levelData["Name"];
             levelConfigHash[levelName] = levelData;
-            Debug.Log("[LevelMgr] Init levelName = " + levelName);
         }
     }
 
