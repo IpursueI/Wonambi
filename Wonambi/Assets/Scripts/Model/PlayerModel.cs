@@ -62,21 +62,27 @@ public class PlayerModel : MonoBehaviour {
             GameMgr.Instance.PlayPickSFX();
 
         }
-        if (collision.tag == "MonsterBullet") {
+        else if (collision.tag == "MonsterBullet") {
             if(!isInvincible) {
                 OnHit();
             }
         }
-        if (collision.tag == "SavePoint") {
+        else if (collision.tag == "SavePoint") {
             status |= PlayerStatus.InBonfire;
         }
-        if(collision.tag == "DoubleJump") {
+        else if(collision.tag == "DoubleJump") {
             controller.EnableDoubleJump();
             GameMgr.Instance.PlayPickSFX();
         }
-        if(collision.tag == "ExtraBullet")
+        else if(collision.tag == "ExtraBullet")
         {
             controller.AddBulletNumber();
+            GameMgr.Instance.PlayPickSFX();
+        }
+        else if(collision.tag == "ExtraHP")
+        {
+            AddMaxHP();
+            LevelMgr.Instance.OnEnableExtraHP();
             GameMgr.Instance.PlayPickSFX();
         }
     }
@@ -121,6 +127,7 @@ public class PlayerModel : MonoBehaviour {
         isDead = true;
         transform.SetParent(null);
         GameMgr.Instance.PlayPlayerDieSFX();
+        GameMgr.Instance.PlayDieFx(transform.position, Color.green);
         StartCoroutine(DieCoroutine());
     }
 
@@ -138,10 +145,10 @@ public class PlayerModel : MonoBehaviour {
     private void AddHP(int v)
     {
         hp += v;
-        LevelMgr.Instance.RefreshHP();
         if(hp > maxHp) {
             hp = maxHp;
         }
+        LevelMgr.Instance.RefreshHP();
     }
 
     public void FullHP()
@@ -152,5 +159,11 @@ public class PlayerModel : MonoBehaviour {
     public int GetMaxHP()
     {
         return maxHp;
+    }
+
+    public void AddMaxHP()
+    {
+        maxHp++;
+        FullHP();
     }
 }

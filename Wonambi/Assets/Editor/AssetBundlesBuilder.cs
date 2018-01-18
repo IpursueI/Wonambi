@@ -45,7 +45,7 @@ public class AssetBundlesBuilder
         colorToPrefab["00FF02FF"] = "JumpTips";
         colorToPrefab["00FF03FF"] = "ShootTips";
         colorToPrefab["00FF64FF"] = "SwitchLevel";
-        colorToPrefab["FFFF00FF"] = "Heart";
+        colorToPrefab["FFFF00FF"] = "ExtraHP";
         colorToPrefab["FFFF01FF"] = "ExtraBullet";
         colorToPrefab["FFFF02FF"] = "DoubleJump";
         colorToPrefab["FF0000FF"] = "Pile";
@@ -373,7 +373,6 @@ public class AssetBundlesBuilder
                 Object obj = AssetDatabase.LoadAssetAtPath("Assets/Bundles/Prefabs/Objects/" + prefab + ".prefab", typeof(GameObject));
                 GameObject go = GameObject.Instantiate(obj, new Vector3(x, y, 0), Quaternion.identity) as GameObject;
                 go.transform.SetParent(level.transform);
-                level.GetComponent<LevelContext>().binaryDoorItem = go;
             }
             else if (prefab == "ExtraBullet")
             {
@@ -381,6 +380,13 @@ public class AssetBundlesBuilder
                 GameObject go = GameObject.Instantiate(obj, new Vector3(x, y, 0), Quaternion.identity) as GameObject;
                 go.transform.SetParent(level.transform);
                 level.GetComponent<LevelContext>().extraBulletItem = go;
+            }
+            else if(prefab == "ExtraHP")
+            {
+                Object obj = AssetDatabase.LoadAssetAtPath("Assets/Bundles/Prefabs/Objects/" + prefab + ".prefab", typeof(GameObject));
+                GameObject go = GameObject.Instantiate(obj, new Vector3(x, y, 0), Quaternion.identity) as GameObject;
+                go.transform.SetParent(level.transform);
+                level.GetComponent<LevelContext>().extraHPItem = go;
             }
             else if (prefab == "Boss1")
             {

@@ -154,6 +154,16 @@ public class LevelMgr : Singleton<LevelMgr>
             }
         }
 
+        string extraHPItem = PlayerPrefs.GetString(PrefsKey.LevelExtraHP, "");
+        string[] extraHPArray = extraHPItem.Split(',');
+        foreach(string item in extraHPArray)
+        {
+            if(levelContext.levelName == item && levelContext.extraHPItem != null)
+            {
+                levelContext.extraHPItem.SetActive(false);
+            }
+        }
+
         return levelContext.startPoint;
     }
 
@@ -210,83 +220,65 @@ public class LevelMgr : Singleton<LevelMgr>
     {
         PlayerPrefs.DeleteKey(PrefsKey.LevelDoubleJump);
         PlayerPrefs.DeleteKey(PrefsKey.LevelExtraBullet);
-        PlayerPrefs.DeleteKey(PrefsKey.LevelBinaryDoor);
-    }
-
-    private void SaveDoubleJumpItem()
-    {
-        if (levelObj == null ||
-            levelObj.GetComponent<LevelContext>().doubleJumpItem == null ||
-            levelObj.GetComponent<LevelContext>().isDoubleJumpDone == false)
-        {
-            return;
-        }
-        string doubleJumpItem = PlayerPrefs.GetString(PrefsKey.LevelDoubleJump, "");
-        if(doubleJumpItem == "")
-        {
-            doubleJumpItem = curLevel;
-        }
-        else
-        {
-            doubleJumpItem += ("," + curLevel);
-        }
-        PlayerPrefs.SetString(PrefsKey.LevelDoubleJump, doubleJumpItem);
-    }
-
-    private void SaveExtraBulletItem()
-    {
-        if (levelObj == null ||
-            levelObj.GetComponent<LevelContext>().extraBulletItem == null ||
-            levelObj.GetComponent<LevelContext>().isExtraBulletDone == false)
-        {
-            return;
-        }
-        string extraBulletItem = PlayerPrefs.GetString(PrefsKey.LevelExtraBullet, "");
-        if (extraBulletItem == "")
-        {
-            extraBulletItem = curLevel;
-        }
-        else
-        {
-            extraBulletItem += ("," + curLevel);
-        }
-        PlayerPrefs.SetString(PrefsKey.LevelExtraBullet, extraBulletItem);
+        PlayerPrefs.DeleteKey(PrefsKey.LevelExtraHP);
+        PlayerPrefs.DeleteKey(PrefsKey.LevelPowerUp);
     }
 
     public void OnEnableDoubleJump()
     {
+        PlayerPrefs.SetInt(PrefsKey.PlayerEnableDoubleJump, player.GetComponent<PlayerController>().enableDoubleJump ? 1 : 0);
         if(levelObj)
         {
             LevelContext context = levelObj.GetComponent<LevelContext>();
             if(context.doubleJumpItem != null)
             {
-                context.isDoubleJumpDone = true;
-                SaveDoubleJumpItem();
+                string doubleJumpItem = PlayerPrefs.GetString(PrefsKey.LevelDoubleJump, "");
+                if (doubleJumpItem == "") {
+                    doubleJumpItem = curLevel;
+                }
+                else {
+                    doubleJumpItem += ("," + curLevel);
+                }
+                PlayerPrefs.SetString(PrefsKey.LevelDoubleJump, doubleJumpItem);
             }
         }
     }
 
     public void OnEnableExtraBullet()
     {
+        PlayerPrefs.SetInt(PrefsKey.PlayerBulletNumber, player.GetComponent<PlayerController>().maxBulletNumber);
         if (levelObj)
         {
             LevelContext context = levelObj.GetComponent<LevelContext>();
             if (context.extraBulletItem != null)
             {
-                context.isExtraBulletDone = true;
-                SaveExtraBulletItem();
+                string extraBulletItem = PlayerPrefs.GetString(PrefsKey.LevelExtraBullet, "");
+                if (extraBulletItem == "") {
+                    extraBulletItem = curLevel;
+                }
+                else {
+                    extraBulletItem += ("," + curLevel);
+                }
+                PlayerPrefs.SetString(PrefsKey.LevelExtraBullet, extraBulletItem);
             }
         }
     }
 
-    public void OnEnableBinaryDoor()
+    public void OnEnableExtraHP()
     {
-        if (levelObj)
-        {
+
+        PlayerPrefs.SetInt(PrefsKey.PlayerMaxHP, player.GetComponent<PlayerModel>().GetMaxHP());
+        if (levelObj) {
             LevelContext context = levelObj.GetComponent<LevelContext>();
-            if (context.binaryDoorItem != null)
-            {
-                context.isBinaryDoorDown = true;
+            if (context.extraHPItem != null) {
+                string extraHPItem = PlayerPrefs.GetString(PrefsKey.LevelExtraHP, "");
+                if (extraHPItem == "") {
+                    extraHPItem = curLevel;
+                }
+                else {
+                    extraHPItem += ("," + curLevel);
+                }
+                PlayerPrefs.SetString(PrefsKey.LevelExtraHP, extraHPItem);
             }
         }
     }

@@ -52,7 +52,8 @@ namespace GlobalDefines
 
         public static readonly string LevelDoubleJump = "LevelDoubleJump";
         public static readonly string LevelExtraBullet = "LevelExtraBullet";
-        public static readonly string LevelBinaryDoor = "LevelBinaryDoor";
+        public static readonly string LevelExtraHP = "LevelExtraHP";
+        public static readonly string LevelPowerUp = "LevelPowerUp";
     }
 
     public static class PlayerStatus

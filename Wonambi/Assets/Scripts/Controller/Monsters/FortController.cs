@@ -7,7 +7,6 @@ public class FortController : MonsterController {
     // Bullet
     public float cooldown;
     private float timer;
-    public GameObject bullet;
     private GameObject muzzle;
     private MonsterModel model;
     private float fireTriggerDistance;
@@ -37,7 +36,7 @@ public class FortController : MonsterController {
     {
         timer -= Time.deltaTime;
         if (timer <= 0f) {
-            GameObject curBullet = Instantiate(bullet, transform) as GameObject;
+            GameObject curBullet = Instantiate(BundleMgr.Instance.GetObject("MonsterBullet"), transform) as GameObject;
             BulletController bulletCtrl = curBullet.GetComponent<BulletController>();
             bulletCtrl.Init(DefineNumber.BulletSpeed, DefineNumber.BulletDuration, muzzle.transform.position, gameObject);
             curBullet.transform.localScale = new Vector3(1f, 1f, 1f);

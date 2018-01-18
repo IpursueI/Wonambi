@@ -13,10 +13,8 @@ public class LevelContext : MonoBehaviour {
     public float height;
     public GameObject doubleJumpItem;
     public GameObject extraBulletItem;
-    public GameObject binaryDoorItem;
-    public bool isDoubleJumpDone = false;
-    public bool isExtraBulletDone = false;
-    public bool isBinaryDoorDown = false;
+    public GameObject extraHPItem;
+    public GameObject powerUpItem;
 
 	// Use this for initialization
 	void Start () {

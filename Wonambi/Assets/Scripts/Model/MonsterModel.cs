@@ -68,6 +68,7 @@ public class MonsterModel : MonoBehaviour {
             controller.OnDie();
         }
         GameMgr.Instance.PlayMonsterDieSFX();
+        GameMgr.Instance.PlayDieFx(transform.position, Color.yellow);
         StartCoroutine(DieCoroutine());
     }
 

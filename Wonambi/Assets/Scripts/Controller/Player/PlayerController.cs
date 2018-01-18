@@ -11,7 +11,7 @@ public class PlayerController : MonoBehaviour {
     public bool forward;
     public LayerMask groundLayer;
     private float groundDistance;
-    private bool enableDoubleJump;
+    public bool enableDoubleJump;
     private float moveSpeed;
     private float jumpSpeed;
     private GameObject leftCheck;
@@ -25,13 +25,12 @@ public class PlayerController : MonoBehaviour {
     private Animator anim;
     // Bullet
     private float cooldown;
-    public GameObject bullet;
     private GameObject muzzle;
     // model
     private PlayerModel model;
     private PlayerDialogController dialog;
 
-    private int maxBulletNumber;
+    public int maxBulletNumber;
     private int bulletCount;
 
     private void Awake()
@@ -157,7 +156,7 @@ public class PlayerController : MonoBehaviour {
         if (!GameMgr.Instance.IsInputEnable()) return;
         cooldown -= Time.deltaTime;
         if (Input.GetKey(KeyCode.J) && cooldown <= 0f && bulletCount < maxBulletNumber) {
-            GameObject curBullet = Instantiate(bullet, transform) as GameObject;
+            GameObject curBullet = Instantiate(BundleMgr.Instance.GetObject("Bullet"), transform) as GameObject;
             BulletController bulletCtrl = curBullet.GetComponent<BulletController>();
             bulletCtrl.Init(DefineNumber.BulletSpeed, 0, GetMuzzlePos(), gameObject);
             curBullet.SetActive(true);
@@ -232,6 +231,7 @@ public class PlayerController : MonoBehaviour {
     public void OnTriggerSave()
     {
         model.FullHP();
+        LevelMgr.Instance.OnEnableExtraHP();
         Save();
     }
 }

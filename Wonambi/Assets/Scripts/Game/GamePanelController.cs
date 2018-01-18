@@ -12,7 +12,7 @@ public class GamePanelController : MonoBehaviour {
     private void Awake()
     {
         bonfireMask = transform.Find("BonfireMask").gameObject.GetComponent<Image>();
-        for (int i = 1; i <= 3; ++i) {
+        for (int i = 1; i <= 7; ++i) {
             GameObject heartObj = transform.Find("Heart0" + i.ToString()).gameObject;
             heartObj.SetActive(false);
             hpList.Add(heartObj);
@@ -31,7 +31,7 @@ public class GamePanelController : MonoBehaviour {
 
     public void ShowHP(int hp)
     {
-        if (hp > 3) return;
+        if (hp > 7) return;
         for (int i = 0; i < hpList.Count; ++i) {
             if (i < hp) {
                 hpList[i].SetActive(true);

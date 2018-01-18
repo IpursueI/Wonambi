@@ -6,20 +6,16 @@ using DG.Tweening;
 
 public class ItemController : MonoBehaviour {
 
-    private Text text;
     private SpriteRenderer sprite;
     private Tweener scaleTweener;
     private void Awake()
     {
-        text = transform.Find("Canvas/Text").gameObject.GetComponent<Text>();
-        text.gameObject.SetActive(false);
         sprite = GetComponent<SpriteRenderer>();
         
     }
     // Use this for initialization
     void Start () {
         scaleTweener = transform.DOScale(1.5f, 1f).SetLoops(-1, LoopType.Yoyo);
-
     }
 	
 	// Update is called once per frame
@@ -32,9 +28,20 @@ public class ItemController : MonoBehaviour {
         transform.localScale = new Vector3(1.0f, 1.0f, 1.0f);
         GetComponent<BoxCollider2D>().enabled = false;
         sprite.enabled = false;
-        text.gameObject.SetActive(true);
-        text.DOFade(0.0f, 3f);
-        transform.DOMoveY(transform.position.y + 1, 3f).OnComplete(EndTween);
+        string tipsContent = "";
+        if(tag == "DoubleJump")
+        {
+            tipsContent = "I can jump twice in the air now.";
+        }
+        else if(tag == "ExtraHP")
+        {
+            tipsContent = "One more HP abtained.";
+        }
+        else if(tag == "ExtraBullet")
+        {
+            tipsContent = "One more bullet abtained.";
+        }
+        LevelMgr.Instance.ShowTips(tipsContent, 1.5f);
     }
 
     private void EndTween() {
