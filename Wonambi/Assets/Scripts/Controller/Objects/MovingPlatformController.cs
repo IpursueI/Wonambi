@@ -25,7 +25,7 @@ public class MovingPlatformController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (auto && LevelMgr.Instance.IsPlayerSoClose(transform.position)) {
+        if (auto && LevelMgr.Instance.IsPlayerClose(transform.position)) {
             isRun = true;
         }
         if (!isRun) {

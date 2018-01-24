@@ -69,7 +69,10 @@ public class LevelMgr : Singleton<LevelMgr>
     public void StartLevel(string levelName)
     {
         curLevel = levelName;
-        PlayerPrefs.SetString(PrefsKey.LevelMap, curLevel);
+        if(curLevel.Substring(0, 4) != "Boss")
+        {
+            PlayerPrefs.SetString(PrefsKey.LevelMap, curLevel);
+        }
         var playerPos = LoadLevel(curLevel);
         TeleportPlayer(playerPos);
     }

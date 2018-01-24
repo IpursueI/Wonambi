@@ -57,10 +57,12 @@ public class BulletController : MonoBehaviour {
                 return;
             }
         } else if(gameObject.tag == "MonsterBullet"){
+            /*
             if(collision.tag == "Tiles" || collision.tag == "Player") {
                 Destroy(gameObject);
                 return;
             }
+            */
         }
     }
 
