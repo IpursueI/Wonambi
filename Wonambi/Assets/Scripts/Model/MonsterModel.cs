@@ -60,6 +60,14 @@ public class MonsterModel : MonoBehaviour {
         }
     }
 
+    public void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (isDead) return;
+        if(collision.gameObject.tag == "PlayerBullet") {
+            OnHit();
+        }
+    }
+
     private void Die() {
         spriteRenderer.enabled = false;
         bc2d.enabled = false;

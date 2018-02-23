@@ -56,13 +56,17 @@ public class BulletController : MonoBehaviour {
                 GameMgr.Instance.PlayPlayerBulletFx(transform.position);
                 return;
             }
-        } else if(gameObject.tag == "MonsterBullet"){
-            /*
-            if(collision.tag == "Tiles" || collision.tag == "Player") {
+        }
+    }
+
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if(gameObject.tag == "PlayerBullet") {
+            if(collision.gameObject.tag == "Monster") {
                 Destroy(gameObject);
+                GameMgr.Instance.PlayPlayerBulletFx(transform.position);
                 return;
             }
-            */
         }
     }
 

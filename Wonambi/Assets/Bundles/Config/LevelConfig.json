@@ -8,12 +8,12 @@
         },
         {
             "Name" : "Level12",
-            "NextLevel" : "Level12",
+            "NextLevel" : "Level13",
             "BGM" : "Normal",
             "CameraSize" : 6.0
         },
         {
-            "Name" : "Level12",
+            "Name" : "Level13",
             "NextLevel" : "Boss1",
             "BGM" : "Normal",
             "CameraSize" : 6.0

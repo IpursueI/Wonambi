@@ -56,6 +56,7 @@ public class AssetBundlesBuilder
         colorToPrefab["FF0005FF"] = "LurkerDown";
         colorToPrefab["FF0006FF"] = "LurkerLeft";
         colorToPrefab["FF0007FF"] = "LurkerRight";
+        colorToPrefab["FF0008FF"] = "Rusher";
 
         foreach (string d in Directory.GetFileSystemEntries(pngDirectoryPath, "*.png")) {
             if (File.Exists(d)) {
