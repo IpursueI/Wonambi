@@ -127,6 +127,7 @@ public class AssetBundlesBuilder
         return false;
     }
 
+    /*
     private static void SpawnObjectAt(Color32[] pixels, int x, int y, int width, int height, Dictionary<string, string> colorToPrefab, GameObject level)
     {
         Color32 c = pixels[(y * width) + x];
@@ -403,6 +404,102 @@ public class AssetBundlesBuilder
             }
         }
         else {
+            Debug.LogError("[LevelLoader] SpawnTileAt : no color to prefab found for: " + colorKey + ", " + c.ToString() + ", " + x + ", " + y);
+        }
+    }
+    */
+
+    private static void SpawnObjectAt(Color32[] pixels, int x, int y, int width, int height, Dictionary<string, string> colorToPrefab, GameObject level)
+    {
+        Color32 c = pixels[(y * width) + x];
+        if (c.a <= 0) return;
+        string colorKey = ColorUtility.ToHtmlStringRGBA(c);
+        if (colorToPrefab.ContainsKey(colorKey))
+        {
+            string prefab = colorToPrefab[colorKey];
+            if (prefab == "Tile")
+            {
+                bool top = y >= height - 1 || IsColorNotTile(pixels[((y + 1) * width) + x], colorToPrefab);
+                bool bottom = y <= 0 || IsColorNotTile(pixels[((y - 1) * width) + x], colorToPrefab);
+                bool left = x <= 0 || IsColorNotTile(pixels[(y * width) + x - 1], colorToPrefab);
+                bool right = x >= width - 1 || IsColorNotTile(pixels[(y * width) + x + 1], colorToPrefab);
+
+                if (top && bottom && left && right)
+                {
+                    prefab += "Block";
+                }
+                else if (top && bottom && left && !right)
+                {
+                    prefab += "PlatformL";
+                }
+                else if (top && bottom && !left && right)
+                {
+                    prefab += "PlatformR";
+                }
+                else if (top && bottom && !left && !right)
+                {
+                    prefab += "PlatformM";
+                }
+                else if (top && !bottom && left && right)
+                {
+                    prefab += "PillarT";
+                }
+                else if (top && !bottom && left && !right)
+                {
+                    prefab += "GroundLT";
+                }
+                else if (top && !bottom && !left && right)
+                {
+                    prefab += "GroundRT";
+                }
+                else if (top && !bottom && !left && !right)
+                {
+                    prefab += "GroundT";
+                }
+                else if (!top && bottom && left && right)
+                {
+                    prefab += "PillarB";
+                }
+                else if (!top && bottom && left && !right)
+                {
+                    prefab += "GroundLB";
+                }
+                else if (!top && bottom && !left && right)
+                {
+                    prefab += "GroundRB";
+                }
+                else if (!top && bottom && !left && !right)
+                {
+                    prefab += "GroundB";
+                }
+                else if (!top && !bottom && left && right)
+                {
+                    prefab += "PillarM";
+                }
+                else if (!top && !bottom && left && !right)
+                {
+                    prefab += "GroundL";
+                }
+                else if (!top && !bottom && !left && right)
+                {
+                    prefab += "GroundR";
+                }
+                else if (!top && !bottom && !left && !right)
+                {
+                    prefab += "GroundM";
+                }
+                Object obj = AssetDatabase.LoadAssetAtPath("Assets/Bundles/Prefabs/Tiles/" + prefab + ".prefab", typeof(GameObject));
+                GameObject go = GameObject.Instantiate(obj, new Vector3(x, y, 0), Quaternion.identity) as GameObject;
+                go.transform.SetParent(level.transform);
+            }
+            else if (prefab == "StartPoint")
+            {
+                level.GetComponent<LevelContext>().startPoint = new Vector3(x, y, -10);
+                return;
+            }
+        }
+        else
+        {
             Debug.LogError("[LevelLoader] SpawnTileAt : no color to prefab found for: " + colorKey + ", " + c.ToString() + ", " + x + ", " + y);
         }
     }
