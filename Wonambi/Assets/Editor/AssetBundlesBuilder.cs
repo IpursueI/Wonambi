@@ -6,6 +6,7 @@ using GlobalDefines;
 
 public class AssetBundlesBuilder
 {
+    /*
     [MenuItem("Assets/Build AssetBundles")]
     static void BuildAssetBundles()
     {
@@ -93,6 +94,7 @@ public class AssetBundlesBuilder
         #endif
         Debug.Log("[AssetBundlesBuilder] BuildAssetBundles Done.");
     }
+    */
 
     private static void BuildMapPrefab(GameObject level, Texture2D png, Dictionary<string, string> colorToPrefab)
     {
