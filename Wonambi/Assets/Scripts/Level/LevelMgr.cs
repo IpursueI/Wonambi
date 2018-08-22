@@ -37,13 +37,13 @@ public class LevelMgr : Singleton<LevelMgr>
     public void ClearLevel()
     {
         if(levelObj != null) {
-            if(player != null) player.transform.SetParent(null);
+            levelObj.GetComponent<LevelContext>().KeepPlayer();
             Destroy(levelObj);
             levelObj = null;
         }
     }
 
-    private Vector3 LoadLevel(string levelName)
+    private void LoadLevel(string levelName)
     {
         ClearLevel();
         var levelData = levelConfigHash[levelName];
@@ -70,13 +70,13 @@ public class LevelMgr : Singleton<LevelMgr>
             savedLevel = curLevelContext.levelName;
         }
         PlayerPrefs.SetString(PrefsKey.SavedLevel, savedLevel);
-        levelContext.TeleportPlayer();
+        curLevelContext.TeleportPlayer();
     }
 
     public void RestartLevel()
     {
         LoadLevel(savedLevel);
-        SpawnPlayer();
+        levelObj.GetComponent<LevelContext>().SpawnPlayer();
     }
 
    
@@ -89,11 +89,9 @@ public class LevelMgr : Singleton<LevelMgr>
    
     public void QuitGame()
     {
+        levelObj.GetComponent<LevelContext>().Clear();
         if(levelObj != null) {
             Destroy(levelObj);
-        }
-        if(player != null) {
-            Destroy(player);
         }
     }
 }

@@ -51,6 +51,13 @@ public class LevelContext : MonoBehaviour {
         // 设置下是否现实的部分 TODO
     }
 
+    public void KeepPlayer()
+    {
+        if(player) {
+            player.transform.SetParent(null);
+        }
+    }
+
     public void SpawnPlayer()
     {
         if(player == null) {
@@ -149,4 +156,10 @@ public class LevelContext : MonoBehaviour {
         player.GetComponent<PlayerDialogController>().HideDialog();
     }
 
+    public void Clear()
+    {
+        if (player != null) {
+            Destroy(player);
+        }
+    }
 }

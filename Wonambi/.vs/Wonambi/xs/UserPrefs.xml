@@ -1,8 +1,9 @@
 ﻿<Properties StartupConfiguration="{FAA0A19A-1BB7-ECA7-3B0D-1A3B6E091A75}|">
   <MonoDevelop.Ide.ItemProperties.Assembly-CSharp PreferredExecutionTarget="Unity.Editor" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Scripts/Monsters/Minors/SentryController.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Scripts/Level/LevelContext.cs">
     <Files>
-      <File FileName="Assets/Scripts/Monsters/Minors/SentryController.cs" Line="37" Column="1" />
+      <File FileName="Assets/Scripts/Level/LevelMgr.cs" Line="40" Column="13" />
+      <File FileName="Assets/Scripts/Level/LevelContext.cs" Line="53" Column="16" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
