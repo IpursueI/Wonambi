@@ -4,25 +4,29 @@
             "Name" : "Level11",
             "NextLevel" : "Level12",
             "BGM" : "Normal",
-            "CameraSize" : 6.0
+            "CameraSize" : 6.0,
+            "NeedSave" : 1
         },
         {
             "Name" : "Level12",
             "NextLevel" : "Level13",
             "BGM" : "Normal",
-            "CameraSize" : 6.0
+            "CameraSize" : 6.0,
+            "NeedSave" : 1
         },
         {
             "Name" : "Level13",
             "NextLevel" : "Boss1",
             "BGM" : "Normal",
-            "CameraSize" : 6.0
+            "CameraSize" : 6.0,
+            "NeedSave" : 1
         },
         {
             "Name" : "Boss1",
             "NextLevel" : "Level21",
             "BGM" : "Boss",
-            "CameraSize" : 6.0
+            "CameraSize" : 6.0,
+            "NeedSave" : 1
         }
     ]
 }

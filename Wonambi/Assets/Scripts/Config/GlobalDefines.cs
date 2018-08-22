@@ -54,6 +54,8 @@ namespace GlobalDefines
         public static readonly string LevelExtraBullet = "LevelExtraBullet";
         public static readonly string LevelExtraHP = "LevelExtraHP";
         public static readonly string LevelPowerUp = "LevelPowerUp";
+
+        public static readonly string SavedLevel = "SavedLevel";
     }
 
     public static class PlayerStatus
